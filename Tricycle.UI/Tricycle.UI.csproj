@@ -12,8 +12,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991864" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.6.0" />
     <PackageReference Include="StructureMap" Version="4.7.1" />
     <PackageReference Include="System.IO.Abstractions" Version="6.0.15" />
     <PackageReference Include="Iso639" Version="1.0.0" />
@@ -30,16 +28,5 @@
     <ProjectReference Include="..\Tricycle.Utilities\Tricycle.Utilities.csproj" />
     <ProjectReference Include="..\Tricycle.Media.FFmpeg\Tricycle.Media.FFmpeg.csproj" />
     <ProjectReference Include="..\Tricycle.Globalization\Tricycle.Globalization.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Update="Controls\PlatformButton.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\WindowsStatusBar.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\WindowsToolbar.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
   </ItemGroup>
 </Project>

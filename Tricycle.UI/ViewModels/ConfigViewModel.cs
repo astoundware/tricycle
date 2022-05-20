@@ -12,7 +12,6 @@ using Tricycle.Models.Config;
 using Tricycle.Models.Templates;
 using Tricycle.UI.Models;
 using Tricycle.Utilities;
-using Xamarin.Forms;
 using FFmpegAudioCodec = Tricycle.Media.FFmpeg.Models.Config.AudioCodec;
 using FFmpegAudioConfig = Tricycle.Media.FFmpeg.Models.Config.AudioConfig;
 using FFmpegVideoCodec = Tricycle.Media.FFmpeg.Models.Config.VideoCodec;

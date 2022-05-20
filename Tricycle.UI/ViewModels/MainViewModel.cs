@@ -20,7 +20,6 @@ using Tricycle.Models.Media;
 using Tricycle.Models.Templates;
 using Tricycle.UI.Models;
 using Tricycle.Utilities;
-using Xamarin.Forms;
 
 namespace Tricycle.UI.ViewModels
 {

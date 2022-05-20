@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Tricycle.Media;
 using Tricycle.Models.Jobs;
-using Xamarin.Forms;
 
 namespace Tricycle.UI.ViewModels
 {

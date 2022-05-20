@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Windows.Input;
 using Tricycle.UI.Models;
-using Xamarin.Forms;
 
 namespace Tricycle.UI.ViewModels
 {
