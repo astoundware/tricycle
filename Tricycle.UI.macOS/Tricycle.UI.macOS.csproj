@@ -131,6 +131,9 @@
     <Reference Include="ByteSize">
       <HintPath>..\packages\ByteSize.2.1.1\lib\netstandard2.1\ByteSize.dll</HintPath>
     </Reference>
+    <Reference Include="Iso639">
+      <HintPath>..\packages\Iso639.1.0.0\lib\netstandard2.0\Iso639.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
