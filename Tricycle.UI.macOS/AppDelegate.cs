@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-//using System.IO.Abstractions;
+using System.IO.Abstractions;
 using System.Linq;
 using AppKit;
 using CoreGraphics;
@@ -94,31 +94,31 @@ namespace Tricycle.UI.macOS
             string userConfigPath = Path.Combine(userPath, "Library", "Preferences", "Tricycle");
             var processCreator = new Func<IProcess>(() => new ProcessWrapper());
             var processRunner = new ProcessRunner(processCreator);
-            //var fileSystem = new FileSystem();
-            //var jsonSerializer = new JsonSerializer();
-            //var ffmpegConfigManager = new FFmpegConfigManager(fileSystem,
-            //                                                  jsonSerializer,
-            //                                                  Path.Combine(defaultConfigPath, FFMPEG_CONFIG_NAME),
-            //                                                  Path.Combine(userConfigPath, FFMPEG_CONFIG_NAME));
-            //var tricycleConfigManager = new TricycleConfigManager(fileSystem,
-            //                                                      jsonSerializer,
-            //                                                      Path.Combine(defaultConfigPath, TRICYCLE_CONFIG_NAME),
-            //                                                      Path.Combine(userConfigPath, TRICYCLE_CONFIG_NAME));
-            //_templateManager =
-            //    new FileConfigManager<Dictionary<string, JobTemplate>>(
-            //        fileSystem,
-            //        jsonSerializer,
-            //        Path.Combine(defaultConfigPath, TEMPLATE_CONFIG_NAME),
-            //        Path.Combine(userConfigPath, TEMPLATE_CONFIG_NAME));
+            var fileSystem = new FileSystem();
+            var jsonSerializer = new JsonSerializer();
+            var ffmpegConfigManager = new FFmpegConfigManager(fileSystem,
+                                                              jsonSerializer,
+                                                              Path.Combine(defaultConfigPath, FFMPEG_CONFIG_NAME),
+                                                              Path.Combine(userConfigPath, FFMPEG_CONFIG_NAME));
+            var tricycleConfigManager = new TricycleConfigManager(fileSystem,
+                                                                  jsonSerializer,
+                                                                  Path.Combine(defaultConfigPath, TRICYCLE_CONFIG_NAME),
+                                                                  Path.Combine(userConfigPath, TRICYCLE_CONFIG_NAME));
+            _templateManager =
+                new FileConfigManager<Dictionary<string, JobTemplate>>(
+                    fileSystem,
+                    jsonSerializer,
+                    Path.Combine(defaultConfigPath, TEMPLATE_CONFIG_NAME),
+                    Path.Combine(userConfigPath, TEMPLATE_CONFIG_NAME));
 
-            //ffmpegConfigManager.Load();
-            //tricycleConfigManager.Load();
-            //_templateManager.Load();
+            ffmpegConfigManager.Load();
+            tricycleConfigManager.Load();
+            _templateManager.Load();
 
-            //if (tricycleConfigManager.Config.Trace)
-            //{
-            //    EnableLogging(userPath);
-            //}
+            if (tricycleConfigManager.Config.Trace)
+            {
+                EnableLogging(userPath);
+            }
 
             _templateManager.ConfigChanged += config => PopulateTemplateMenu();
 
