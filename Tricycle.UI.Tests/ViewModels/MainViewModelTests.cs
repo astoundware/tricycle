@@ -4491,7 +4491,7 @@ public class MainViewModelTests
         Start();
         _mediaTranscoder.StatusChanged += Raise.Event<Action<TranscodeStatus>>(status);
 
-        Assert.AreEqual("Transcoding... 0.23x | 02:30:35 | ~5.2 GB | 15.8%", _viewModel.Status);
+        Assert.AreEqual("Transcoding... 0.23x | 02:30:35 | ~5.6 GB | 15.8%", _viewModel.Status);
     }
 
     [TestMethod]
@@ -4509,7 +4509,7 @@ public class MainViewModelTests
         Start();
         _mediaTranscoder.StatusChanged += Raise.Event<Action<TranscodeStatus>>(status);
 
-        Assert.AreEqual("Transcoding... 0.23x | ~5.2 GB | 15.8%", _viewModel.Status);
+        Assert.AreEqual("Transcoding... 0.23x | ~5.6 GB | 15.8%", _viewModel.Status);
     }
 
     [TestMethod]

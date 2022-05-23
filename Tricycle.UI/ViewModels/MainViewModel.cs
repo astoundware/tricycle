@@ -2122,7 +2122,7 @@ namespace Tricycle.UI.ViewModels
 
         string GetSizeFormat(ByteSize size)
         {
-            if (size.LargestWholeNumberValue >= 100)
+            if (size.LargestWholeNumberDecimalValue >= 100)
             {
                 return "#";
             }
