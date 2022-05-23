@@ -1,5 +1,5 @@
 ﻿using System;
-using StructureMap;
+using Lamar;
 
 namespace Tricycle.Models
 {

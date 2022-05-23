@@ -17,6 +17,9 @@
     <Folder Include="Templates\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="StructureMap" Version="4.7.1" />
+    <None Remove="Lamar" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Lamar" Version="8.0.1" />
   </ItemGroup>
 </Project>

@@ -7,7 +7,7 @@ using System.Linq;
 using AppKit;
 using CoreGraphics;
 using Foundation;
-//using StructureMap;
+using Lamar;
 using Tricycle.Diagnostics;
 using Tricycle.Diagnostics.Utilities;
 using Tricycle.Globalization;
@@ -124,41 +124,40 @@ namespace Tricycle.UI.macOS
 
             var ffmpegArgumentGenerator = new FFmpegArgumentGenerator(new ArgumentPropertyReflector());
 
-            //AppState.IocContainer = new Container(_ =>
-            //{
-            //    _.For<IConfigManager<FFmpegConfig>>().Use(ffmpegConfigManager);
-            //    _.For<IConfigManager<TricycleConfig>>().Use(tricycleConfigManager);
-            //    _.For<IConfigManager<Dictionary<string, JobTemplate>>>().Use(_templateManager);
-            //    _.For<IFileBrowser>().Use<FileBrowser>();
-            //    _.For<IFolderBrowser>().Use<FolderBrowser>();
-            //    _.For<IProcessUtility>().Use(ProcessUtility.Self);
-            //    _.For<IMediaInspector>().Use(new MediaInspector(Path.Combine(ffmpegPath, "ffprobe"),
-            //                                                    processRunner,
-            //                                                    ProcessUtility.Self,
-            //                                                    jsonSerializer));
-            //    _.For<ICropDetector>().Use(new CropDetector(ffmpegFileName,
-            //                                                processRunner,
-            //                                                ffmpegConfigManager,
-            //                                                ffmpegArgumentGenerator));
-            //    _.For<IInterlaceDetector>().Use(new InterlaceDetector(ffmpegFileName,
-            //                                                          processRunner,
-            //                                                          ffmpegArgumentGenerator));
-            //    _.For<IFileSystem>().Use(fileSystem);
-            //    _.For<ITranscodeCalculator>().Use<TranscodeCalculator>();
-            //    _.For<IArgumentPropertyReflector>().Use<ArgumentPropertyReflector>();
-            //    _.For<IMediaTranscoder>().Use(new MediaTranscoder(ffmpegFileName,
-            //                                                      processCreator,
-            //                                                      ffmpegConfigManager,
-            //                                                      ffmpegArgumentGenerator));
-            //    _.For<IDevice>().Use(DeviceWrapper.Self);
-            //    _.For<IAppManager>().Use(_appManager);
-            //    _.For<IPreviewImageGenerator>().Use(new PreviewImageGenerator(ffmpegFileName,
-            //                                                                  processRunner,
-            //                                                                  ffmpegConfigManager,
-            //                                                                  ffmpegArgumentGenerator,
-            //                                                                  fileSystem));
-            //    _.For<ILanguageService>().Use<LanguageService>();
-            //});
+            AppState.IocContainer = new Container(_ =>
+            {
+                _.For<IConfigManager<FFmpegConfig>>().Use(ffmpegConfigManager);
+                _.For<IConfigManager<TricycleConfig>>().Use(tricycleConfigManager);
+                _.For<IConfigManager<Dictionary<string, JobTemplate>>>().Use(_templateManager);
+                _.For<IFileBrowser>().Use<FileBrowser>();
+                _.For<IFolderBrowser>().Use<FolderBrowser>();
+                _.For<IProcessUtility>().Use(ProcessUtility.Self);
+                _.For<IMediaInspector>().Use(new MediaInspector(Path.Combine(ffmpegPath, "ffprobe"),
+                                                                processRunner,
+                                                                ProcessUtility.Self,
+                                                                jsonSerializer));
+                _.For<ICropDetector>().Use(new CropDetector(ffmpegFileName,
+                                                            processRunner,
+                                                            ffmpegConfigManager,
+                                                            ffmpegArgumentGenerator));
+                _.For<IInterlaceDetector>().Use(new InterlaceDetector(ffmpegFileName,
+                                                                      processRunner,
+                                                                      ffmpegArgumentGenerator));
+                _.For<IFileSystem>().Use(fileSystem);
+                _.For<ITranscodeCalculator>().Use<TranscodeCalculator>();
+                _.For<IArgumentPropertyReflector>().Use<ArgumentPropertyReflector>();
+                _.For<IMediaTranscoder>().Use(new MediaTranscoder(ffmpegFileName,
+                                                                  processCreator,
+                                                                  ffmpegConfigManager,
+                                                                  ffmpegArgumentGenerator));
+                _.For<IAppManager>().Use(_appManager);
+                _.For<IPreviewImageGenerator>().Use(new PreviewImageGenerator(ffmpegFileName,
+                                                                              processRunner,
+                                                                              ffmpegConfigManager,
+                                                                              ffmpegArgumentGenerator,
+                                                                              fileSystem));
+                _.For<ILanguageService>().Use<LanguageService>();
+            });
             AppState.DefaultDestinationDirectory = Path.Combine(userPath, "Movies");
 
             PopulateTemplateMenu();
