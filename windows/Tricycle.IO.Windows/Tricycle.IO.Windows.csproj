@@ -48,7 +48,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Tricycle.IO\Tricycle.IO.csproj">
+    <ProjectReference Include="..\..\dotnet\Tricycle.IO\Tricycle.IO.csproj">
       <Project>{69bbe676-d689-42fe-8dca-a9731621969d}</Project>
       <Name>Tricycle.IO</Name>
     </ProjectReference>

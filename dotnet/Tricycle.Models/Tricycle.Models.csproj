@@ -6,11 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Class1.cs" />
-    <Compile Remove="Config.cs" />
-    <Compile Remove="Media\HDRProperties.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Config\" />
     <Folder Include="Media\" />
     <Folder Include="Jobs\" />

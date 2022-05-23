@@ -171,41 +171,41 @@
     <InterfaceDefinition Include="Main.storyboard" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Tricycle.IO.macOS\Tricycle.IO.macOS.csproj">
-      <Project>{E303680C-0FFB-4CE6-AD29-482FAB318438}</Project>
-      <Name>Tricycle.IO.macOS</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Tricycle.IO\Tricycle.IO.csproj">
+    <ProjectReference Include="..\..\dotnet\Tricycle.IO\Tricycle.IO.csproj">
       <Project>{8E31720E-E9C1-4D3F-AA41-F70F0AD78CED}</Project>
       <Name>Tricycle.IO</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Tricycle.Diagnostics\Tricycle.Diagnostics.csproj">
+    <ProjectReference Include="..\..\dotnet\Tricycle.Diagnostics\Tricycle.Diagnostics.csproj">
       <Project>{EEE33ED0-2D2E-419F-BABB-3825B6AB620B}</Project>
       <Name>Tricycle.Diagnostics</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Tricycle.Media\Tricycle.Media.csproj">
+    <ProjectReference Include="..\..\dotnet\Tricycle.Media\Tricycle.Media.csproj">
       <Project>{879F9F92-4A54-4F41-82BD-17D7E55CAC6B}</Project>
       <Name>Tricycle.Media</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Tricycle.Media.FFmpeg\Tricycle.Media.FFmpeg.csproj">
+    <ProjectReference Include="..\..\dotnet\Tricycle.Media.FFmpeg\Tricycle.Media.FFmpeg.csproj">
       <Project>{FF03A145-405E-4C92-8B1B-401946EA6E61}</Project>
       <Name>Tricycle.Media.FFmpeg</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Tricycle.UI\Tricycle.UI.csproj">
+    <ProjectReference Include="..\..\dotnet\Tricycle.UI\Tricycle.UI.csproj">
       <Project>{2318EE49-B396-40AC-8D09-58104D2ABB67}</Project>
       <Name>Tricycle.UI</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Tricycle.Models\Tricycle.Models.csproj">
+    <ProjectReference Include="..\..\dotnet\Tricycle.Models\Tricycle.Models.csproj">
       <Project>{D8C74968-42BE-4884-BD81-352A9113231D}</Project>
       <Name>Tricycle.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Tricycle.Utilities\Tricycle.Utilities.csproj">
+    <ProjectReference Include="..\..\dotnet\Tricycle.Utilities\Tricycle.Utilities.csproj">
       <Project>{0ED0381E-0215-4814-8B3E-DCE3EDC555A6}</Project>
       <Name>Tricycle.Utilities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Tricycle.Globalization\Tricycle.Globalization.csproj">
+    <ProjectReference Include="..\..\dotnet\Tricycle.Globalization\Tricycle.Globalization.csproj">
       <Project>{D3D4FED4-BE82-4144-81DA-605110421742}</Project>
       <Name>Tricycle.Globalization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tricycle.IO.macOS\Tricycle.IO.macOS.csproj">
+      <Project>{E303680C-0FFB-4CE6-AD29-482FAB318438}</Project>
+      <Name>Tricycle.IO.macOS</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -217,34 +217,34 @@
     <BundleResource Include="Resources\Tools\FFmpeg\ffmpeg" />
     <BundleResource Include="Resources\Config\tricycle.json" />
     <BundleResource Include="Resources\Config\ffmpeg.json" />
-    <BundleResource Include="..\COPYING.txt">
+    <BundleResource Include="..\..\COPYING.txt">
       <Link>Resources\COPYING.txt</Link>
     </BundleResource>
-    <BundleResource Include="..\LICENSE.txt">
+    <BundleResource Include="..\..\LICENSE.txt">
       <Link>Resources\LICENSE.txt</Link>
     </BundleResource>
-    <BundleResource Include="..\tools\FFmpeg\COPYING.GPLv2">
+    <BundleResource Include="..\..\tools\FFmpeg\COPYING.GPLv2">
       <Link>Resources\Tools\FFmpeg\COPYING.GPLv2</Link>
     </BundleResource>
-    <BundleResource Include="..\tools\FFmpeg\COPYING.GPLv3">
+    <BundleResource Include="..\..\tools\FFmpeg\COPYING.GPLv3">
       <Link>Resources\Tools\FFmpeg\COPYING.GPLv3</Link>
     </BundleResource>
-    <BundleResource Include="..\tools\FFmpeg\COPYING.LGPLv2.1">
+    <BundleResource Include="..\..\tools\FFmpeg\COPYING.LGPLv2.1">
       <Link>Resources\Tools\FFmpeg\COPYING.LGPLv2.1</Link>
     </BundleResource>
-    <BundleResource Include="..\tools\FFmpeg\COPYING.LGPLv3">
+    <BundleResource Include="..\..\tools\FFmpeg\COPYING.LGPLv3">
       <Link>Resources\Tools\FFmpeg\COPYING.LGPLv3</Link>
     </BundleResource>
-    <BundleResource Include="..\tools\FFmpeg\LICENSE.md">
+    <BundleResource Include="..\..\tools\FFmpeg\LICENSE.md">
       <Link>Resources\Tools\FFmpeg\LICENSE.md</Link>
     </BundleResource>
-    <BundleResource Include="..\tools\FFmpeg\source\ffmpeg.tar.gz">
+    <BundleResource Include="..\..\tools\FFmpeg\source\ffmpeg.tar.gz">
       <Link>Resources\Tools\FFmpeg\Source\ffmpeg.tar.gz</Link>
     </BundleResource>
-    <BundleResource Include="..\tools\FFmpeg\source\x264.tar.bz2">
+    <BundleResource Include="..\..\tools\FFmpeg\source\x264.tar.bz2">
       <Link>Resources\Tools\FFmpeg\Source\x264.tar.bz2</Link>
     </BundleResource>
-    <BundleResource Include="..\tools\FFmpeg\source\x265.tar.bz2">
+    <BundleResource Include="..\..\tools\FFmpeg\source\x265.tar.bz2">
       <Link>Resources\Tools\FFmpeg\Source\x265.tar.bz2</Link>
     </BundleResource>
     <BundleResource Include="Resources\Images\trash.png" />

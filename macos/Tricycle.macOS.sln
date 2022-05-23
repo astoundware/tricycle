@@ -1,37 +1,37 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tricycle.Diagnostics", "Tricycle.Diagnostics\Tricycle.Diagnostics.csproj", "{EEE33ED0-2D2E-419F-BABB-3825B6AB620B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tricycle.Diagnostics", "..\dotnet\Tricycle.Diagnostics\Tricycle.Diagnostics.csproj", "{EEE33ED0-2D2E-419F-BABB-3825B6AB620B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tricycle.Media", "Tricycle.Media\Tricycle.Media.csproj", "{879F9F92-4A54-4F41-82BD-17D7E55CAC6B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tricycle.Media", "..\dotnet\Tricycle.Media\Tricycle.Media.csproj", "{879F9F92-4A54-4F41-82BD-17D7E55CAC6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tricycle.Media.FFmpeg", "Tricycle.Media.FFmpeg\Tricycle.Media.FFmpeg.csproj", "{FF03A145-405E-4C92-8B1B-401946EA6E61}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tricycle.Media.FFmpeg", "..\dotnet\Tricycle.Media.FFmpeg\Tricycle.Media.FFmpeg.csproj", "{FF03A145-405E-4C92-8B1B-401946EA6E61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tricycle.Diagnostics.Tests", "Tricycle.Diagnostics.Tests\Tricycle.Diagnostics.Tests.csproj", "{69BC8363-403E-4B7A-A9E4-ADAFF1B747DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tricycle.Diagnostics.Tests", "..\dotnet\Tricycle.Diagnostics.Tests\Tricycle.Diagnostics.Tests.csproj", "{69BC8363-403E-4B7A-A9E4-ADAFF1B747DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tricycle.Media.FFmpeg.Tests", "Tricycle.Media.FFmpeg.Tests\Tricycle.Media.FFmpeg.Tests.csproj", "{9F6871C2-51A8-4809-BC04-84967A2847A0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tricycle.Media.FFmpeg.Tests", "..\dotnet\Tricycle.Media.FFmpeg.Tests\Tricycle.Media.FFmpeg.Tests.csproj", "{9F6871C2-51A8-4809-BC04-84967A2847A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tricycle.IO", "Tricycle.IO\Tricycle.IO.csproj", "{8E31720E-E9C1-4D3F-AA41-F70F0AD78CED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tricycle.IO", "..\dotnet\Tricycle.IO\Tricycle.IO.csproj", "{8E31720E-E9C1-4D3F-AA41-F70F0AD78CED}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tricycle.IO.macOS", "Tricycle.IO.macOS\Tricycle.IO.macOS.csproj", "{E303680C-0FFB-4CE6-AD29-482FAB318438}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tricycle.UI", "Tricycle.UI\Tricycle.UI.csproj", "{2318EE49-B396-40AC-8D09-58104D2ABB67}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tricycle.UI", "..\dotnet\Tricycle.UI\Tricycle.UI.csproj", "{2318EE49-B396-40AC-8D09-58104D2ABB67}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tricycle.UI.macOS", "Tricycle.UI.macOS\Tricycle.UI.macOS.csproj", "{E47E3DE2-BD86-4D6A-B977-280C9D325444}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tricycle.UI.Tests", "Tricycle.UI.Tests\Tricycle.UI.Tests.csproj", "{9A6A95C9-6B4D-4F61-9984-8D5DF3E3995E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tricycle.UI.Tests", "..\dotnet\Tricycle.UI.Tests\Tricycle.UI.Tests.csproj", "{9A6A95C9-6B4D-4F61-9984-8D5DF3E3995E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tricycle.Models", "Tricycle.Models\Tricycle.Models.csproj", "{D8C74968-42BE-4884-BD81-352A9113231D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tricycle.Models", "..\dotnet\Tricycle.Models\Tricycle.Models.csproj", "{D8C74968-42BE-4884-BD81-352A9113231D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tricycle.Utilities", "Tricycle.Utilities\Tricycle.Utilities.csproj", "{0ED0381E-0215-4814-8B3E-DCE3EDC555A6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tricycle.Utilities", "..\dotnet\Tricycle.Utilities\Tricycle.Utilities.csproj", "{0ED0381E-0215-4814-8B3E-DCE3EDC555A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tricycle.Utilities.Tests", "Tricycle.Utilities.Tests\Tricycle.Utilities.Tests.csproj", "{13545FE5-B979-48C8-8DDE-E1F353A8929D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tricycle.Utilities.Tests", "..\dotnet\Tricycle.Utilities.Tests\Tricycle.Utilities.Tests.csproj", "{13545FE5-B979-48C8-8DDE-E1F353A8929D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tricycle.IO.Tests", "Tricycle.IO.Tests\Tricycle.IO.Tests.csproj", "{1FD03DC4-DAF0-4C12-9F86-7F6CFD830BCE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tricycle.IO.Tests", "..\dotnet\Tricycle.IO.Tests\Tricycle.IO.Tests.csproj", "{1FD03DC4-DAF0-4C12-9F86-7F6CFD830BCE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tricycle.Globalization", "Tricycle.Globalization\Tricycle.Globalization.csproj", "{D3D4FED4-BE82-4144-81DA-605110421742}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tricycle.Globalization", "..\dotnet\Tricycle.Globalization\Tricycle.Globalization.csproj", "{D3D4FED4-BE82-4144-81DA-605110421742}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tricycle.Globalization.Tests", "Tricycle.Globalization.Tests\Tricycle.Globalization.Tests.csproj", "{632D9833-4187-4D5F-A74B-1401338FD1A9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tricycle.Globalization.Tests", "..\dotnet\Tricycle.Globalization.Tests\Tricycle.Globalization.Tests.csproj", "{632D9833-4187-4D5F-A74B-1401338FD1A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

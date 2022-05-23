@@ -58,7 +58,7 @@
     <Compile Include="FolderBrowser.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Tricycle.IO\Tricycle.IO.csproj">
+    <ProjectReference Include="..\..\dotnet\Tricycle.IO\Tricycle.IO.csproj">
       <Project>{8E31720E-E9C1-4D3F-AA41-F70F0AD78CED}</Project>
       <Name>Tricycle.IO</Name>
     </ProjectReference>
