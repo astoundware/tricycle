@@ -6,10 +6,10 @@ namespace Tricycle.UI
     {
         int _modalCount;
 
-        public bool IsBusy { get; private set; }
-        public bool IsQuitConfirmed { get; private set; }
+        public bool IsBusy { get; protected set; }
+        public bool IsQuitConfirmed { get; protected set; }
         public bool IsModalOpen { get => _modalCount > 0; }
-        public bool IsValidSourceSelected { get; private set; }
+        public bool IsValidSourceSelected { get; protected set; }
 
         public event Action Ready;
         public event Action Busy;

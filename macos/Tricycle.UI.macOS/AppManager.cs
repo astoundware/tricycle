@@ -6,6 +6,12 @@ namespace Tricycle.UI.macOS
 {
     public class AppManager : AppManagerBase
     {
+        public AppManager()
+        {
+            // TODO: remove once AppManager is wired up to UI
+            IsQuitConfirmed = true;
+        }
+
         public override void Alert(string title, string message, Severity severity)
         {
             using (var alert = NSAlert.WithMessage(title,
