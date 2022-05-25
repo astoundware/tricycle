@@ -1,2 +1,5 @@
 # Assets produced by JS bundle
 Resources/assets/
+
+# DMGs produced by Release builds
+*.dmg
