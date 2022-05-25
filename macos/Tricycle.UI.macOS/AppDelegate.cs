@@ -5,7 +5,7 @@ using System.IO;
 using System.IO.Abstractions;
 using System.Linq;
 using AppKit;
-using CoreGraphics;
+using Astound.ReactNative.macOS.Extensions;
 using Foundation;
 using Lamar;
 using Tricycle.Diagnostics;
@@ -22,57 +22,162 @@ using Tricycle.Models.Config;
 using Tricycle.Models.Templates;
 using Tricycle.Utilities;
 
-
 namespace Tricycle.UI.macOS
 {
-    [Register("AppDelegate")]
-    public sealed class AppDelegate : NSApplicationDelegate
-    {
-        const int WINDOW_WIDTH = 800;
-        const int WINDOW_HEIGHT = 560;
+    [Register ("AppDelegate")]
+	public class AppDelegate : ReactAppDelegate
+	{
+        #region Fields
 
-        IAppManager _appManager;
-        NSDocumentController _documentController;
-        IConfigManager<Dictionary<string, JobTemplate>> _templateManager;
-        TextWriterTraceListener _traceListener;
+        readonly IAppManager _appManager;
+		IConfigManager<Dictionary<string, JobTemplate>> _templateManager;
+		TextWriterTraceListener _traceListener;
 
-        public AppDelegate()
-        {
-            var center = GetCenterCoordinate();
-            var rect = new CGRect(center.X, center.Y, WINDOW_WIDTH, WINDOW_HEIGHT);
-            var style = NSWindowStyle.Closable | NSWindowStyle.Miniaturizable | NSWindowStyle.Resizable | NSWindowStyle.Titled;
+        #endregion
 
-            MainWindow = new NSWindow(rect, style, NSBackingStore.Buffered, false)
+        #region Constructors
+
+        public AppDelegate ()
+		{
+			_appManager = new AppManager();
+
+			_appManager.FileOpened += fileName =>
+			{
+				var url = new NSUrl($"file://{Uri.EscapeUriString(fileName)}");
+
+				NSDocumentController.SharedDocumentController.NoteNewRecentDocumentURL(url);
+			};
+			_appManager.QuitConfirmed += () =>
+			{
+				NSApplication.SharedApplication.Terminate(this);
+			};
+
+			new AppDocumentController(_appManager);
+		}
+
+        #endregion
+
+        #region Public Methods
+
+        public override void DidFinishLaunching (NSNotification notification)
+		{
+			NSApplication.SharedApplication.MainWindow.Delegate = new MainWindowDelegate(_appManager);
+
+            InitializeAppState();
+            PopulateTemplateMenu();
+		}
+
+		public override void WillTerminate (NSNotification notification)
+		{
+            if (_traceListener != null)
             {
-                Title = "Tricycle",
-                TitlebarAppearsTransparent = true,
-                BackgroundColor = NSColor.FromSrgb(225 / 255f, 224 / 255f, 225 / 255f, 1),
-                MovableByWindowBackground = true
-            };
-            MainWindow.WindowShouldClose += sender => ShouldClose();
-
-            _appManager = new AppManager(MainWindow);
-
-            _appManager.FileOpened += fileName =>
-            {
-                var url = new NSUrl($"file://{Uri.EscapeUriString(fileName)}");
-
-                NSDocumentController.SharedDocumentController.NoteNewRecentDocumentURL(url);
-            };
-            _appManager.QuitConfirmed += () =>
-            {
-                NSApplication.SharedApplication.Terminate(this);
-            };
+                _traceListener.Flush();
+            }
         }
 
-        public NSWindow MainWindow { get; }
+        public override bool ApplicationShouldTerminateAfterLastWindowClosed(NSApplication sender) => true;
 
-        public override void WillFinishLaunching(NSNotification notification)
+        public override NSApplicationTerminateReply ApplicationShouldTerminate(NSApplication sender) =>
+            ShouldClose() ? NSApplicationTerminateReply.Now : NSApplicationTerminateReply.Cancel;
+
+        public override bool OpenFile(NSApplication sender, string filename)
         {
-            _documentController = new AppDocumentController(_appManager);
+            if (!File.Exists(filename))
+            {
+                return false;
+            }
+
+            _appManager.RaiseFileOpened(filename);
+            return true;
         }
 
-        public override void DidFinishLaunching(NSNotification notification)
+        [Export("openDocument:")]
+        public void OpenFile(NSObject sender)
+        {
+            var browser = new FileBrowser();
+            var result = browser.BrowseToOpen().GetAwaiter().GetResult();
+
+            if (result.Confirmed)
+            {
+                _appManager.RaiseFileOpened(result.FileName);
+            }
+        }
+
+        [Action("openPreferences:")]
+        public void OpenPreferences(NSObject sender)
+        {
+            _appManager.RaiseModalOpened(Modal.Config);
+        }
+
+        [Action("saveTemplate:")]
+        public void SaveTemplate(NSObject sender)
+        {
+            string name = _appManager.Ask("Save Template", "Please enter a name for the template:", GetNewTemplateName());
+
+            if (name != null)
+            {
+                name = name.Trim();
+                bool overwrite = false;
+
+                if (_templateManager.Config?.ContainsKey(name) == true)
+                {
+                    overwrite = _appManager.Confirm("Overwrite Template",
+                                                    "A template with that name exists. Would you like to overwrite it?");
+
+                    if (!overwrite)
+                    {
+                        return;
+                    }
+                }
+
+                _appManager.RaiseTemplateSaved(name);
+
+                if (!overwrite)
+                {
+                    PopulateTemplateMenu();
+                }
+            }
+        }
+
+        [Action("manageTemplates:")]
+        public void ManageTemplates(NSObject sender)
+        {
+            _appManager.RaiseModalOpened(Modal.Config);
+        }
+
+        [Action("viewPreview:")]
+        public void ViewPreview(NSObject sender)
+        {
+            _appManager.RaiseModalOpened(Modal.Preview);
+        }
+
+        [Action("validateMenuItem:")]
+        public bool ValidateMenuItem(NSMenuItem item)
+        {
+            if (item.ParentItem?.Title == "Templates")
+            {
+                return IsTemplateMenuItemValid(item);
+            }
+
+            switch (item.Title)
+            {
+                case "Manage…":
+                case "Open…":
+                case "Preferences…":
+                    return !_appManager.IsBusy && !_appManager.IsModalOpen;
+                case "Preview…":
+                case "Save As…":
+                    return !_appManager.IsBusy && !_appManager.IsModalOpen && _appManager.IsValidSourceSelected;
+                default:
+                    return true;
+            }
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        void InitializeAppState()
         {
             const string FFMPEG_CONFIG_NAME = "ffmpeg.json";
             const string TRICYCLE_CONFIG_NAME = "tricycle.json";
@@ -159,125 +264,6 @@ namespace Tricycle.UI.macOS
                 _.For<ILanguageService>().Use<LanguageService>();
             });
             AppState.DefaultDestinationDirectory = Path.Combine(userPath, "Movies");
-
-            PopulateTemplateMenu();
-
-            base.DidFinishLaunching(notification);
-        }
-
-        public override bool ApplicationShouldTerminateAfterLastWindowClosed(NSApplication sender) => true;
-
-        public override NSApplicationTerminateReply ApplicationShouldTerminate(NSApplication sender) =>
-            ShouldClose() ? NSApplicationTerminateReply.Now : NSApplicationTerminateReply.Cancel;
-
-        public override void WillTerminate(NSNotification notification)
-        {
-            if (_traceListener != null)
-            {
-                _traceListener.Flush();
-            }
-        }
-
-        public override bool OpenFile(NSApplication sender, string filename)
-        {
-            if (!File.Exists(filename))
-            {
-                return false;
-            }
-
-            _appManager.RaiseFileOpened(filename);
-            return true;
-        }
-
-        [Action("validateMenuItem:")]
-        public bool ValidateMenuItem(NSMenuItem item)
-        {
-            if (item.ParentItem?.Title == "Templates")
-            {
-                return IsTemplateMenuItemValid(item);
-            }
-
-            switch (item.Title)
-            {
-                case "Manage…":
-                case "Open…":
-                case "Preferences…":
-                    return !_appManager.IsBusy && !_appManager.IsModalOpen;
-                case "Preview…":
-                case "Save As…":
-                    return !_appManager.IsBusy && !_appManager.IsModalOpen && _appManager.IsValidSourceSelected;
-                default:
-                    return true;
-            }
-        }
-
-        [Action("openPreferences:")]
-        public void OpenPreferences(NSObject sender)
-        {
-            _appManager.RaiseModalOpened(Modal.Config);
-        }
-
-        [Export("openDocument:")]
-        void OpenFile(NSObject sender)
-        {
-            var browser = new FileBrowser();
-            var result = browser.BrowseToOpen().GetAwaiter().GetResult();
-
-            if (result.Confirmed)
-            {
-                _appManager.RaiseFileOpened(result.FileName);
-            }
-        }
-
-        [Action("saveTemplate:")]
-        public void SaveTemplate(NSObject sender)
-        {
-            string name = _appManager.Ask("Save Template", "Please enter a name for the template:", GetNewTemplateName());
-
-            if (name != null)
-            {
-                name = name.Trim();
-                bool overwrite = false;
-
-                if (_templateManager.Config?.ContainsKey(name) == true)
-                {
-                    overwrite = _appManager.Confirm("Overwrite Template",
-                                                    "A template with that name exists. Would you like to overwrite it?");
-
-                    if (!overwrite)
-                    {
-                        return;
-                    }
-                }
-
-                _appManager.RaiseTemplateSaved(name);
-
-                if (!overwrite)
-                {
-                    PopulateTemplateMenu();
-                }
-            }
-        }
-
-        [Action("manageTemplates:")]
-        public void ManageTemplates(NSObject sender)
-        {
-            _appManager.RaiseModalOpened(Modal.Config);
-        }
-
-        [Action("viewPreview:")]
-        public void ViewPreview(NSObject sender)
-        {
-            _appManager.RaiseModalOpened(Modal.Preview);
-        }
-
-        Coordinate<nfloat> GetCenterCoordinate()
-        {
-            var frame = NSScreen.MainScreen.VisibleFrame;
-            var x = frame.X + (frame.Width - WINDOW_WIDTH) / 2f;
-            var y = frame.Y + (frame.Height - WINDOW_HEIGHT) / 2f;
-
-            return new Coordinate<nfloat>(x, y);
         }
 
         void EnableLogging(string userPath)
@@ -304,36 +290,9 @@ namespace Tricycle.UI.macOS
             }
         }
 
-        bool ShouldClose()
-        {
-            if (!_appManager.IsQuitConfirmed)
-            {
-                _appManager.RaiseQuitting();
-            }
-
-            return _appManager.IsQuitConfirmed;
-        }
-
-        string GetNewTemplateName()
-        {
-            var templates = _templateManager.Config;
-            int i = 0;
-            string result;
-
-            do
-            {
-                string suffix = i > 0 ? $" {i}" : string.Empty;
-                result = $"New Template{suffix}";
-                i++;
-            }
-            while (templates.ContainsKey(result));
-
-            return result;
-        }
-
         void PopulateTemplateMenu()
         {
-            var menu = MainWindow.Menu.ItemWithTitle("Templates").Submenu;
+            var menu = NSApplication.SharedApplication.MainWindow.Menu.ItemWithTitle("Templates").Submenu;
 
             // There are 3 items that are static
             for (int i = menu.Items.Length - 1; i > 2; i--)
@@ -356,5 +315,34 @@ namespace Tricycle.UI.macOS
         {
             return !_appManager.IsBusy && !_appManager.IsModalOpen && _appManager.IsValidSourceSelected;
         }
+
+        string GetNewTemplateName()
+        {
+            var templates = _templateManager.Config;
+            int i = 0;
+            string result;
+
+            do
+            {
+                string suffix = i > 0 ? $" {i}" : string.Empty;
+                result = $"New Template{suffix}";
+                i++;
+            }
+            while (templates.ContainsKey(result));
+
+            return result;
+        }
+
+        bool ShouldClose()
+        {
+            if (!_appManager.IsQuitConfirmed)
+            {
+                _appManager.RaiseQuitting();
+            }
+
+            return _appManager.IsQuitConfirmed;
+        }
+
+        #endregion
     }
 }

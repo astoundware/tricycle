@@ -6,13 +6,6 @@ namespace Tricycle.UI.macOS
 {
     public class AppManager : AppManagerBase
     {
-        NSWindow _mainWindow;
-
-        public AppManager(NSWindow mainWindow)
-        {
-            _mainWindow = mainWindow;
-        }
-
         public override void Alert(string title, string message, Severity severity)
         {
             using (var alert = NSAlert.WithMessage(title,
@@ -21,7 +14,7 @@ namespace Tricycle.UI.macOS
                                                    null,
                                                    message))
             {
-                alert.RunSheetModal(_mainWindow);
+                alert.RunSheetModal(NSApplication.SharedApplication.MainWindow);
             }
         }
 
@@ -37,7 +30,7 @@ namespace Tricycle.UI.macOS
             {
                 alert.AlertStyle = NSAlertStyle.Critical;
 
-                return alert.RunSheetModal(_mainWindow) == OK;
+                return alert.RunSheetModal(NSApplication.SharedApplication.MainWindow) == OK;
             }
         }
 
@@ -61,7 +54,7 @@ namespace Tricycle.UI.macOS
                     {
                         input.StringValue = defaultValue;
 
-                        result = alert.RunSheetModal(_mainWindow);
+                        result = alert.RunSheetModal(NSApplication.SharedApplication.MainWindow);
 
                         input.ValidateEditing();
                     }

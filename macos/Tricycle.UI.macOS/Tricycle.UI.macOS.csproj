@@ -1,16 +1,15 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Astound.ReactNative.macOS.Bindings.0.64.0\build\Astound.ReactNative.macOS.Bindings.props" Condition="Exists('..\packages\Astound.ReactNative.macOS.Bindings.0.64.0\build\Astound.ReactNative.macOS.Bindings.props')" />
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E47E3DE2-BD86-4D6A-B977-280C9D325444}</ProjectGuid>
+    <ProjectGuid>{54483175-1802-4686-93E9-DCBF4E185B76}</ProjectGuid>
     <ProjectTypeGuids>{A3F8F2AB-B479-4A4A-A458-A89E7DC349F1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Tricycle.UI.macOS</RootNamespace>
     <AssemblyName>Tricycle</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <TargetFrameworkIdentifier>Xamarin.Mac</TargetFrameworkIdentifier>
     <MonoMacResourcePrefix>Resources</MonoMacResourcePrefix>
+    <RootNamespace>Tricycle.UI.macOS</RootNamespace>
     <ReleaseVersion>2.6.1</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -28,17 +27,17 @@
     <IncludeMonoRuntime>false</IncludeMonoRuntime>
     <UseSGen>true</UseSGen>
     <UseRefCounting>true</UseRefCounting>
-    <HttpClientHandler>HttpClientHandler</HttpClientHandler>
-    <LinkMode>None</LinkMode>
-    <XamMacArch></XamMacArch>
-    <AOTMode>None</AOTMode>
+    <HttpClientHandler></HttpClientHandler>
+    <CodeSignProvision></CodeSignProvision>
     <PackageSigningKey>3rd Party Mac Developer Installer</PackageSigningKey>
-    <UseHardenedRuntime>true</UseHardenedRuntime>
+    <LinkMode>None</LinkMode>
+    <AOTMode>None</AOTMode>
+    <XamMacArch>x86_64</XamMacArch>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
-    <DefineConstants>__UNIFIED__;__MACOS__;TRACE;</DefineConstants>
+    <DefineConstants>__MACOS__;__UNIFIED__;TRACE;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <EnableCodeSigning>false</EnableCodeSigning>
@@ -47,21 +46,20 @@
     <IncludeMonoRuntime>true</IncludeMonoRuntime>
     <UseSGen>true</UseSGen>
     <UseRefCounting>true</UseRefCounting>
+    <CodeSignEntitlements>Entitlements.plist</CodeSignEntitlements>
     <LinkMode>SdkOnly</LinkMode>
-    <HttpClientHandler>HttpClientHandler</HttpClientHandler>
-    <XamMacArch></XamMacArch>
+    <HttpClientHandler></HttpClientHandler>
+    <CodeSigningKey>Mac Developer</CodeSigningKey>
+    <CodeSignProvision></CodeSignProvision>
+    <UseHardenedRuntime>true</UseHardenedRuntime>
+    <PackageSigningKey>3rd Party Mac Developer Installer</PackageSigningKey>
     <AOTMode>None</AOTMode>
     <CustomCommands>
       <CustomCommands>
         <Command>
           <type>AfterBuild</type>
-          <command>npm i</command>
-          <workingdir>${ProjectDir}</workingdir>
-        </Command>
-        <Command>
-          <type>AfterBuild</type>
           <command>rm -f Tricycle.dmg</command>
-          <workingdir>${TargetDir}</workingdir>
+          <workingdir>${ProjectDir}/dmg</workingdir>
         </Command>
         <Command>
           <type>AfterBuild</type>
@@ -80,16 +78,12 @@
         </Command>
         <Command>
           <type>AfterBuild</type>
-          <command>npm run appdmg dmg/config.json bin/Release/Tricycle.dmg</command>
-          <workingdir>${ProjectDir}</workingdir>
+          <command>npm run appdmg config.json Tricycle.dmg</command>
+          <workingdir>${ProjectDir}/dmg</workingdir>
         </Command>
       </CustomCommands>
     </CustomCommands>
-    <CodeSigningKey>Developer ID Application</CodeSigningKey>
-    <UseHardenedRuntime>true</UseHardenedRuntime>
-    <PackageSigningKey>3rd Party Mac Developer Installer</PackageSigningKey>
-    <CodeSignEntitlements>Entitlements.plist</CodeSignEntitlements>
-    <CodeSignProvision>Automatic</CodeSignProvision>
+    <XamMacArch>x86_64</XamMacArch>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -134,6 +128,15 @@
     <Reference Include="Iso639">
       <HintPath>..\packages\Iso639.1.0.0\lib\netstandard2.0\Iso639.dll</HintPath>
     </Reference>
+    <Reference Include="Astound.ReactNative.Modules">
+      <HintPath>..\packages\Astound.ReactNative.Modules.1.0.0\lib\netstandard2.0\Astound.ReactNative.Modules.dll</HintPath>
+    </Reference>
+    <Reference Include="Astound.ReactNative.Modules.ObjC">
+      <HintPath>..\packages\Astound.ReactNative.Modules.ObjC.1.0.0\lib\netstandard2.0\Astound.ReactNative.Modules.ObjC.dll</HintPath>
+    </Reference>
+    <Reference Include="Astound.ReactNative.macOS.Extensions">
+      <HintPath>..\packages\Astound.ReactNative.macOS.Extensions.0.64.0\lib\xamarinmac20\Astound.ReactNative.macOS.Extensions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
@@ -158,13 +161,17 @@
   <ItemGroup>
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
-    <None Include="makefile" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="ViewController.cs" />
+    <Compile Include="ViewController.designer.cs">
+      <DependentUpon>ViewController.cs</DependentUpon>
+    </Compile>
     <Compile Include="AppDocumentController.cs" />
+    <Compile Include="MainWindowDelegate.cs" />
     <Compile Include="AppManager.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -254,4 +261,6 @@
     <BundleResource Include="Resources\Images\tricycle-gray.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
+  <Import Project="..\packages\Astound.ReactNative.Generators.ObjC.0.64.0\build\Astound.ReactNative.Generators.ObjC.targets" Condition="Exists('..\packages\Astound.ReactNative.Generators.ObjC.0.64.0\build\Astound.ReactNative.Generators.ObjC.targets')" />
+  <Import Project="..\packages\Astound.ReactNative.macOS.Bindings.0.64.0\build\Astound.ReactNative.macOS.Bindings.targets" Condition="Exists('..\packages\Astound.ReactNative.macOS.Bindings.0.64.0\build\Astound.ReactNative.macOS.Bindings.targets')" />
 </Project>
