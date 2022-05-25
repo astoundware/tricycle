@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceAssemblyReference>true</ProduceAssemblyReference>
+    <ReleaseVersion>2.6.1</ReleaseVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.IO.Abstractions" Version="17.0.15" />
+    <PackageReference Include="Iso639" Version="1.0.0" />
+    <PackageReference Include="ByteSize" Version="2.1.1" />
+    <PackageReference Include="Lamar" Version="8.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Tricycle.Media\Tricycle.Media.csproj" />
+    <ProjectReference Include="..\Tricycle.IO\Tricycle.IO.csproj" />
+    <ProjectReference Include="..\Tricycle.Models\Tricycle.Models.csproj" />
+    <ProjectReference Include="..\Tricycle.Utilities\Tricycle.Utilities.csproj" />
+    <ProjectReference Include="..\Tricycle.Media.FFmpeg\Tricycle.Media.FFmpeg.csproj" />
+    <ProjectReference Include="..\Tricycle.Globalization\Tricycle.Globalization.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Lamar" />
+  </ItemGroup>
+</Project>

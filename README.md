@@ -35,7 +35,7 @@ Tricycle is an open-source video transcoder for macOS and Windows.  It takes the
 
 ## System Requirements
 ### macOS
-* macOS High Sierra (10.13) or later
+* macOS Mojave (10.14) or later
 ### Windows
 * Windows 7 or later (64-bit)
 * .NET Framework 4.6.1 or later

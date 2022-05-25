@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ReleaseVersion>2.6.1</ReleaseVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Config\" />
+    <Folder Include="Media\" />
+    <Folder Include="Jobs\" />
+    <Folder Include="Templates\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Lamar" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Lamar" Version="8.0.1" />
+  </ItemGroup>
+</Project>
