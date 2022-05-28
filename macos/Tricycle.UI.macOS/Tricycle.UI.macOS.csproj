@@ -173,6 +173,7 @@
     <Compile Include="AppDocumentController.cs" />
     <Compile Include="MainWindowDelegate.cs" />
     <Compile Include="AppManager.cs" />
+    <Compile Include="LanguageManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />

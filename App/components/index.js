@@ -1,4 +1,2 @@
-import GeneralSettings from './GeneralSettings';
-import LabeledSwitch from './LabeledSwitch';
-
-export {GeneralSettings, LabeledSwitch};
+export {default as GeneralSettings} from './GeneralSettings';
+export {default as LabeledSwitch} from './LabeledSwitch';
