@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Astound.ReactNative.macOS.Bindings.0.64.1\build\Astound.ReactNative.macOS.Bindings.props" Condition="Exists('..\packages\Astound.ReactNative.macOS.Bindings.0.64.1\build\Astound.ReactNative.macOS.Bindings.props')" />
   <Import Project="..\packages\Astound.ReactNative.macOS.Bindings.0.64.0\build\Astound.ReactNative.macOS.Bindings.props" Condition="Exists('..\packages\Astound.ReactNative.macOS.Bindings.0.64.0\build\Astound.ReactNative.macOS.Bindings.props')" />
   <PropertyGroup>
     <ProjectGuid>{54483175-1802-4686-93E9-DCBF4E185B76}</ProjectGuid>
@@ -135,7 +136,7 @@
       <HintPath>..\packages\Astound.ReactNative.Modules.ObjC.1.0.0\lib\netstandard2.0\Astound.ReactNative.Modules.ObjC.dll</HintPath>
     </Reference>
     <Reference Include="Astound.ReactNative.macOS.Extensions">
-      <HintPath>..\packages\Astound.ReactNative.macOS.Extensions.0.64.0\lib\xamarinmac20\Astound.ReactNative.macOS.Extensions.dll</HintPath>
+      <HintPath>..\packages\Astound.ReactNative.macOS.Extensions.0.64.1\lib\xamarinmac20\Astound.ReactNative.macOS.Extensions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -263,5 +264,5 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
   <Import Project="..\packages\Astound.ReactNative.Generators.ObjC.0.64.0\build\Astound.ReactNative.Generators.ObjC.targets" Condition="Exists('..\packages\Astound.ReactNative.Generators.ObjC.0.64.0\build\Astound.ReactNative.Generators.ObjC.targets')" />
-  <Import Project="..\packages\Astound.ReactNative.macOS.Bindings.0.64.0\build\Astound.ReactNative.macOS.Bindings.targets" Condition="Exists('..\packages\Astound.ReactNative.macOS.Bindings.0.64.0\build\Astound.ReactNative.macOS.Bindings.targets')" />
+  <Import Project="..\packages\Astound.ReactNative.macOS.Bindings.0.64.1\build\Astound.ReactNative.macOS.Bindings.targets" Condition="Exists('..\packages\Astound.ReactNative.macOS.Bindings.0.64.1\build\Astound.ReactNative.macOS.Bindings.targets')" />
 </Project>

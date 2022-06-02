@@ -9,6 +9,7 @@
     "macos": "msbuild macos/Tricycle.macOS.sln && open macos/Tricycle.UI.macOS/bin/Debug/Tricycle.app"
   },
   "dependencies": {
+    "@react-native-picker/picker": "^2.4.1",
     "i18next": "^21.8.4",
     "react": "17.0.1",
     "react-i18next": "^11.16.9",
