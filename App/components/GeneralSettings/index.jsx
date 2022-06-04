@@ -2,7 +2,9 @@ import React from 'react';
 import {View} from 'react-native';
 import {useTranslation} from 'react-i18next';
 
+import ImageButton from '../ImageButton';
 import LabeledSwitch from '../LabeledSwitch';
+import {trash} from '../../images';
 
 export default function GeneralSettings({
   isCompletionAlertEnabled,
@@ -17,6 +19,7 @@ export default function GeneralSettings({
         value={isCompletionAlertEnabled}
         onValueChange={onCompletionAlertEnabledChange}
       />
+      <ImageButton imageSource={trash} />
     </View>
   );
 }

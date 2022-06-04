@@ -218,10 +218,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Images\folder-browse.png" />
-    <BundleResource Include="Resources\Images\folder-open.png" />
-    <BundleResource Include="Resources\Images\play.png" />
-    <BundleResource Include="Resources\Images\stop.png" />
     <BundleResource Include="Resources\Tools\FFmpeg\ffprobe" />
     <BundleResource Include="Resources\Tools\FFmpeg\ffmpeg" />
     <BundleResource Include="Resources\Config\tricycle.json" />
@@ -256,11 +252,6 @@
     <BundleResource Include="..\..\tools\FFmpeg\source\x265.tar.bz2">
       <Link>Resources\Tools\FFmpeg\Source\x265.tar.bz2</Link>
     </BundleResource>
-    <BundleResource Include="Resources\Images\trash.png" />
-    <BundleResource Include="Resources\Images\next.png" />
-    <BundleResource Include="Resources\Images\previous.png" />
-    <BundleResource Include="Resources\Images\preview.png" />
-    <BundleResource Include="Resources\Images\tricycle-gray.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
   <Import Project="..\packages\Astound.ReactNative.Generators.ObjC.0.64.0\build\Astound.ReactNative.Generators.ObjC.targets" Condition="Exists('..\packages\Astound.ReactNative.Generators.ObjC.0.64.0\build\Astound.ReactNative.Generators.ObjC.targets')" />
