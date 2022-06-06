@@ -28,6 +28,10 @@
   },
   "jest": {
     "preset": "react-native",
+    "moduleNameMapper": {
+      "^\\.(.*)/constants/colors$": "<rootDir>/App/constants/colors.macos.js",
+      "^\\.(.*)/images$": "<rootDir>/App/images/index.macos.js"
+    },
     "transform": {
       "^.+\\.[jt]sx?$": "babel-jest"
     }
