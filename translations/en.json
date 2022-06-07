@@ -1,5 +1,14 @@
 {
   "settings": {
-    "completionAlert": "Show alert on completion"
+    "completionAlert": "Show alert on completion",
+    "deleteIncompleteFiles": "Delete incomplete files",
+    "enableForcedSubtitles": "Prefer forced subtitles",
+    "enableSoftSubtitles": "Use soft subtitles when supported",
+    "mp4FileExtension": "MP4 file extension",
+    "mkvFileExtension": "MKV file extension",
+    "destinationDirectory": "Destination directory"
+  },
+  "templates": {
+    "title": "Templates"
   }
 }

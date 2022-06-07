@@ -9,6 +9,16 @@ import {trash} from '../../images';
 export default function GeneralSettings({
   isCompletionAlertEnabled,
   onCompletionAlertEnabledChange,
+  isIncompleteDeletionEnabled,
+  onIncompleteDeletionChange,
+  isForcedSubtitlesEnabled,
+  onForcedSubtitlesChange,
+  isSoftSubtitlesEnabled,
+  onSoftSubtitlesChange,
+  mp4FileExtension,
+  onMp4FileExtensionChange,
+  mkvFileExtension,
+  onMkvFileExtensionChange,
 }) {
   const {t} = useTranslation();
 
@@ -18,6 +28,21 @@ export default function GeneralSettings({
         label={t('settings.completionAlert')}
         value={isCompletionAlertEnabled}
         onValueChange={onCompletionAlertEnabledChange}
+      />
+      <LabeledSwitch
+        label={t('settings.deleteIncompleteFiles')}
+        value={isIncompleteDeletionEnabled}
+        onValueChange={onIncompleteDeletionChange}
+      />
+      <LabeledSwitch
+        label={t('settings.enableForcedSubtitles')}
+        value={isForcedSubtitlesEnabled}
+        onValueChange={onForcedSubtitlesChange}
+      />
+      <LabeledSwitch
+        label={t('settings.enableSoftSubtitles')}
+        value={isSoftSubtitlesEnabled}
+        onValueChange={onSoftSubtitlesChange}
       />
       <ImageButton imageSource={trash} />
     </View>

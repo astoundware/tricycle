@@ -1,17 +1,19 @@
 import React from 'react';
-import {Switch, Text, View} from 'react-native';
+import {Pressable, Switch, Text} from 'react-native';
 
 import styles from './styles';
 
 export default function LabeledSwitch({style, label, onValueChange, value}) {
   return (
-    <View style={[styles.container, style]}>
+    <Pressable
+      style={[styles.container, style]}
+      onPress={() => onValueChange && onValueChange(!value)}>
       <Switch
         style={styles.switch}
-        onValueChange={onValueChange}
         value={value}
+        onValueChange={onValueChange}
       />
       <Text style={styles.label}>{label}</Text>
-    </View>
+    </Pressable>
   );
 }

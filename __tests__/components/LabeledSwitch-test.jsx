@@ -1,7 +1,7 @@
 import 'react-native';
 import renderer from 'react-test-renderer';
 import React from 'react';
-import {Switch, Text} from 'react-native';
+import {Pressable, Switch, Text} from 'react-native';
 
 import {LabeledSwitch} from '../../App/components';
 
@@ -32,4 +32,24 @@ it('calls onValueChange when the switch is toggled', () => {
   sw.props.onValueChange(value);
 
   expect(onValueChange).toHaveBeenCalledWith(value);
+});
+
+it('calls onValueChange when pressed', () => {
+  const value = true;
+  const onValueChange = jest.fn();
+  const component = renderer.create(
+    <LabeledSwitch onValueChange={onValueChange} />,
+  );
+  const pressable = component.root.findByType(Pressable);
+
+  pressable.props.onPress();
+
+  expect(onValueChange).toHaveBeenCalledWith(value);
+});
+
+it('does not throw error when onValueChange is null', () => {
+  const component = renderer.create(<LabeledSwitch />);
+  const pressable = component.root.findByType(Pressable);
+
+  pressable.props.onPress();
 });
