@@ -34,7 +34,7 @@ it('calls onValueChange when the switch is toggled', () => {
   expect(onValueChange).toHaveBeenCalledWith(value);
 });
 
-it('calls onValueChange when pressed', () => {
+it('calls onValueChange when the label is pressed', () => {
   const value = true;
   const onValueChange = jest.fn();
   const component = renderer.create(

@@ -1,10 +1,12 @@
 import React from 'react';
-import {View} from 'react-native';
+import {Text, View} from 'react-native';
 import {useTranslation} from 'react-i18next';
 
 import ImageButton from '../ImageButton';
 import LabeledSwitch from '../LabeledSwitch';
+import PlatformTextInput from '../PlatformTextInput';
 import {trash} from '../../images';
+import styles from './styles';
 
 export default function GeneralSettings({
   isCompletionAlertEnabled,
@@ -44,6 +46,16 @@ export default function GeneralSettings({
         value={isSoftSubtitlesEnabled}
         onValueChange={onSoftSubtitlesChange}
       />
+      <View style={styles.table}>
+        <View style={styles.column}>
+          <Text style={styles.row}>{t('settings.mp4FileExtension')}</Text>
+          <Text style={styles.row}>{t('settings.mkvFileExtension')}</Text>
+        </View>
+        <View>
+          <PlatformTextInput style={[styles.row, styles.text]} value="mp4" />
+          <PlatformTextInput style={[styles.row, styles.text]} value="mkv" />
+        </View>
+      </View>
       <ImageButton imageSource={trash} />
     </View>
   );
