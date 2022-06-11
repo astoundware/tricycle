@@ -6,12 +6,18 @@ export default StyleSheet.create({
     marginVertical: 10,
   },
   column: {
+    alignContent: 'center',
     marginRight: 10,
   },
   row: {
     marginBottom: 10,
   },
-  text: {
-    width: 100,
+  labelRow: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  label: {},
+  input: {
+    minWidth: 100,
   },
 });

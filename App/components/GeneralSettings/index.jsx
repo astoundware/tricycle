@@ -48,12 +48,16 @@ export default function GeneralSettings({
       />
       <View style={styles.table}>
         <View style={styles.column}>
-          <Text style={styles.row}>{t('settings.mp4FileExtension')}</Text>
-          <Text style={styles.row}>{t('settings.mkvFileExtension')}</Text>
+          <View style={[styles.row, styles.labelRow]}>
+            <Text style={styles.label}>{t('settings.mp4FileExtension')}</Text>
+          </View>
+          <View style={[styles.row, styles.labelRow]}>
+            <Text style={styles.label}>{t('settings.mkvFileExtension')}</Text>
+          </View>
         </View>
         <View>
-          <PlatformTextInput style={[styles.row, styles.text]} value="mp4" />
-          <PlatformTextInput style={[styles.row, styles.text]} value="mkv" />
+          <PlatformTextInput style={[styles.row, styles.input]} value="mp4" />
+          <PlatformTextInput style={[styles.row, styles.input]} value="mkv" />
         </View>
       </View>
       <ImageButton imageSource={trash} />
