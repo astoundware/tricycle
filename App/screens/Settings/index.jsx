@@ -11,6 +11,7 @@ export default function Settings() {
   const [isForcedSubtitlesEnabled, setIsForcedSubtitlesEnabled] =
     useState(false);
   const [isSoftSubtitlesEnabled, setIsSoftSubtitlesEnabled] = useState(false);
+  const [destinationMode, setDestinationMode] = useState('auto');
 
   return (
     <View>
@@ -27,6 +28,12 @@ export default function Settings() {
         onForcedSubtitlesChange={value => setIsForcedSubtitlesEnabled(value)}
         isSoftSubtitlesEnabled={isSoftSubtitlesEnabled}
         onSoftSubtitlesChange={value => setIsSoftSubtitlesEnabled(value)}
+        destinationModeItems={[
+          {key: 'manual', text: 'Manual'},
+          {key: 'auto', text: 'Auto'},
+        ]}
+        destinationMode={destinationMode}
+        onDestinationModeChange={value => setDestinationMode(value)}
       />
     </View>
   );

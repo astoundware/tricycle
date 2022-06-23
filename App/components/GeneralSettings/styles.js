@@ -18,6 +18,6 @@ export default StyleSheet.create({
   },
   label: {},
   input: {
-    minWidth: 100,
+    minWidth: 125,
   },
 });

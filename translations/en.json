@@ -6,7 +6,7 @@
     "enableSoftSubtitles": "Use soft subtitles when supported",
     "mp4FileExtension": "MP4 file extension",
     "mkvFileExtension": "MKV file extension",
-    "destinationDirectory": "Destination directory"
+    "destinationFolder": "Destination folder"
   },
   "templates": {
     "title": "Templates"

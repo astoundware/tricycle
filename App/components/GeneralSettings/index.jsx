@@ -1,5 +1,6 @@
 import React from 'react';
 import {Text, View} from 'react-native';
+import {Picker} from '@react-native-picker/picker';
 import {useTranslation} from 'react-i18next';
 
 import ImageButton from '../ImageButton';
@@ -21,6 +22,9 @@ export default function GeneralSettings({
   onMp4FileExtensionChange,
   mkvFileExtension,
   onMkvFileExtensionChange,
+  destinationModeItems,
+  destinationMode,
+  onDestinationModeChange,
 }) {
   const {t} = useTranslation();
 
@@ -54,10 +58,21 @@ export default function GeneralSettings({
           <View style={[styles.row, styles.labelRow]}>
             <Text style={styles.label}>{t('settings.mkvFileExtension')}</Text>
           </View>
+          <View style={[styles.row, styles.labelRow]}>
+            <Text style={styles.label}>{t('settings.destinationFolder')}</Text>
+          </View>
         </View>
         <View>
           <PlatformTextInput style={[styles.row, styles.input]} value="mp4" />
           <PlatformTextInput style={[styles.row, styles.input]} value="mkv" />
+          <Picker
+            style={[styles.row, styles.input]}
+            selectedValue={destinationMode}
+            onValueChange={onDestinationModeChange}>
+            {(destinationModeItems || []).map(item => (
+              <Picker.Item key={item.key} label={item.text} value={item.key} />
+            ))}
+          </Picker>
         </View>
       </View>
       <ImageButton imageSource={trash} />
