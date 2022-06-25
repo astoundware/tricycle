@@ -6,7 +6,7 @@ import {useTranslation} from 'react-i18next';
 import ImageButton from '../ImageButton';
 import LabeledSwitch from '../LabeledSwitch';
 import PlatformTextInput from '../PlatformTextInput';
-import {trash} from '../../images';
+import {folderBrowse} from '../../images';
 import styles from './styles';
 
 export default function GeneralSettings({
@@ -25,6 +25,9 @@ export default function GeneralSettings({
   destinationModeItems,
   destinationMode,
   onDestinationModeChange,
+  destinationFolder,
+  isDestinationFolderBrowseDisabled,
+  onDestinationFolderBrowse,
 }) {
   const {t} = useTranslation();
 
@@ -58,15 +61,23 @@ export default function GeneralSettings({
           <View style={[styles.row, styles.labelRow]}>
             <Text style={styles.label}>{t('settings.mkvFileExtension')}</Text>
           </View>
-          <View style={[styles.row, styles.labelRow]}>
+          <View style={styles.labelRow}>
             <Text style={styles.label}>{t('settings.destinationFolder')}</Text>
           </View>
         </View>
         <View>
-          <PlatformTextInput style={[styles.row, styles.input]} value="mp4" />
-          <PlatformTextInput style={[styles.row, styles.input]} value="mkv" />
-          <Picker
+          <PlatformTextInput
             style={[styles.row, styles.input]}
+            value={mp4FileExtension}
+            onChangeText={onMp4FileExtensionChange}
+          />
+          <PlatformTextInput
+            style={[styles.row, styles.input]}
+            value={mkvFileExtension}
+            onChangeText={onMkvFileExtensionChange}
+          />
+          <Picker
+            style={styles.input}
             selectedValue={destinationMode}
             onValueChange={onDestinationModeChange}>
             {(destinationModeItems || []).map(item => (
@@ -75,7 +86,18 @@ export default function GeneralSettings({
           </Picker>
         </View>
       </View>
-      <ImageButton imageSource={trash} />
+      <View style={[styles.row, styles.destinationRow]}>
+        <PlatformTextInput
+          style={styles.folderInput}
+          value={destinationFolder}
+          editable={false}
+        />
+        <ImageButton
+          imageSource={folderBrowse}
+          disabled={isDestinationFolderBrowseDisabled}
+          onPress={onDestinationFolderBrowse}
+        />
+      </View>
     </View>
   );
 }

@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 export default StyleSheet.create({
   table: {
     flexDirection: 'row',
-    marginVertical: 10,
+    marginTop: 10,
   },
   column: {
     alignContent: 'center',
@@ -19,5 +19,12 @@ export default StyleSheet.create({
   label: {},
   input: {
     minWidth: 125,
+  },
+  destinationRow: {
+    flexDirection: 'row',
+  },
+  folderInput: {
+    flex: 1,
+    marginRight: 5,
   },
 });
