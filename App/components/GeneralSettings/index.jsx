@@ -6,17 +6,19 @@ import {useTranslation} from 'react-i18next';
 import ImageButton from '../ImageButton';
 import LabeledSwitch from '../LabeledSwitch';
 import PlatformTextInput from '../PlatformTextInput';
+import TemplateTable from '../TemplateTable';
 import {folderBrowse} from '../../images';
 import styles from './styles';
 
 export default function GeneralSettings({
-  isCompletionAlertEnabled,
-  onCompletionAlertEnabledChange,
-  isIncompleteDeletionEnabled,
+  style,
+  completionAlertEnabled,
+  onCompletionAlertChange,
+  incompleteDeletionEnabled,
   onIncompleteDeletionChange,
-  isForcedSubtitlesEnabled,
+  forcedSubtitlesEnabled,
   onForcedSubtitlesChange,
-  isSoftSubtitlesEnabled,
+  softSubtitlesEnabled,
   onSoftSubtitlesChange,
   mp4FileExtension,
   onMp4FileExtensionChange,
@@ -28,29 +30,32 @@ export default function GeneralSettings({
   destinationFolder,
   isDestinationFolderBrowseDisabled,
   onDestinationFolderBrowse,
+  templates,
+  onTemplateNameChange,
+  onTemplateRemove,
 }) {
   const {t} = useTranslation();
 
   return (
-    <View>
+    <View style={[styles.container, style]}>
       <LabeledSwitch
         label={t('settings.completionAlert')}
-        value={isCompletionAlertEnabled}
-        onValueChange={onCompletionAlertEnabledChange}
+        value={completionAlertEnabled}
+        onValueChange={onCompletionAlertChange}
       />
       <LabeledSwitch
         label={t('settings.deleteIncompleteFiles')}
-        value={isIncompleteDeletionEnabled}
+        value={incompleteDeletionEnabled}
         onValueChange={onIncompleteDeletionChange}
       />
       <LabeledSwitch
         label={t('settings.enableForcedSubtitles')}
-        value={isForcedSubtitlesEnabled}
+        value={forcedSubtitlesEnabled}
         onValueChange={onForcedSubtitlesChange}
       />
       <LabeledSwitch
         label={t('settings.enableSoftSubtitles')}
-        value={isSoftSubtitlesEnabled}
+        value={softSubtitlesEnabled}
         onValueChange={onSoftSubtitlesChange}
       />
       <View style={styles.table}>
@@ -96,6 +101,16 @@ export default function GeneralSettings({
           imageSource={folderBrowse}
           disabled={isDestinationFolderBrowseDisabled}
           onPress={onDestinationFolderBrowse}
+        />
+      </View>
+      <View style={styles.templateContainer}>
+        <View style={styles.templateHeader}>
+          <Text style={styles.templateTitle}>{t('templates.title')}</Text>
+        </View>
+        <TemplateTable
+          templates={templates}
+          onNameChange={onTemplateNameChange}
+          onRemove={onTemplateRemove}
         />
       </View>
     </View>

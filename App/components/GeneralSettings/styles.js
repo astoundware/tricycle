@@ -1,6 +1,11 @@
 import {StyleSheet} from 'react-native';
 
+import colors from '../../constants/colors';
+
 export default StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   table: {
     flexDirection: 'row',
     marginTop: 10,
@@ -26,5 +31,20 @@ export default StyleSheet.create({
   folderInput: {
     flex: 1,
     marginRight: 5,
+  },
+  templateContainer: {
+    flex: 1,
+    borderColor: colors.border,
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 2,
+  },
+  templateHeader: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginVertical: 5,
+  },
+  templateTitle: {
+    fontWeight: 'bold',
   },
 });

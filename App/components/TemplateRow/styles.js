@@ -2,7 +2,10 @@ import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   container: {
+    flexDirection: 'row',
+  },
+  input: {
     flex: 1,
-    padding: 10,
+    marginRight: 5,
   },
 });
