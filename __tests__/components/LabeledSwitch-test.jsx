@@ -47,7 +47,7 @@ it('calls onValueChange when the label is pressed', () => {
   expect(onValueChange).toHaveBeenCalledWith(value);
 });
 
-it('does not throw error when onValueChange is null', () => {
+it('does not throw error when onValueChange is undefined', () => {
   const component = renderer.create(<LabeledSwitch />);
   const pressable = component.root.findByType(Pressable);
 
