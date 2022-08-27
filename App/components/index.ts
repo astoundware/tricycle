@@ -1,4 +1,8 @@
 export {
+  default as AdvancedSettings,
+  type Props as AdvancedSettingsProps,
+} from './AdvancedSettings';
+export {
   default as GeneralSettings,
   type Props as GeneralSettingsProps,
 } from './GeneralSettings';

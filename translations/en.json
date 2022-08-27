@@ -10,7 +10,18 @@
     "enableSoftSubtitles": "Use soft subtitles when supported",
     "mp4FileExtension": "MP4 file extension",
     "mkvFileExtension": "MKV file extension",
-    "destinationFolder": "Destination folder"
+    "destinationFolder": "Destination folder",
+    "x264Preset": "x264 Preset",
+    "x265Preset": "x265 Preset",
+    "hevcTag": "HEVC Tag",
+    "aacCodec": "AAC Codec",
+    "dolbyDigitalCodec": "Dolby Digital Codec",
+    "cropDetectOptions": "Crop Detect Options",
+    "deinterlaceOptions": "Deinterlace Options",
+    "denoiseOptions": "Denoise Options",
+    "tonemapOptions": "Tonemap Options",
+    "traceLogging": "Trace Logging",
+    "restartRequired": "Restart Required"
   },
   "templates": {
     "title": "Templates"
