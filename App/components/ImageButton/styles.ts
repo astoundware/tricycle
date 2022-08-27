@@ -1,12 +1,12 @@
 import {StyleSheet} from 'react-native';
 
-import colors from '@constants/colors';
+import {theme} from '@config';
 
 export default StyleSheet.create({
   container: {
-    borderRadius: 5,
+    borderRadius: theme.borderRadius,
     borderWidth: 1,
-    borderColor: colors.border,
+    borderColor: theme.colors.border,
     paddingHorizontal: 12,
     paddingVertical: 5,
     alignItems: 'center',

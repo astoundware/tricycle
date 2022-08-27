@@ -18,7 +18,6 @@ module.exports = {
         alias: {
           '@components': './App/components',
           '@config': './App/config',
-          '@constants': './App/constants',
           '@images': './App/images',
           '@models': './App/models',
           '@native': './App/native',

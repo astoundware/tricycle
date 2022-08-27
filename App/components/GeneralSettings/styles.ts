@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-import colors from '@constants/colors';
+import {theme} from '@config';
 
 export default StyleSheet.create({
   container: {
@@ -34,7 +34,7 @@ export default StyleSheet.create({
   },
   templateContainer: {
     flex: 1,
-    borderColor: colors.border,
+    borderColor: theme.colors.border,
     borderWidth: 1,
     borderRadius: 5,
     padding: 2,

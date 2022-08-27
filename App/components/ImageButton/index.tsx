@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, ImageSourcePropType, Pressable} from 'react-native';
 
-import colors from '@constants/colors';
+import {theme} from '@config';
 import styles from './styles';
 
 export type Props = {
@@ -31,8 +31,8 @@ export default function ImageButton({
         containerStyle,
         {
           backgroundColor: pressed
-            ? colors.buttonBackgroundPressed
-            : colors.buttonBackground,
+            ? theme.colors.buttonBackgroundPressed
+            : theme.colors.buttonBackground,
         },
         style,
       ]}

@@ -11,7 +11,7 @@
     "noEmit": true,
     "paths": {
       "@components": ["App/components"],
-      "@constants/*": ["App/constants/*"],
+      "@config": ["App/config"],
       "@images": ["App/images"],
       "@models": ["App/models"],
       "@native": ["App/native"],

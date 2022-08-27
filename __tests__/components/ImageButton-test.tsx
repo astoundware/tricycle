@@ -4,7 +4,7 @@ import React from 'react';
 import {Image, Pressable, StyleSheet} from 'react-native';
 
 import {ImageButton} from '@components';
-import colors from '@constants/colors';
+import {theme} from '@config';
 import {trash} from '@images';
 
 it('renders the image source correctly', () => {
@@ -19,7 +19,7 @@ it('renders the background color correctly when pressed', () => {
   const pressable = component.root.findByType(Pressable);
   const style = StyleSheet.flatten(pressable.props.style({pressed: true}));
 
-  expect(style.backgroundColor).toBe(colors.buttonBackgroundPressed);
+  expect(style.backgroundColor).toBe(theme.colors.buttonBackgroundPressed);
 });
 
 it('renders the background color correctly when not pressed', () => {
@@ -27,7 +27,7 @@ it('renders the background color correctly when not pressed', () => {
   const pressable = component.root.findByType(Pressable);
   const style = StyleSheet.flatten(pressable.props.style({pressed: false}));
 
-  expect(style.backgroundColor).toBe(colors.buttonBackground);
+  expect(style.backgroundColor).toBe(theme.colors.buttonBackground);
 });
 
 it('calls onPress when pressed', () => {
