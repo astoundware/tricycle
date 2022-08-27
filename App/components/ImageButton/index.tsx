@@ -1,10 +1,22 @@
 import React from 'react';
-import {Image, Pressable} from 'react-native';
+import {Image, ImageSourcePropType, Pressable} from 'react-native';
 
-import colors from '../../constants/colors';
+import colors from '@constants/colors';
 import styles from './styles';
 
-export default function ImageButton({style, imageSource, disabled, onPress}) {
+export type Props = {
+  style?: any;
+  imageSource: ImageSourcePropType;
+  disabled?: boolean;
+  onPress?: () => void;
+};
+
+export default function ImageButton({
+  style,
+  imageSource,
+  disabled,
+  onPress,
+}: Props) {
   let containerStyle = {...styles.container};
   let imageStyle = {...styles.image};
 

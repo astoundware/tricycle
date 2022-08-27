@@ -2,15 +2,23 @@ import React from 'react';
 import {FlatList, Text, View} from 'react-native';
 import {useTranslation} from 'react-i18next';
 
+import {Template} from '@models';
 import TemplateRow from '../TemplateRow';
 import styles from './styles';
+
+export type Props = {
+  style?: any;
+  templates?: Template[];
+  onNameChange?: (index: number, name: string) => void;
+  onRemove?: (index: number) => void;
+};
 
 export default function TemplateTable({
   style,
   templates,
   onNameChange,
   onRemove,
-}) {
+}: Props) {
   const {t} = useTranslation();
 
   return (

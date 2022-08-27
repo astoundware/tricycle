@@ -3,12 +3,38 @@ import {Text, View} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import {useTranslation} from 'react-i18next';
 
+import {folderBrowse} from '@images';
+import {DisplayValue, Template, ValueChangeHandler} from '@models';
 import ImageButton from '../ImageButton';
 import LabeledSwitch from '../LabeledSwitch';
 import PlatformTextInput from '../PlatformTextInput';
 import TemplateTable from '../TemplateTable';
-import {folderBrowse} from '../../images';
 import styles from './styles';
+
+export type Props = {
+  style?: any;
+  completionAlertEnabled?: boolean;
+  onCompletionAlertChange?: ValueChangeHandler<boolean>;
+  incompleteDeletionEnabled?: boolean;
+  onIncompleteDeletionChange?: ValueChangeHandler<boolean>;
+  forcedSubtitlesEnabled?: boolean;
+  onForcedSubtitlesChange?: ValueChangeHandler<boolean>;
+  softSubtitlesEnabled?: boolean;
+  onSoftSubtitlesChange?: ValueChangeHandler<boolean>;
+  mp4FileExtension?: string;
+  onMp4FileExtensionChange?: ValueChangeHandler<string>;
+  mkvFileExtension?: string;
+  onMkvFileExtensionChange?: ValueChangeHandler<string>;
+  destinationModeItems?: DisplayValue[];
+  destinationMode?: string;
+  onDestinationModeChange?: ValueChangeHandler<string>;
+  destinationFolder?: string;
+  isDestinationFolderBrowseDisabled?: boolean;
+  onDestinationFolderBrowse?: () => void;
+  templates?: Template[];
+  onTemplateNameChange?: (index: number, name: string) => void;
+  onTemplateRemove?: (index: number) => void;
+};
 
 export default function GeneralSettings({
   style,
@@ -33,7 +59,7 @@ export default function GeneralSettings({
   templates,
   onTemplateNameChange,
   onTemplateRemove,
-}) {
+}: Props) {
   const {t} = useTranslation();
 
   return (
@@ -85,7 +111,7 @@ export default function GeneralSettings({
             style={styles.input}
             selectedValue={destinationMode}
             onValueChange={onDestinationModeChange}>
-            {(destinationModeItems || []).map(item => (
+            {(destinationModeItems || []).map((item: DisplayValue) => (
               <Picker.Item key={item.key} label={item.text} value={item.key} />
             ))}
           </Picker>

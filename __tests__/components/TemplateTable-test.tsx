@@ -3,8 +3,8 @@ import renderer from 'react-test-renderer';
 import React from 'react';
 import {FlatList} from 'react-native';
 
-import {TemplateTable} from '../../App/components';
-import '../../App/config/i18n';
+import {TemplateTable} from '@components';
+import '@config/i18n';
 
 const element = {
   index: 1,

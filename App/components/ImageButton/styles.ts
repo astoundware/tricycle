@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-import colors from '../../constants/colors';
+import colors from '@constants/colors';
 
 export default StyleSheet.create({
   container: {
@@ -14,5 +14,6 @@ export default StyleSheet.create({
   image: {
     width: 16,
     height: 16,
+    opacity: 1,
   },
 });

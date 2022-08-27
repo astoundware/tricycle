@@ -9,8 +9,8 @@ import {
   LabeledSwitch,
   PlatformTextInput,
   TemplateTable,
-} from '../../App/components';
-import '../../App/config/i18n';
+} from '@components';
+import '@config/i18n';
 
 it('renders the completion alert value correctly', () => {
   const value = true;
@@ -216,8 +216,8 @@ it('calls onDestinationFolderBrowse when browse button is pressed', () => {
 
 it('renders the templates correctly', () => {
   const templates = [
-    {key: 1, name: 'Template 1'},
-    {key: 2, name: 'Template 2'},
+    {key: '1', name: 'Template 1'},
+    {key: '2', name: 'Template 2'},
   ];
   const component = renderer.create(<GeneralSettings templates={templates} />);
   const table = component.root.findByType(TemplateTable);

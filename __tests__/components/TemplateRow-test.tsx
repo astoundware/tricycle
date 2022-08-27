@@ -2,11 +2,7 @@ import 'react-native';
 import renderer from 'react-test-renderer';
 import React from 'react';
 
-import {
-  ImageButton,
-  PlatformTextInput,
-  TemplateRow,
-} from '../../App/components';
+import {ImageButton, PlatformTextInput, TemplateRow} from '@components';
 
 it('renders the name correctly', () => {
   const name = 'test';

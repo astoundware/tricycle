@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import React from 'react';
 import {Pressable, Switch, Text} from 'react-native';
 
-import {LabeledSwitch} from '../../App/components';
+import {LabeledSwitch} from '@components';
 
 it('renders the label correctly', () => {
   const label = 'test';

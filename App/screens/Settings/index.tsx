@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import {View} from 'react-native';
 
-import {GeneralSettings} from '../../components';
+import {Template} from '@models';
+import {GeneralSettings} from '@components';
 import styles from './styles';
 
-function renameTemplate(templates, index, name) {
+function renameTemplate(templates: Template[], index: number, name: string) {
   let result = (templates || []).map(template => template);
 
   if (result.length > index) {
@@ -14,8 +15,8 @@ function renameTemplate(templates, index, name) {
   return result;
 }
 
-function removeTemplate(templates, index) {
-  return (templates || []).filter((template, i) => i !== index);
+function removeTemplate(templates: Template[], index: number) {
+  return (templates || []).filter((_, i) => i !== index);
 }
 
 export default function Settings() {
@@ -27,7 +28,7 @@ export default function Settings() {
   const [mp4FileExtension, setMp4FileExtension] = useState('m4v');
   const [mkvFileExtension, setMkvFileExtension] = useState('mkv');
   const [destinationMode, setDestinationMode] = useState('auto');
-  const [templates, setTemplates] = useState([
+  const [templates, setTemplates] = useState<Template[]>([
     {key: 1, name: 'Template 1'},
     {key: 2, name: 'Template 2'},
     {key: 3, name: 'Template 3'},

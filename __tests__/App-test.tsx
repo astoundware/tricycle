@@ -1,9 +1,10 @@
 import 'react-native';
 import renderer from 'react-test-renderer';
 import React from 'react';
+import {EmitterSubscription} from 'react-native';
 
+import {LanguageManager, LanguageManagerEvents} from '@native';
 import App from '../App/index';
-import {LanguageManager, LanguageManagerEvents} from '../App/native';
 
 const mockChangeLanguage = jest.fn();
 
@@ -42,6 +43,8 @@ it('calls i18n.changeLanguage on language change', () => {
     if (name === 'onLanguageChange') {
       handle(lang);
     }
+
+    return {} as EmitterSubscription;
   });
 
   renderer.create(<App />);

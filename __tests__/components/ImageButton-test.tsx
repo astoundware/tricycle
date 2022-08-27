@@ -3,9 +3,9 @@ import renderer from 'react-test-renderer';
 import React from 'react';
 import {Image, Pressable, StyleSheet} from 'react-native';
 
-import {ImageButton} from '../../App/components';
-import {trash} from '../../App/images';
-import colors from '../../App/constants/colors';
+import {ImageButton} from '@components';
+import colors from '@constants/colors';
+import {trash} from '@images';
 
 it('renders the image source correctly', () => {
   const component = renderer.create(<ImageButton imageSource={trash} />);
@@ -15,7 +15,7 @@ it('renders the image source correctly', () => {
 });
 
 it('renders the background color correctly when pressed', () => {
-  const component = renderer.create(<ImageButton />);
+  const component = renderer.create(<ImageButton imageSource={trash} />);
   const pressable = component.root.findByType(Pressable);
   const style = StyleSheet.flatten(pressable.props.style({pressed: true}));
 
@@ -23,7 +23,7 @@ it('renders the background color correctly when pressed', () => {
 });
 
 it('renders the background color correctly when not pressed', () => {
-  const component = renderer.create(<ImageButton />);
+  const component = renderer.create(<ImageButton imageSource={trash} />);
   const pressable = component.root.findByType(Pressable);
   const style = StyleSheet.flatten(pressable.props.style({pressed: false}));
 
@@ -32,7 +32,9 @@ it('renders the background color correctly when not pressed', () => {
 
 it('calls onPress when pressed', () => {
   const onPress = jest.fn();
-  const component = renderer.create(<ImageButton onPress={onPress} />);
+  const component = renderer.create(
+    <ImageButton imageSource={trash} onPress={onPress} />,
+  );
   const pressable = component.root.findByType(Pressable);
 
   pressable.props.onPress();
@@ -42,14 +44,18 @@ it('calls onPress when pressed', () => {
 
 it('disables pressing when disabled', () => {
   const disabled = true;
-  const component = renderer.create(<ImageButton disabled={disabled} />);
+  const component = renderer.create(
+    <ImageButton imageSource={trash} disabled={disabled} />,
+  );
   const pressable = component.root.findByType(Pressable);
 
   expect(pressable.props.disabled).toBe(disabled);
 });
 
 it('changes styles when disabled', () => {
-  const component = renderer.create(<ImageButton disabled={true} />);
+  const component = renderer.create(
+    <ImageButton imageSource={trash} disabled={true} />,
+  );
   const pressable = component.root.findByType(Pressable);
   const image = component.root.findByType(Image);
   const containerStyle = StyleSheet.flatten(pressable.props.style({}));
