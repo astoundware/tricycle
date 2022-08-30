@@ -1,4 +1,4 @@
 export type DisplayValue = {
-  key?: string;
+  key: string;
   text?: string;
 };

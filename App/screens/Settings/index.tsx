@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {View} from 'react-native';
 
 import {Template} from '@models';
-import {AdvancedSettings, GeneralSettings} from '@components';
+import {AdvancedSettings, GeneralSettings, SelectionList} from '@components';
 import styles from './styles';
 
 function renameTemplate(templates: Template[], index: number, name: string) {
@@ -26,7 +26,7 @@ const presetItems = [
 ];
 
 export default function Settings() {
-  const [section] = useState('general');
+  const [section, setSection] = useState('general');
   const [completionAlertEnabled, setCompletionAlertEnabled] = useState(false);
   const [incompleteDeletionEnabled, setIncompleteDeletionEnabled] =
     useState(false);
@@ -59,8 +59,18 @@ export default function Settings() {
 
   return (
     <View style={styles.container}>
+      <SelectionList
+        style={styles.list}
+        items={[
+          {key: 'general', text: 'General'},
+          {key: 'advanced', text: 'Advanced'},
+        ]}
+        selectedKey={section}
+        onSelectionChange={setSection}
+      />
       {section === 'general' && (
         <GeneralSettings
+          style={styles.section}
           completionAlertEnabled={completionAlertEnabled}
           onCompletionAlertChange={setCompletionAlertEnabled}
           incompleteDeletionEnabled={incompleteDeletionEnabled}
@@ -92,6 +102,7 @@ export default function Settings() {
       )}
       {section === 'advanced' && (
         <AdvancedSettings
+          style={styles.section}
           traceLoggingEnabled={traceLoggingEnabled}
           onTraceLoggingChange={setTraceLoggingEnabled}
           x264PresetItems={presetItems}

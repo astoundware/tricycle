@@ -19,6 +19,10 @@ export {
   type Props as PlatformTextInputProps,
 } from './PlatformTextInput';
 export {
+  default as SelectionList,
+  type Props as SelectionListProps,
+} from './SelectionList';
+export {
   default as TemplateRow,
   type Props as TemplateRowProps,
 } from './TemplateRow';
