@@ -11,5 +11,7 @@ export type Theme = {
     buttonBackgroundPressed: ColorValue;
     inputBackground: ColorValue;
     titleBarBorder: ColorValue;
+    selectionBackground: ColorValue;
+    selectionFont: ColorValue;
   };
 };

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View} from 'react-native';
+import {Text, View} from 'react-native';
 
 import {Template} from '@models';
 import {AdvancedSettings, GeneralSettings, SelectionList} from '@components';
@@ -19,6 +19,10 @@ function removeTemplate(templates: Template[], index: number) {
   return (templates || []).filter((_, i) => i !== index);
 }
 
+const sections = [
+  {key: 'general', text: 'General'},
+  {key: 'advanced', text: 'Advanced'},
+];
 const presetItems = [
   {key: 'fast', text: 'Fast'},
   {key: 'medium', text: 'Medium'},
@@ -61,72 +65,74 @@ export default function Settings() {
     <View style={styles.container}>
       <SelectionList
         style={styles.list}
-        items={[
-          {key: 'general', text: 'General'},
-          {key: 'advanced', text: 'Advanced'},
-        ]}
+        items={sections}
         selectedKey={section}
         onSelectionChange={setSection}
       />
-      {section === 'general' && (
-        <GeneralSettings
-          style={styles.section}
-          completionAlertEnabled={completionAlertEnabled}
-          onCompletionAlertChange={setCompletionAlertEnabled}
-          incompleteDeletionEnabled={incompleteDeletionEnabled}
-          onIncompleteDeletionChange={setIncompleteDeletionEnabled}
-          forcedSubtitlesEnabled={forcedSubtitlesEnabled}
-          onForcedSubtitlesChange={setForcedSubtitlesEnabled}
-          softSubtitlesEnabled={softSubtitlesEnabled}
-          onSoftSubtitlesChange={setSoftSubtitlesEnabled}
-          mp4FileExtension={mp4FileExtension}
-          onMp4FileExtensionChange={setMp4FileExtension}
-          mkvFileExtension={mkvFileExtension}
-          onMkvFileExtensionChange={setMkvFileExtension}
-          destinationModeItems={[
-            {key: 'manual', text: 'Manual'},
-            {key: 'auto', text: 'Auto'},
-          ]}
-          destinationMode={destinationMode}
-          onDestinationModeChange={setDestinationMode}
-          destinationFolder="/Users/kenny/Temp"
-          isDestinationFolderBrowseDisabled={true}
-          templates={templates}
-          onTemplateNameChange={(index, name) =>
-            setTemplates(oldValue => renameTemplate(oldValue, index, name))
-          }
-          onTemplateRemove={index =>
-            setTemplates(oldValue => removeTemplate(oldValue, index))
-          }
-        />
-      )}
-      {section === 'advanced' && (
-        <AdvancedSettings
-          style={styles.section}
-          traceLoggingEnabled={traceLoggingEnabled}
-          onTraceLoggingChange={setTraceLoggingEnabled}
-          x264PresetItems={presetItems}
-          x264Preset={x264Preset}
-          onX264PresetChange={setX264Preset}
-          x265PresetItems={presetItems}
-          x265Preset={x265Preset}
-          onX265PresetChange={setX265Preset}
-          hevcTag={hevcTag}
-          onHevcTagChange={setHevcTag}
-          aacCodec={aacCodec}
-          onAacCodecChange={setAacCodec}
-          dolbyDigitalCodec={dolbyDigitalCodec}
-          onDolbyDigitalCodecChange={setDolbyDigitalCodec}
-          cropDetectOptions={cropDetectOptions}
-          onCropDetectOptionsChange={setCropDetectOptions}
-          deinterlaceOptions={deinterlaceOptions}
-          onDeinterlaceOptionsChange={setDeinterlaceOptions}
-          denoiseOptions={denoiseOptions}
-          onDenoiseOptionsChange={setDenoiseOptions}
-          tonemapOptions={tonemapOptions}
-          onTonemapOptionsChange={setTonemapOptions}
-        />
-      )}
+      <View style={styles.section}>
+        <View style={styles.header}>
+          <Text style={styles.title}>
+            {sections.find(s => s.key === section)!.text}
+          </Text>
+        </View>
+        {section === 'general' && (
+          <GeneralSettings
+            completionAlertEnabled={completionAlertEnabled}
+            onCompletionAlertChange={setCompletionAlertEnabled}
+            incompleteDeletionEnabled={incompleteDeletionEnabled}
+            onIncompleteDeletionChange={setIncompleteDeletionEnabled}
+            forcedSubtitlesEnabled={forcedSubtitlesEnabled}
+            onForcedSubtitlesChange={setForcedSubtitlesEnabled}
+            softSubtitlesEnabled={softSubtitlesEnabled}
+            onSoftSubtitlesChange={setSoftSubtitlesEnabled}
+            mp4FileExtension={mp4FileExtension}
+            onMp4FileExtensionChange={setMp4FileExtension}
+            mkvFileExtension={mkvFileExtension}
+            onMkvFileExtensionChange={setMkvFileExtension}
+            destinationModeItems={[
+              {key: 'manual', text: 'Manual'},
+              {key: 'auto', text: 'Auto'},
+            ]}
+            destinationMode={destinationMode}
+            onDestinationModeChange={setDestinationMode}
+            destinationFolder="/Users/kenny/Temp"
+            isDestinationFolderBrowseDisabled={true}
+            templates={templates}
+            onTemplateNameChange={(index, name) =>
+              setTemplates(oldValue => renameTemplate(oldValue, index, name))
+            }
+            onTemplateRemove={index =>
+              setTemplates(oldValue => removeTemplate(oldValue, index))
+            }
+          />
+        )}
+        {section === 'advanced' && (
+          <AdvancedSettings
+            traceLoggingEnabled={traceLoggingEnabled}
+            onTraceLoggingChange={setTraceLoggingEnabled}
+            x264PresetItems={presetItems}
+            x264Preset={x264Preset}
+            onX264PresetChange={setX264Preset}
+            x265PresetItems={presetItems}
+            x265Preset={x265Preset}
+            onX265PresetChange={setX265Preset}
+            hevcTag={hevcTag}
+            onHevcTagChange={setHevcTag}
+            aacCodec={aacCodec}
+            onAacCodecChange={setAacCodec}
+            dolbyDigitalCodec={dolbyDigitalCodec}
+            onDolbyDigitalCodecChange={setDolbyDigitalCodec}
+            cropDetectOptions={cropDetectOptions}
+            onCropDetectOptionsChange={setCropDetectOptions}
+            deinterlaceOptions={deinterlaceOptions}
+            onDeinterlaceOptionsChange={setDeinterlaceOptions}
+            denoiseOptions={denoiseOptions}
+            onDenoiseOptionsChange={setDenoiseOptions}
+            tonemapOptions={tonemapOptions}
+            onTonemapOptionsChange={setTonemapOptions}
+          />
+        )}
+      </View>
     </View>
   );
 }

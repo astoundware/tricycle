@@ -1,7 +1,9 @@
 import React from 'react';
-import {FlatList, Pressable, Text, View} from 'react-native';
+import {Pressable, Text, View} from 'react-native';
 
+import {theme} from '@config';
 import {DisplayValue} from '@models';
+import styles from './styles';
 
 export type Props = {
   style?: any;
@@ -17,21 +19,26 @@ export default function SelectionList({
   onSelectionChange,
 }: Props) {
   return (
-    <View style={style}>
-      <FlatList
-        data={items}
-        renderItem={function ({item}) {
-          const textStyle = {
-            backgroundColor: item.key === selectedKey ? 'gray' : 'white',
-          };
-          return (
-            <Pressable
-              onPress={() => onSelectionChange && onSelectionChange(item.key)}>
-              <Text style={textStyle}>{item.text}</Text>
-            </Pressable>
-          );
-        }}
-      />
+    <View style={[styles.container, style]}>
+      {(items || []).map(function (item) {
+        const isSelected = item.key === selectedKey;
+        const itemStyle = {
+          backgroundColor: isSelected
+            ? theme.colors.selectionBackground
+            : 'transparent',
+        };
+        const textStyle = {
+          color: isSelected ? theme.colors.selectionFont : 'black',
+        };
+        return (
+          <Pressable
+            key={item.key}
+            style={[styles.itemContainer, itemStyle]}
+            onPress={() => onSelectionChange && onSelectionChange(item.key)}>
+            <Text style={textStyle}>{item.text}</Text>
+          </Pressable>
+        );
+      })}
     </View>
   );
 }

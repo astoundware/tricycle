@@ -101,7 +101,7 @@ export default function AdvancedSettings({
         </View>
         <View>
           <Picker
-            style={styles.input}
+            style={[styles.row, styles.input]}
             selectedValue={x264Preset}
             onValueChange={onX264PresetChange}>
             {(x264PresetItems || []).map((item: DisplayValue) => (
@@ -109,7 +109,7 @@ export default function AdvancedSettings({
             ))}
           </Picker>
           <Picker
-            style={styles.input}
+            style={[styles.row, styles.input]}
             selectedValue={x265Preset}
             onValueChange={onX265PresetChange}>
             {(x265PresetItems || []).map((item: DisplayValue) => (

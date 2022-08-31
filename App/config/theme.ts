@@ -11,5 +11,7 @@ export default {
     buttonBackgroundPressed: '#e9e9e9',
     inputBackground: 'white',
     titleBarBorder: '#b4b3b4',
+    selectionBackground: '#0163ff',
+    selectionFont: 'white',
   },
 } as Theme;
