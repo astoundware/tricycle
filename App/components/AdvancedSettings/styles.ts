@@ -21,6 +21,6 @@ export default StyleSheet.create({
   },
   label: {},
   input: {
-    minWidth: 150,
+    width: 200,
   },
 });

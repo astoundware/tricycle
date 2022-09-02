@@ -23,7 +23,7 @@ export default StyleSheet.create({
   },
   label: {},
   input: {
-    minWidth: 125,
+    width: 175,
   },
   destinationRow: {
     flexDirection: 'row',
