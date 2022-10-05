@@ -34,7 +34,11 @@ export default function SelectionList({
           <Pressable
             key={item.key}
             style={[styles.itemContainer, itemStyle]}
-            onPress={() => onSelectionChange && onSelectionChange(item.key)}>
+            onPress={() =>
+              item.key !== selectedKey &&
+              onSelectionChange &&
+              onSelectionChange(item.key)
+            }>
             <Text style={textStyle} numberOfLines={1}>
               {item.text}
             </Text>
