@@ -15,9 +15,17 @@ export {
   type Props as LabeledSwitchProps,
 } from './LabeledSwitch';
 export {
+  default as NumberInput,
+  type Props as NumberInputProps,
+} from './NumberInput';
+export {
   default as PlatformTextInput,
   type Props as PlatformTextInputProps,
 } from './PlatformTextInput';
+export {
+  default as QualityPresetRow,
+  type Props as QualityPresetRowProps,
+} from './QualityPresetRow';
 export {
   default as SelectionList,
   type Props as SelectionListProps,
