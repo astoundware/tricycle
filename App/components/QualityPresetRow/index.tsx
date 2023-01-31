@@ -36,7 +36,7 @@ export default function TemplateRow({
   return (
     <View style={[styles.container, style]}>
       <Picker
-        style={styles.input}
+        style={styles.picker}
         selectedValue={format}
         onValueChange={onFormatChange}>
         {(formatItems || []).map((item: DisplayValue) => (
@@ -44,7 +44,7 @@ export default function TemplateRow({
         ))}
       </Picker>
       <Picker
-        style={styles.input}
+        style={styles.picker}
         selectedValue={mixdown}
         onValueChange={onMixdownChange}>
         {(mixdownItems || []).map((item: DisplayValue) => (

@@ -3,6 +3,10 @@ export {
   type Props as AdvancedSettingsProps,
 } from './AdvancedSettings';
 export {
+  default as AudioSettings,
+  type Props as AudioSettingsProps,
+} from './AudioSettings';
+export {
   default as GeneralSettings,
   type Props as GeneralSettingsProps,
 } from './GeneralSettings';
@@ -26,6 +30,10 @@ export {
   default as QualityPresetRow,
   type Props as QualityPresetRowProps,
 } from './QualityPresetRow';
+export {
+  default as QualityPresetTable,
+  type Props as QualityPresetTableProps,
+} from './QualityPresetTable';
 export {
   default as SelectionList,
   type Props as SelectionListProps,

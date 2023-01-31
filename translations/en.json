@@ -3,6 +3,12 @@
     "name": "Name",
     "remove": "Remove"
   },
+  "qualityPresets": {
+    "title": "Quality Presets",
+    "format": "Format",
+    "mixdown": "Mixdown",
+    "quality": "Quality"
+  },
   "settings": {
     "completionAlert": "Show alert on completion",
     "deleteIncompleteFiles": "Delete incomplete files",
@@ -11,6 +17,7 @@
     "mp4FileExtension": "MP4 file extension",
     "mkvFileExtension": "MKV file extension",
     "destinationFolder": "Destination folder",
+    "passthruMatchingTracks": "Passthru Matching Tracks",
     "x264Preset": "x264 Preset",
     "x265Preset": "x265 Preset",
     "hevcTag": "HEVC Tag",

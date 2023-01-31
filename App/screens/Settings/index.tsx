@@ -1,12 +1,17 @@
 import React, {useState} from 'react';
 import {Text, View} from 'react-native';
 
-import {Template} from '@models';
-import {AdvancedSettings, GeneralSettings, SelectionList} from '@components';
+import {QualityPreset, Template} from '@models';
+import {
+  AdvancedSettings,
+  AudioSettings,
+  GeneralSettings,
+  SelectionList,
+} from '@components';
 import styles from './styles';
 
 function renameTemplate(templates: Template[], index: number, name: string) {
-  let result = (templates || []).map(template => template);
+  let result = Array.from(templates || []);
 
   if (result.length > index) {
     result[index].name = name;
@@ -19,14 +24,75 @@ function removeTemplate(templates: Template[], index: number) {
   return (templates || []).filter((_, i) => i !== index);
 }
 
+function updateQualityPresetFormat(
+  presets: QualityPreset[],
+  key: string,
+  format: string,
+) {
+  let result = Array.from(presets || []);
+  const preset = result.find(p => p.key === key);
+
+  if (preset) {
+    preset.format = format;
+  }
+
+  return result;
+}
+
+function updateQualityPresetMixdown(
+  presets: QualityPreset[],
+  key: string,
+  mixdown: string,
+) {
+  let result = Array.from(presets || []);
+  const preset = result.find(p => p.key === key);
+
+  if (preset) {
+    preset.mixdown = mixdown;
+  }
+
+  return result;
+}
+
+function updateQualityPresetQuality(
+  presets: QualityPreset[],
+  key: string,
+  quality: number | undefined,
+) {
+  let result = Array.from(presets || []);
+  const preset = result.find(p => p.key === key);
+
+  if (preset) {
+    preset.quality = quality || 0;
+  }
+
+  return result;
+}
+
+function removeQualityPreset(presets: QualityPreset[], key: string) {
+  return (presets || []).filter(p => p.key !== key);
+}
+
 const sections = [
   {key: 'general', text: 'General'},
+  {key: 'audio', text: 'Audio'},
   {key: 'advanced', text: 'Advanced'},
 ];
 const presetItems = [
   {key: 'fast', text: 'Fast'},
   {key: 'medium', text: 'Medium'},
   {key: 'slow', text: 'Slow'},
+];
+const audioFormatItems = [
+  {key: 'none', text: ''},
+  {key: 'aac', text: 'AAC'},
+  {key: 'dolby', text: 'Dolby Digital'},
+];
+const mixdownItems = [
+  {key: 'none', text: ''},
+  {key: 'mono', text: 'Mono'},
+  {key: 'stereo', text: 'Stereo'},
+  {key: 'surround', text: 'Surround'},
 ];
 
 export default function Settings() {
@@ -49,6 +115,12 @@ export default function Settings() {
     {key: 7, name: 'Template 7'},
     {key: 8, name: 'Template 8'},
     {key: 9, name: 'Template 9'},
+  ]);
+  const [passthruMatchingTracksEnabled, setPassthruMatchingTracksEnabled] =
+    useState(true);
+  const [qualityPresets, setQualityPresets] = useState<QualityPreset[]>([
+    {key: '1', format: 'aac', mixdown: 'stereo', quality: 160},
+    {key: '2', format: 'dolby', mixdown: 'surround', quality: 640},
   ]);
   const [traceLoggingEnabled, setTraceLoggingEnabled] = useState(false);
   const [x264Preset, setX264Preset] = useState('medium');
@@ -103,6 +175,33 @@ export default function Settings() {
             }
             onTemplateRemove={index =>
               setTemplates(oldValue => removeTemplate(oldValue, index))
+            }
+          />
+        )}
+        {section === 'audio' && (
+          <AudioSettings
+            passthruMatchingTracksEnabled={passthruMatchingTracksEnabled}
+            onPassthruMatchingTracksChange={setPassthruMatchingTracksEnabled}
+            qualityPresets={qualityPresets}
+            formatItems={audioFormatItems}
+            mixdownItems={mixdownItems}
+            onQualityPresetFormatChange={(key, format) =>
+              setQualityPresets(oldValue =>
+                updateQualityPresetFormat(oldValue, key, format),
+              )
+            }
+            onQualityPresetMixdownChange={(key, mixdown) =>
+              setQualityPresets(oldValue =>
+                updateQualityPresetMixdown(oldValue, key, mixdown),
+              )
+            }
+            onQualityPresetQualityChange={(key, quality) =>
+              setQualityPresets(oldValue =>
+                updateQualityPresetQuality(oldValue, key, quality),
+              )
+            }
+            onQualityPresetRemove={key =>
+              setQualityPresets(oldValue => removeQualityPreset(oldValue, key))
             }
           />
         )}
