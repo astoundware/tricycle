@@ -95,10 +95,11 @@
     <ProjectReference Include="..\Tricycle.IO.macOS\Tricycle.IO.macOS.csproj"/>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="ByteSize" Version="2.1.2"/>
+    <PackageReference Include="Astound.ReactNative.macOS.Extensions" Version="0.71.0" />
+    <PackageReference Include="ByteSize" Version="2.1.1"/>
     <PackageReference Include="Iso639" Version="1.0.0"/>
-    <PackageReference Include="Lamar" Version="8.1.0"/>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
-    <PackageReference Include="System.IO.Abstractions" Version="17.2.26"/>
+    <PackageReference Include="Lamar" Version="8.0.1"/>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
+    <PackageReference Include="System.IO.Abstractions" Version="17.0.15"/>
   </ItemGroup>
 </Project>
