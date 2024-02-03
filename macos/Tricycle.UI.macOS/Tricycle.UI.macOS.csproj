@@ -7,37 +7,13 @@
     <SupportedOSPlatformVersion>10.15</SupportedOSPlatformVersion>
     <AssemblyName>Tricycle</AssemblyName>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <CustomCommands>
-      <CustomCommands>
-        <Command>
-          <type>AfterBuild</type>
-          <command>rm -f Tricycle.dmg</command>
-          <workingdir>${ProjectDir}/dmg</workingdir>
-        </Command>
-        <Command>
-          <type>AfterBuild</type>
-          <command>codesign -f -s "Developer ID" -o runtime Tricycle.app/Contents/Resources/Tools/FFmpeg/ffmpeg</command>
-          <workingdir>${TargetDir}</workingdir>
-        </Command>
-        <Command>
-          <type>AfterBuild</type>
-          <command>codesign -f -s "Developer ID" -o runtime Tricycle.app/Contents/Resources/Tools/FFmpeg/ffprobe</command>
-          <workingdir>${TargetDir}</workingdir>
-        </Command>
-        <Command>
-          <type>AfterBuild</type>
-          <command>codesign -f -s "Developer ID" -o runtime --entitlements Entitlements.plist bin/Release/Tricycle.app</command>
-          <workingdir>${ProjectDir}</workingdir>
-        </Command>
-        <Command>
-          <type>AfterBuild</type>
-          <command>npm run appdmg config.json Tricycle.dmg</command>
-          <workingdir>${ProjectDir}/dmg</workingdir>
-        </Command>
-      </CustomCommands>
-    </CustomCommands>
-  </PropertyGroup>
+  <Target Name="PackageDmg" Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'" AfterTargets="AfterBuild">
+    <Delete Files="${ProjectDir}/dmgTricycle.dmg" />
+    <Exec Command="codesign -f -s &quot;Developer ID&quot; -o runtime Tricycle.app/Contents/Resources/Tools/FFmpeg/ffmpeg" WorkingDirectory="${TargetDir}" />
+    <Exec Command="codesign -f -s &quot;Developer ID&quot; -o runtime Tricycle.app/Contents/Resources/Tools/FFmpeg/ffprobe" WorkingDirectory="${TargetDir}" />
+    <Exec Command="codesign -f -s &quot;Developer ID&quot; -o runtime --entitlements Entitlements.plist bin/Release/Tricycle.app" WorkingDirectory="${ProjectDir}" />
+    <Exec Command="npm run appdmg config.json Tricycle.dmg" WorkingDirectory="${ProjectDir}/dmg" />
+  </Target>
   <ItemGroup>
     <BundleResource Include="Resources\Images\folder-browse.png"/>
     <BundleResource Include="Resources\Images\folder-open.png"/>
