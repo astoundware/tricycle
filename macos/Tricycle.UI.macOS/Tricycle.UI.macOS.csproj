@@ -7,12 +7,12 @@
     <SupportedOSPlatformVersion>10.15</SupportedOSPlatformVersion>
     <AssemblyName>Tricycle</AssemblyName>
   </PropertyGroup>
-  <Target Name="PackageDmg" Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'" AfterTargets="AfterBuild">
-    <Delete Files="${ProjectDir}/dmgTricycle.dmg" />
-    <Exec Command="codesign -f -s &quot;Developer ID&quot; -o runtime Tricycle.app/Contents/Resources/Tools/FFmpeg/ffmpeg" WorkingDirectory="${TargetDir}" />
-    <Exec Command="codesign -f -s &quot;Developer ID&quot; -o runtime Tricycle.app/Contents/Resources/Tools/FFmpeg/ffprobe" WorkingDirectory="${TargetDir}" />
-    <Exec Command="codesign -f -s &quot;Developer ID&quot; -o runtime --entitlements Entitlements.plist bin/Release/Tricycle.app" WorkingDirectory="${ProjectDir}" />
-    <Exec Command="npm run appdmg config.json Tricycle.dmg" WorkingDirectory="${ProjectDir}/dmg" />
+  <Target Name="PackageDmg" Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'" AfterTargets="_CreateInstaller">
+    <Delete Files="$(ProjectDir)/dmg/Tricycle.dmg" Condition="Exists('$(ProjectDir)/dmg/Tricycle.dmg')" />
+    <Exec Command="codesign -f -s &quot;Developer ID&quot; -o runtime Tricycle.app/Contents/Resources/Tools/FFmpeg/ffmpeg" WorkingDirectory="$(TargetDir)" />
+    <Exec Command="codesign -f -s &quot;Developer ID&quot; -o runtime Tricycle.app/Contents/Resources/Tools/FFmpeg/ffprobe" WorkingDirectory="$(TargetDir)" />
+    <Exec Command="codesign -f -s &quot;Developer ID&quot; -o runtime --entitlements Entitlements.plist bin/Release/net8.0-macos/Tricycle.app" WorkingDirectory="$(ProjectDir)" />
+    <Exec Command="npm run appdmg config.json Tricycle.dmg" WorkingDirectory="$(ProjectDir)/dmg" />
   </Target>
   <ItemGroup>
     <BundleResource Include="Resources\Images\folder-browse.png"/>
