@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
-    "appdmg": "^0.6.0"
+    "appdmg": "^0.6.6"
   },
   "scripts": {
     "appdmg": "node_modules/.bin/appdmg"
