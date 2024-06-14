@@ -5,7 +5,8 @@
   "scripts": {
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "macos": "dotnet run --project macos/Tricycle.UI.macOS"
   },
   "dependencies": {
     "react": "18.2.0",
