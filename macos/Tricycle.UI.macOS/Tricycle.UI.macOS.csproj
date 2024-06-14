@@ -1,227 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Astound.ReactNative.macOS.Bindings.0.64.1\build\Astound.ReactNative.macOS.Bindings.props" Condition="Exists('..\packages\Astound.ReactNative.macOS.Bindings.0.64.1\build\Astound.ReactNative.macOS.Bindings.props')" />
-  <Import Project="..\packages\Astound.ReactNative.macOS.Bindings.0.64.0\build\Astound.ReactNative.macOS.Bindings.props" Condition="Exists('..\packages\Astound.ReactNative.macOS.Bindings.0.64.0\build\Astound.ReactNative.macOS.Bindings.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <ProjectGuid>{54483175-1802-4686-93E9-DCBF4E185B76}</ProjectGuid>
-    <ProjectTypeGuids>{A3F8F2AB-B479-4A4A-A458-A89E7DC349F1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFramework>net8.0-macos</TargetFramework>
     <OutputType>Exe</OutputType>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>true</ImplicitUsings>
+    <SupportedOSPlatformVersion>10.15</SupportedOSPlatformVersion>
     <AssemblyName>Tricycle</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
-    <TargetFrameworkIdentifier>Xamarin.Mac</TargetFrameworkIdentifier>
-    <MonoMacResourcePrefix>Resources</MonoMacResourcePrefix>
-    <RootNamespace>Tricycle.UI.macOS</RootNamespace>
-    <ReleaseVersion>2.6.1</ReleaseVersion>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <EnableCodeSigning>false</EnableCodeSigning>
-    <CodeSigningKey>Mac Developer</CodeSigningKey>
-    <CreatePackage>false</CreatePackage>
-    <EnablePackageSigning>false</EnablePackageSigning>
-    <IncludeMonoRuntime>false</IncludeMonoRuntime>
-    <UseSGen>true</UseSGen>
-    <UseRefCounting>true</UseRefCounting>
-    <HttpClientHandler></HttpClientHandler>
-    <CodeSignProvision></CodeSignProvision>
-    <PackageSigningKey>3rd Party Mac Developer Installer</PackageSigningKey>
-    <LinkMode>None</LinkMode>
-    <AOTMode>None</AOTMode>
-    <XamMacArch>x86_64</XamMacArch>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
-    <DefineConstants>__MACOS__;__UNIFIED__;TRACE;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <EnableCodeSigning>false</EnableCodeSigning>
-    <CreatePackage>false</CreatePackage>
-    <EnablePackageSigning>false</EnablePackageSigning>
-    <IncludeMonoRuntime>true</IncludeMonoRuntime>
-    <UseSGen>true</UseSGen>
-    <UseRefCounting>true</UseRefCounting>
-    <CodeSignEntitlements>Entitlements.plist</CodeSignEntitlements>
-    <LinkMode>SdkOnly</LinkMode>
-    <HttpClientHandler></HttpClientHandler>
-    <CodeSigningKey>Mac Developer</CodeSigningKey>
-    <CodeSignProvision></CodeSignProvision>
-    <UseHardenedRuntime>true</UseHardenedRuntime>
-    <PackageSigningKey>3rd Party Mac Developer Installer</PackageSigningKey>
-    <AOTMode>None</AOTMode>
-    <CustomCommands>
-      <CustomCommands>
-        <Command>
-          <type>AfterBuild</type>
-          <command>rm -f Tricycle.dmg</command>
-          <workingdir>${ProjectDir}/dmg</workingdir>
-        </Command>
-        <Command>
-          <type>AfterBuild</type>
-          <command>codesign -f -s "Developer ID" -o runtime Tricycle.app/Contents/Resources/Tools/FFmpeg/ffmpeg</command>
-          <workingdir>${TargetDir}</workingdir>
-        </Command>
-        <Command>
-          <type>AfterBuild</type>
-          <command>codesign -f -s "Developer ID" -o runtime Tricycle.app/Contents/Resources/Tools/FFmpeg/ffprobe</command>
-          <workingdir>${TargetDir}</workingdir>
-        </Command>
-        <Command>
-          <type>AfterBuild</type>
-          <command>codesign -f -s "Developer ID" -o runtime --entitlements Entitlements.plist bin/Release/Tricycle.app</command>
-          <workingdir>${ProjectDir}</workingdir>
-        </Command>
-        <Command>
-          <type>AfterBuild</type>
-          <command>npm run appdmg config.json Tricycle.dmg</command>
-          <workingdir>${ProjectDir}/dmg</workingdir>
-        </Command>
-      </CustomCommands>
-    </CustomCommands>
-    <XamMacArch>x86_64</XamMacArch>
-  </PropertyGroup>
+  <Target Name="PackageDmg" Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'" AfterTargets="_CreateInstaller">
+    <Delete Files="$(ProjectDir)/dmg/Tricycle.dmg" Condition="Exists('$(ProjectDir)/dmg/Tricycle.dmg')" />
+    <Exec Command="codesign -f -s &quot;Developer ID&quot; -o runtime Tricycle.app/Contents/Resources/Tools/FFmpeg/ffmpeg" WorkingDirectory="$(TargetDir)" />
+    <Exec Command="codesign -f -s &quot;Developer ID&quot; -o runtime Tricycle.app/Contents/Resources/Tools/FFmpeg/ffprobe" WorkingDirectory="$(TargetDir)" />
+    <Exec Command="codesign -f -s &quot;Developer ID&quot; -o runtime --entitlements Entitlements.plist bin/Release/net8.0-macos/Tricycle.app" WorkingDirectory="$(ProjectDir)" />
+    <Exec Command="npm run appdmg config.json Tricycle.dmg" WorkingDirectory="$(ProjectDir)/dmg" />
+  </Target>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="Xamarin.Mac" />
-    <Reference Include="System.Buffers">
-      <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Principal.Windows">
-      <HintPath>..\packages\System.Security.Principal.Windows.4.7.0\lib\netstandard2.0\System.Security.Principal.Windows.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.AccessControl">
-      <HintPath>..\packages\System.Security.AccessControl.4.7.0\lib\netstandard2.0\System.Security.AccessControl.dll</HintPath>
-    </Reference>
-    <Reference Include="System.IO.FileSystem.AccessControl">
-      <HintPath>..\packages\System.IO.FileSystem.AccessControl.4.7.0\lib\netstandard2.0\System.IO.FileSystem.AccessControl.dll</HintPath>
-    </Reference>
-    <Reference Include="System.IO.Abstractions">
-      <HintPath>..\packages\System.IO.Abstractions.17.0.15\lib\netstandard2.1\System.IO.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Bcl.AsyncInterfaces">
-      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\netstandard2.1\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
-      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.0.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="BaselineTypeDiscovery">
-      <HintPath>..\packages\BaselineTypeDiscovery.1.1.3\lib\netstandard2.1\BaselineTypeDiscovery.dll</HintPath>
-    </Reference>
-    <Reference Include="LamarCodeGeneration">
-      <HintPath>..\packages\LamarCodeGeneration.5.4.0\lib\netstandard2.0\LamarCodeGeneration.dll</HintPath>
-    </Reference>
-    <Reference Include="Lamar">
-      <HintPath>..\packages\Lamar.8.0.1\lib\netstandard2.0\Lamar.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="ByteSize">
-      <HintPath>..\packages\ByteSize.2.1.1\lib\netstandard2.1\ByteSize.dll</HintPath>
-    </Reference>
-    <Reference Include="Iso639">
-      <HintPath>..\packages\Iso639.1.0.0\lib\netstandard2.0\Iso639.dll</HintPath>
-    </Reference>
-    <Reference Include="Astound.ReactNative.Modules">
-      <HintPath>..\packages\Astound.ReactNative.Modules.1.0.0\lib\netstandard2.0\Astound.ReactNative.Modules.dll</HintPath>
-    </Reference>
-    <Reference Include="Astound.ReactNative.Modules.ObjC">
-      <HintPath>..\packages\Astound.ReactNative.Modules.ObjC.1.0.0\lib\netstandard2.0\Astound.ReactNative.Modules.ObjC.dll</HintPath>
-    </Reference>
-    <Reference Include="Astound.ReactNative.macOS.Extensions">
-      <HintPath>..\packages\Astound.ReactNative.macOS.Extensions.0.64.1\lib\xamarinmac20\Astound.ReactNative.macOS.Extensions.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-128.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-128%402x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-16.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-16%402x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-256.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-256%402x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-32.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-32%402x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-512.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-512%402x.png" />
-    <ImageAsset Include="Assets.xcassets\Contents.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-    <Folder Include="Resources\Tools\" />
-    <Folder Include="Resources\Tools\FFmpeg\" />
-    <Folder Include="Resources\Config\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Info.plist" />
-    <None Include="Entitlements.plist" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Main.cs" />
-    <Compile Include="AppDelegate.cs" />
-    <Compile Include="ViewController.cs" />
-    <Compile Include="ViewController.designer.cs">
-      <DependentUpon>ViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AppDocumentController.cs" />
-    <Compile Include="MainWindowDelegate.cs" />
-    <Compile Include="AppManager.cs" />
-    <Compile Include="LanguageManager.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <InterfaceDefinition Include="Main.storyboard" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\dotnet\Tricycle.IO\Tricycle.IO.csproj">
-      <Project>{8E31720E-E9C1-4D3F-AA41-F70F0AD78CED}</Project>
-      <Name>Tricycle.IO</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\dotnet\Tricycle.Diagnostics\Tricycle.Diagnostics.csproj">
-      <Project>{EEE33ED0-2D2E-419F-BABB-3825B6AB620B}</Project>
-      <Name>Tricycle.Diagnostics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\dotnet\Tricycle.Media\Tricycle.Media.csproj">
-      <Project>{879F9F92-4A54-4F41-82BD-17D7E55CAC6B}</Project>
-      <Name>Tricycle.Media</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\dotnet\Tricycle.Media.FFmpeg\Tricycle.Media.FFmpeg.csproj">
-      <Project>{FF03A145-405E-4C92-8B1B-401946EA6E61}</Project>
-      <Name>Tricycle.Media.FFmpeg</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\dotnet\Tricycle.UI\Tricycle.UI.csproj">
-      <Project>{2318EE49-B396-40AC-8D09-58104D2ABB67}</Project>
-      <Name>Tricycle.UI</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\dotnet\Tricycle.Models\Tricycle.Models.csproj">
-      <Project>{D8C74968-42BE-4884-BD81-352A9113231D}</Project>
-      <Name>Tricycle.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\dotnet\Tricycle.Utilities\Tricycle.Utilities.csproj">
-      <Project>{0ED0381E-0215-4814-8B3E-DCE3EDC555A6}</Project>
-      <Name>Tricycle.Utilities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\dotnet\Tricycle.Globalization\Tricycle.Globalization.csproj">
-      <Project>{D3D4FED4-BE82-4144-81DA-605110421742}</Project>
-      <Name>Tricycle.Globalization</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Tricycle.IO.macOS\Tricycle.IO.macOS.csproj">
-      <Project>{E303680C-0FFB-4CE6-AD29-482FAB318438}</Project>
-      <Name>Tricycle.IO.macOS</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Tools\FFmpeg\ffprobe" />
-    <BundleResource Include="Resources\Tools\FFmpeg\ffmpeg" />
-    <BundleResource Include="Resources\Config\tricycle.json" />
-    <BundleResource Include="Resources\Config\ffmpeg.json" />
+    <BundleResource Include="Resources\Images\folder-browse.png"/>
+    <BundleResource Include="Resources\Images\folder-open.png"/>
+    <BundleResource Include="Resources\Images\play.png"/>
+    <BundleResource Include="Resources\Images\stop.png"/>
+    <BundleResource Include="Resources\Tools\FFmpeg\ffprobe"/>
+    <BundleResource Include="Resources\Tools\FFmpeg\ffmpeg"/>
+    <BundleResource Include="Resources\Config\tricycle.json"/>
+    <BundleResource Include="Resources\Config\ffmpeg.json"/>
     <BundleResource Include="..\..\COPYING.txt">
       <Link>Resources\COPYING.txt</Link>
     </BundleResource>
@@ -252,8 +53,29 @@
     <BundleResource Include="..\..\tools\FFmpeg\source\x265.tar.bz2">
       <Link>Resources\Tools\FFmpeg\Source\x265.tar.bz2</Link>
     </BundleResource>
+    <BundleResource Include="Resources\Images\trash.png"/>
+    <BundleResource Include="Resources\Images\next.png"/>
+    <BundleResource Include="Resources\Images\previous.png"/>
+    <BundleResource Include="Resources\Images\preview.png"/>
+    <BundleResource Include="Resources\Images\tricycle-gray.png"/>
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
-  <Import Project="..\packages\Astound.ReactNative.Generators.ObjC.0.64.0\build\Astound.ReactNative.Generators.ObjC.targets" Condition="Exists('..\packages\Astound.ReactNative.Generators.ObjC.0.64.0\build\Astound.ReactNative.Generators.ObjC.targets')" />
-  <Import Project="..\packages\Astound.ReactNative.macOS.Bindings.0.64.1\build\Astound.ReactNative.macOS.Bindings.targets" Condition="Exists('..\packages\Astound.ReactNative.macOS.Bindings.0.64.1\build\Astound.ReactNative.macOS.Bindings.targets')" />
+  <ItemGroup>
+    <ProjectReference Include="..\..\dotnet\Tricycle.Diagnostics\Tricycle.Diagnostics.csproj"/>
+    <ProjectReference Include="..\..\dotnet\Tricycle.Globalization\Tricycle.Globalization.csproj"/>
+    <ProjectReference Include="..\..\dotnet\Tricycle.IO\Tricycle.IO.csproj"/>
+    <ProjectReference Include="..\..\dotnet\Tricycle.Media.FFmpeg\Tricycle.Media.FFmpeg.csproj"/>
+    <ProjectReference Include="..\..\dotnet\Tricycle.Media\Tricycle.Media.csproj"/>
+    <ProjectReference Include="..\..\dotnet\Tricycle.Models\Tricycle.Models.csproj"/>
+    <ProjectReference Include="..\..\dotnet\Tricycle.UI\Tricycle.UI.csproj"/>
+    <ProjectReference Include="..\..\dotnet\Tricycle.Utilities\Tricycle.Utilities.csproj"/>
+    <ProjectReference Include="..\Tricycle.IO.macOS\Tricycle.IO.macOS.csproj"/>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Astound.ReactNative.macOS.Extensions" Version="0.71.1" />
+    <PackageReference Include="ByteSize" Version="2.1.1"/>
+    <PackageReference Include="Iso639" Version="1.0.0"/>
+    <PackageReference Include="Lamar" Version="8.0.1"/>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
+    <PackageReference Include="System.IO.Abstractions" Version="17.0.15"/>
+  </ItemGroup>
 </Project>
