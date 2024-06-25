@@ -6,7 +6,7 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   switch: {
-    width: 16,
+    marginLeft: -6,
     marginRight: 5,
   },
   label: {},
