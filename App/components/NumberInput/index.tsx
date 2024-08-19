@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import PlatformTextInput from '../PlatformTextInput';
 import {ValueChangeHandler} from '@models';
@@ -18,8 +18,6 @@ export default function NumberInput({
   editable,
   allowDecimals,
 }: Props) {
-  const [lastValidValue, setLastValidValue] = useState(value);
-
   return (
     <PlatformTextInput
       editable={editable}
@@ -29,24 +27,20 @@ export default function NumberInput({
         }
 
         if (!text) {
-          setLastValidValue(undefined);
           onValueChange(undefined);
+          return;
         }
 
         const numberValue = Number(text.replace(',', '.'));
 
         if (
-          isNaN(numberValue) ||
-          (!allowDecimals && !Number.isInteger(numberValue))
+          !isNaN(numberValue) &&
+          (allowDecimals || Number.isInteger(numberValue))
         ) {
-          onValueChange(lastValidValue);
-        } else {
-          setLastValidValue(numberValue);
           onValueChange(numberValue);
         }
       }}
-      style={style}>
-      {value}
-    </PlatformTextInput>
+      style={style}
+      value={value?.toString() || ''}></PlatformTextInput>
   );
 }
