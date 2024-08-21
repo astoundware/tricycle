@@ -1,12 +1,13 @@
 ﻿using System;
 using Astound.ReactNative.macOS.Extensions;
 using Foundation;
+using ObjCRuntime;
 
 namespace Tricycle.UI.macOS
 {
     public partial class ViewController : ReactViewControllerBase
 	{
-		public ViewController (IntPtr handle) : base (handle)
+		public ViewController (NativeHandle handle) : base (handle)
 		{
 		}
 

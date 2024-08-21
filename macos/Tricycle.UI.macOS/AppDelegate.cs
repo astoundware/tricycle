@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
+﻿using System.Diagnostics;
 using System.IO.Abstractions;
-using System.Linq;
-using AppKit;
 using Astound.ReactNative.macOS.Extensions;
-using Foundation;
 using Lamar;
 using Tricycle.Diagnostics;
 using Tricycle.Diagnostics.Utilities;
@@ -79,6 +73,9 @@ namespace Tricycle.UI.macOS
 
         public override NSApplicationTerminateReply ApplicationShouldTerminate(NSApplication sender) =>
             ShouldClose() ? NSApplicationTerminateReply.Now : NSApplicationTerminateReply.Cancel;
+
+        [Export("applicationSupportsSecureRestorableState:")]
+        public bool ApplicationSupportsSecureRestorableState(NSApplication sender) => true;
 
         public override bool OpenFile(NSApplication sender, string filename)
         {

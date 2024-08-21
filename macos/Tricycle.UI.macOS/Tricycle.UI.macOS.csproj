@@ -6,6 +6,7 @@
     <ImplicitUsings>true</ImplicitUsings>
     <SupportedOSPlatformVersion>10.15</SupportedOSPlatformVersion>
     <AssemblyName>Tricycle</AssemblyName>
+    <ApplicationId>com.astound.tricycle</ApplicationId>
   </PropertyGroup>
   <Target Name="PackageDmg" Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'" AfterTargets="_CreateInstaller">
     <Delete Files="$(ProjectDir)/dmg/Tricycle.dmg" Condition="Exists('$(ProjectDir)/dmg/Tricycle.dmg')" />
