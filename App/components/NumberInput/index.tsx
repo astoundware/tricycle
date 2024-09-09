@@ -41,6 +41,7 @@ export default function NumberInput({
         }
       }}
       style={style}
-      value={value?.toString() || ''}></PlatformTextInput>
+      value={value?.toString() || ''}
+    />
   );
 }
