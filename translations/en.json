@@ -17,6 +17,8 @@
     "mp4FileExtension": "MP4 file extension",
     "mkvFileExtension": "MKV file extension",
     "destinationFolder": "Destination folder",
+    "deinterlace": "Deinterlace",
+    "sizeDivisor": "Require that all sizes be divisible by",
     "passthruMatchingTracks": "Passthru Matching Tracks",
     "x264Preset": "x264 Preset",
     "x265Preset": "x265 Preset",

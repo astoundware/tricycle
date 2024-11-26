@@ -1,7 +1,8 @@
 import React from 'react';
 
-import PlatformTextInput from '../PlatformTextInput';
 import {ValueChangeHandler} from '@models';
+import PlatformTextInput from '../PlatformTextInput';
+import styles from './styles';
 
 export type Props = {
   style?: any;
@@ -40,7 +41,7 @@ export default function NumberInput({
           onValueChange(numberValue);
         }
       }}
-      style={style}
+      style={[styles.input, style]}
       value={value?.toString() || ''}
     />
   );

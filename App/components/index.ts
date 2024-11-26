@@ -46,3 +46,7 @@ export {
   default as TemplateTable,
   type Props as TemplateTableProps,
 } from './TemplateTable';
+export {
+  default as VideoSettings,
+  type Props as VideoSettingsProps,
+} from './VideoSettings';

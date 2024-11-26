@@ -7,6 +7,7 @@ import {
   AudioSettings,
   GeneralSettings,
   SelectionList,
+  VideoSettings,
 } from '@components';
 import styles from './styles';
 
@@ -75,13 +76,14 @@ function removeQualityPreset(presets: QualityPreset[], key: string) {
 
 const sections = [
   {key: 'general', text: 'General'},
+  {key: 'video', text: 'Video'},
   {key: 'audio', text: 'Audio'},
   {key: 'advanced', text: 'Advanced'},
 ];
-const presetItems = [
-  {key: 'fast', text: 'Fast'},
-  {key: 'medium', text: 'Medium'},
-  {key: 'slow', text: 'Slow'},
+const deinterlaceItems = [
+  {key: 'off', text: 'Off'},
+  {key: 'auto', text: 'Auto'},
+  {key: 'on', text: 'On'},
 ];
 const audioFormatItems = [
   {key: 'none', text: ''},
@@ -93,6 +95,11 @@ const mixdownItems = [
   {key: 'mono', text: 'Mono'},
   {key: 'stereo', text: 'Stereo'},
   {key: 'surround', text: 'Surround'},
+];
+const presetItems = [
+  {key: 'fast', text: 'Fast'},
+  {key: 'medium', text: 'Medium'},
+  {key: 'slow', text: 'Slow'},
 ];
 
 export default function Settings() {
@@ -116,6 +123,8 @@ export default function Settings() {
     {key: 8, name: 'Template 8'},
     {key: 9, name: 'Template 9'},
   ]);
+  const [deinterlace, setDeinterlace] = useState('auto');
+  const [sizeDivisor, setSizeDivisor] = useState<number | undefined>(8);
   const [passthruMatchingTracksEnabled, setPassthruMatchingTracksEnabled] =
     useState(true);
   const [qualityPresets, setQualityPresets] = useState<QualityPreset[]>([
@@ -176,6 +185,15 @@ export default function Settings() {
             onTemplateRemove={index =>
               setTemplates(oldValue => removeTemplate(oldValue, index))
             }
+          />
+        )}
+        {section === 'video' && (
+          <VideoSettings
+            deinterlaceItems={deinterlaceItems}
+            deinterlace={deinterlace}
+            onDeinterlaceChange={setDeinterlace}
+            sizeDivisor={sizeDivisor}
+            onSizeDivisorChange={setSizeDivisor}
           />
         )}
         {section === 'audio' && (

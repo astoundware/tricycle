@@ -10,6 +10,5 @@ export default StyleSheet.create({
   input: {
     flex: 1,
     marginRight: 10,
-    textAlign: 'right',
   },
 });
