@@ -34,5 +34,12 @@
   },
   "templates": {
     "title": "Templates"
+  },
+  "videoCodecQualities": {
+    "title": "Quality",
+    "label": "Codec",
+    "min": "Good",
+    "max": "Best",
+    "steps": "Steps"
   }
 }

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Text, View} from 'react-native';
 
-import {QualityPreset, Template} from '@models';
+import {QualityPreset, Template, VideoCodecQuality} from '@models';
 import {
   AdvancedSettings,
   AudioSettings,
@@ -23,6 +23,22 @@ function renameTemplate(templates: Template[], index: number, name: string) {
 
 function removeTemplate(templates: Template[], index: number) {
   return (templates || []).filter((_, i) => i !== index);
+}
+
+function updateVideoCodecQualityValue(
+  qualities: VideoCodecQuality[],
+  key: string,
+  propertyName: keyof VideoCodecQuality,
+  value: number | undefined,
+) {
+  let result = Array.from(qualities || []);
+  const quality = result.find(p => p.key === key);
+
+  if (quality) {
+    (quality[propertyName] as number | undefined) = value;
+  }
+
+  return result;
 }
 
 function updateQualityPresetFormat(
@@ -125,6 +141,12 @@ export default function Settings() {
   ]);
   const [deinterlace, setDeinterlace] = useState('auto');
   const [sizeDivisor, setSizeDivisor] = useState<number | undefined>(8);
+  const [videoCodecQualities, setVideoCodecQualities] = useState<
+    VideoCodecQuality[]
+  >([
+    {key: 'AVC', min: 22.0, max: 20.0, steps: 3},
+    {key: 'HEVC', min: 22.0, max: 18.0, steps: 4},
+  ]);
   const [passthruMatchingTracksEnabled, setPassthruMatchingTracksEnabled] =
     useState(true);
   const [qualityPresets, setQualityPresets] = useState<QualityPreset[]>([
@@ -194,6 +216,22 @@ export default function Settings() {
             onDeinterlaceChange={setDeinterlace}
             sizeDivisor={sizeDivisor}
             onSizeDivisorChange={setSizeDivisor}
+            codecQualities={videoCodecQualities}
+            onCodecQualityMinChange={(key, value) =>
+              setVideoCodecQualities(oldValue =>
+                updateVideoCodecQualityValue(oldValue, key, 'min', value),
+              )
+            }
+            onCodecQualityMaxChange={(key, value) =>
+              setVideoCodecQualities(oldValue =>
+                updateVideoCodecQualityValue(oldValue, key, 'max', value),
+              )
+            }
+            onCodecQualityStepsChange={(key, value) =>
+              setVideoCodecQualities(oldValue =>
+                updateVideoCodecQualityValue(oldValue, key, 'steps', value),
+              )
+            }
           />
         )}
         {section === 'audio' && (

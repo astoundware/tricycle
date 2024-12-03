@@ -3,8 +3,14 @@ import {Text, View} from 'react-native';
 import {useTranslation} from 'react-i18next';
 import {Picker} from '@react-native-picker/picker';
 
-import {DisplayValue, ValueChangeHandler} from '@models';
+import {
+  DisplayValue,
+  KeyedValueChangeHandler,
+  ValueChangeHandler,
+  VideoCodecQuality,
+} from '@models';
 import NumberInput from '../NumberInput';
+import VideoCodecQualityTable from '../VideoCodecQualityTable';
 import styles from './styles';
 
 export type Props = {
@@ -14,6 +20,10 @@ export type Props = {
   onDeinterlaceChange?: ValueChangeHandler<string>;
   sizeDivisor?: number;
   onSizeDivisorChange?: ValueChangeHandler<number | undefined>;
+  codecQualities: VideoCodecQuality[];
+  onCodecQualityMinChange?: KeyedValueChangeHandler<number | undefined>;
+  onCodecQualityMaxChange?: KeyedValueChangeHandler<number | undefined>;
+  onCodecQualityStepsChange?: KeyedValueChangeHandler<number | undefined>;
 };
 
 export default function VideoSettings({
@@ -23,6 +33,10 @@ export default function VideoSettings({
   onDeinterlaceChange,
   sizeDivisor,
   onSizeDivisorChange,
+  codecQualities,
+  onCodecQualityMinChange,
+  onCodecQualityMaxChange,
+  onCodecQualityStepsChange,
 }: Props) {
   const {t} = useTranslation();
 
@@ -52,6 +66,19 @@ export default function VideoSettings({
             onValueChange={onSizeDivisorChange}
           />
         </View>
+      </View>
+      <View style={styles.tableContainer}>
+        <View style={styles.tableHeader}>
+          <Text style={styles.tableTitle}>
+            {t('videoCodecQualities.title')}
+          </Text>
+        </View>
+        <VideoCodecQualityTable
+          codecs={codecQualities}
+          onMinChange={onCodecQualityMinChange}
+          onMaxChange={onCodecQualityMaxChange}
+          onStepsChange={onCodecQualityStepsChange}
+        />
       </View>
     </View>
   );

@@ -21,7 +21,7 @@ export type Props = {
   onRemove?: () => void;
 };
 
-export default function TemplateRow({
+export default function QualityPresetRow({
   style,
   format,
   formatItems,
