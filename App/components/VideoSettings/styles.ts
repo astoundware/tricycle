@@ -22,7 +22,7 @@ export default StyleSheet.create({
   },
   label: {},
   input: {
-    width: 80,
+    width: 100,
   },
   tableContainer: {
     flex: 1,

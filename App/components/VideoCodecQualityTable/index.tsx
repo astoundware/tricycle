@@ -14,7 +14,7 @@ export type Props = {
   onStepsChange?: KeyedValueChangeHandler<number | undefined>;
 };
 
-export default function QualityPresetTable({
+export default function VideoCodecQualityTable({
   style,
   codecs,
   onMinChange,
@@ -26,16 +26,16 @@ export default function QualityPresetTable({
   return (
     <View style={[styles.container, style]}>
       <View style={[styles.row, styles.header]}>
-        <View>
+        <View style={styles.headerCell}>
           <Text>{t('videoCodecQualities.label')}</Text>
         </View>
-        <View style={styles.inputHeader}>
+        <View style={styles.headerCell}>
           <Text>{t('videoCodecQualities.min')}</Text>
         </View>
-        <View style={styles.inputHeader}>
+        <View style={styles.headerCell}>
           <Text>{t('videoCodecQualities.max')}</Text>
         </View>
-        <View style={styles.inputHeader}>
+        <View style={styles.headerCell}>
           <Text>{t('videoCodecQualities.steps')}</Text>
         </View>
       </View>

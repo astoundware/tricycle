@@ -5,7 +5,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
   },
   label: {
-    width: 50,
+    flex: 1,
   },
   input: {
     flex: 1,

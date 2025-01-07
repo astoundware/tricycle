@@ -9,12 +9,8 @@ export default StyleSheet.create({
     marginBottom: 7,
     paddingRight: 15,
   },
-  pickerHeader: {
+  headerCell: {
     flex: 3,
-    alignItems: 'center',
-  },
-  inputHeader: {
-    flex: 1,
     alignItems: 'center',
   },
   list: {
