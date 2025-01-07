@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {ValueChangeHandler} from '@models';
 import PlatformTextInput from '../PlatformTextInput';
@@ -19,16 +19,15 @@ export default function NumberInput({
   editable,
   allowDecimals,
 }: Props) {
+  const [lastValidText, setLastValidText] = useState(value?.toString() || '');
+
   return (
     <PlatformTextInput
       editable={editable}
       onChangeText={text => {
-        if (!onValueChange) {
-          return;
-        }
-
         if (!text) {
-          onValueChange(undefined);
+          setLastValidText('');
+          onValueChange && onValueChange(undefined);
           return;
         }
 
@@ -38,11 +37,12 @@ export default function NumberInput({
           !isNaN(numberValue) &&
           (allowDecimals || Number.isInteger(numberValue))
         ) {
-          onValueChange(numberValue);
+          setLastValidText(text);
+          onValueChange && onValueChange(numberValue);
         }
       }}
       style={[styles.input, style]}
-      value={value?.toString() || ''}
+      value={lastValidText}
     />
   );
 }
