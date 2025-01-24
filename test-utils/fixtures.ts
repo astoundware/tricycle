@@ -44,6 +44,9 @@ export const createAudioQualityPreset = (
   quality: preset?.quality || createNumber(),
 });
 
+export const createAudioQualityPresets = (count?: number) =>
+  createMany(createAudioQualityPreset, count);
+
 export const createTemplate = (template?: Partial<Template>): Template => ({
   key: createKey(),
   name: createString(),

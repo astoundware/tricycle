@@ -9,8 +9,8 @@ import styles from './styles';
 
 export type Props = {
   style?: any;
-  passthruMatchingTracksEnabled: boolean;
-  onPassthruMatchingTracksChange: ValueChangeHandler<boolean>;
+  passthruMatchingTracksEnabled?: boolean;
+  onPassthruMatchingTracksChange?: ValueChangeHandler<boolean>;
   qualityPresets?: AudioQualityPreset[];
   formatItems?: DisplayValue[];
   mixdownItems?: DisplayValue[];

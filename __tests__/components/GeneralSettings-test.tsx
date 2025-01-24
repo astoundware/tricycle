@@ -226,7 +226,7 @@ it('renders the templates correctly', () => {
   expect(table.props.templates).toBe(templates);
 });
 
-it('calls onTemplateNameChange when destination mode is changed', () => {
+it('calls onTemplateNameChange when template name is changed', () => {
   const index = createNumber();
   const name = createString();
   const onTemplateNameChange = jest.fn();
@@ -240,7 +240,7 @@ it('calls onTemplateNameChange when destination mode is changed', () => {
   expect(onTemplateNameChange).toHaveBeenCalledWith(index, name);
 });
 
-it('calls onTemplateRemove when destination mode is changed', () => {
+it('calls onTemplateRemove when template is removed', () => {
   const index = createNumber();
   const onTemplateRemove = jest.fn();
   const component = renderer.create(
