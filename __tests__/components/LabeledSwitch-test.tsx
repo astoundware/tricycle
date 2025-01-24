@@ -4,9 +4,10 @@ import React from 'react';
 import {Pressable, Switch, Text} from 'react-native';
 
 import {LabeledSwitch} from '@components';
+import {createBoolean, createString} from '@test-utils/fixtures';
 
 it('renders the label correctly', () => {
-  const label = 'test';
+  const label = createString();
   const component = renderer.create(<LabeledSwitch label={label} />);
   const text = component.root.findByType(Text);
 
@@ -14,7 +15,7 @@ it('renders the label correctly', () => {
 });
 
 it('renders the value correctly', () => {
-  const value = true;
+  const value = createBoolean();
   const component = renderer.create(<LabeledSwitch value={value} />);
   const sw = component.root.findByType(Switch);
 
@@ -22,7 +23,7 @@ it('renders the value correctly', () => {
 });
 
 it('calls onValueChange when the switch is toggled', () => {
-  const value = true;
+  const value = createBoolean();
   const onValueChange = jest.fn();
   const component = renderer.create(
     <LabeledSwitch onValueChange={onValueChange} />,
@@ -35,16 +36,16 @@ it('calls onValueChange when the switch is toggled', () => {
 });
 
 it('calls onValueChange when the label is pressed', () => {
-  const value = true;
+  const value = createBoolean();
   const onValueChange = jest.fn();
   const component = renderer.create(
-    <LabeledSwitch onValueChange={onValueChange} />,
+    <LabeledSwitch value={value} onValueChange={onValueChange} />,
   );
   const pressable = component.root.findByType(Pressable);
 
   pressable.props.onPress();
 
-  expect(onValueChange).toHaveBeenCalledWith(value);
+  expect(onValueChange).toHaveBeenCalledWith(!value);
 });
 
 it('does not throw error when onValueChange is undefined', () => {

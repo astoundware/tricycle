@@ -5,9 +5,14 @@ import {Picker} from '@react-native-picker/picker';
 
 import {AdvancedSettings, LabeledSwitch, PlatformTextInput} from '@components';
 import '@config/i18n';
+import {
+  createBoolean,
+  createDisplayValues,
+  createString,
+} from '@test-utils/fixtures';
 
 it('renders the trace logging value correctly', () => {
-  const value = true;
+  const value = createBoolean();
   const component = renderer.create(
     <AdvancedSettings traceLoggingEnabled={value} />,
   );
@@ -17,7 +22,7 @@ it('renders the trace logging value correctly', () => {
 });
 
 it('calls onTraceLoggingChange when trace logging is toggled', () => {
-  const value = true;
+  const value = createBoolean();
   const onTraceLoggingChange = jest.fn();
   const component = renderer.create(
     <AdvancedSettings onTraceLoggingChange={onTraceLoggingChange} />,
@@ -30,10 +35,7 @@ it('calls onTraceLoggingChange when trace logging is toggled', () => {
 });
 
 it('renders the x264 preset options correctly', () => {
-  const items = [
-    {key: 'slow', text: 'Slow'},
-    {key: 'fast', text: 'Fast'},
-  ];
+  const items = createDisplayValues();
   const component = renderer.create(
     <AdvancedSettings x264PresetItems={items} />,
   );
@@ -51,7 +53,7 @@ it('renders the x264 preset options correctly', () => {
 });
 
 it('renders the selected x264 preset correctly', () => {
-  const preset = 'fast';
+  const preset = createString();
   const component = renderer.create(<AdvancedSettings x264Preset={preset} />);
   const pickers = component.root.findAllByType(Picker);
 
@@ -59,7 +61,7 @@ it('renders the selected x264 preset correctly', () => {
 });
 
 it('calls onX264PresetChange when x264 preset is changed', () => {
-  const preset = 'fast';
+  const preset = createString();
   const onX264PresetChange = jest.fn();
   const component = renderer.create(
     <AdvancedSettings onX264PresetChange={onX264PresetChange} />,
@@ -72,10 +74,7 @@ it('calls onX264PresetChange when x264 preset is changed', () => {
 });
 
 it('renders the x265 preset options correctly', () => {
-  const items = [
-    {key: 'slow', text: 'Slow'},
-    {key: 'fast', text: 'Fast'},
-  ];
+  const items = createDisplayValues();
   const component = renderer.create(
     <AdvancedSettings x265PresetItems={items} />,
   );
@@ -93,7 +92,7 @@ it('renders the x265 preset options correctly', () => {
 });
 
 it('renders the selected x265 preset correctly', () => {
-  const preset = 'fast';
+  const preset = createString();
   const component = renderer.create(<AdvancedSettings x265Preset={preset} />);
   const pickers = component.root.findAllByType(Picker);
 
@@ -101,7 +100,7 @@ it('renders the selected x265 preset correctly', () => {
 });
 
 it('calls onX265PresetChange when x265 preset is changed', () => {
-  const preset = 'fast';
+  const preset = createString();
   const onX265PresetChange = jest.fn();
   const component = renderer.create(
     <AdvancedSettings onX265PresetChange={onX265PresetChange} />,
@@ -114,7 +113,7 @@ it('calls onX265PresetChange when x265 preset is changed', () => {
 });
 
 it('renders the HEVC tag correctly', () => {
-  const tag = 'hvc1';
+  const tag = createString();
   const component = renderer.create(<AdvancedSettings hevcTag={tag} />);
   const inputs = component.root.findAllByType(PlatformTextInput);
 
@@ -122,7 +121,7 @@ it('renders the HEVC tag correctly', () => {
 });
 
 it('calls onHevcTagChange when HEVC tag is changed', () => {
-  const tag = 'hvc1';
+  const tag = createString();
   const onHevcTagChange = jest.fn();
   const component = renderer.create(
     <AdvancedSettings onHevcTagChange={onHevcTagChange} />,
@@ -135,7 +134,7 @@ it('calls onHevcTagChange when HEVC tag is changed', () => {
 });
 
 it('renders the AAC codec correctly', () => {
-  const codec = 'aac';
+  const codec = createString();
   const component = renderer.create(<AdvancedSettings aacCodec={codec} />);
   const inputs = component.root.findAllByType(PlatformTextInput);
 
@@ -143,7 +142,7 @@ it('renders the AAC codec correctly', () => {
 });
 
 it('calls onAacCodecChange when AAC codec is changed', () => {
-  const codec = 'aac';
+  const codec = createString();
   const onAacCodecChange = jest.fn();
   const component = renderer.create(
     <AdvancedSettings onAacCodecChange={onAacCodecChange} />,
@@ -156,7 +155,7 @@ it('calls onAacCodecChange when AAC codec is changed', () => {
 });
 
 it('renders the Dolby Digital codec correctly', () => {
-  const codec = 'ac3';
+  const codec = createString();
   const component = renderer.create(
     <AdvancedSettings dolbyDigitalCodec={codec} />,
   );
@@ -166,7 +165,7 @@ it('renders the Dolby Digital codec correctly', () => {
 });
 
 it('calls onDolbyDigitalCodecChange when Dolby Digital codec is changed', () => {
-  const codec = 'ac3';
+  const codec = createString();
   const onDolbyDigitalCodecChange = jest.fn();
   const component = renderer.create(
     <AdvancedSettings onDolbyDigitalCodecChange={onDolbyDigitalCodecChange} />,
@@ -179,7 +178,7 @@ it('calls onDolbyDigitalCodecChange when Dolby Digital codec is changed', () => 
 });
 
 it('renders the crop detect options correctly', () => {
-  const options = '0.125:2:0';
+  const options = createString();
   const component = renderer.create(
     <AdvancedSettings cropDetectOptions={options} />,
   );
@@ -189,7 +188,7 @@ it('renders the crop detect options correctly', () => {
 });
 
 it('calls onCropDetectOptionsChange when crop detect options are changed', () => {
-  const options = '0.125:2:0';
+  const options = createString();
   const onCropDetectOptionsChange = jest.fn();
   const component = renderer.create(
     <AdvancedSettings onCropDetectOptionsChange={onCropDetectOptionsChange} />,
@@ -202,7 +201,7 @@ it('calls onCropDetectOptionsChange when crop detect options are changed', () =>
 });
 
 it('renders the deinterlace options correctly', () => {
-  const options = 'bwdif';
+  const options = createString();
   const component = renderer.create(
     <AdvancedSettings deinterlaceOptions={options} />,
   );
@@ -212,7 +211,7 @@ it('renders the deinterlace options correctly', () => {
 });
 
 it('calls onDeinterlaceOptionsChange when deinterlace options are changed', () => {
-  const options = 'bwdif';
+  const options = createString();
   const onDeinterlaceOptionsChange = jest.fn();
   const component = renderer.create(
     <AdvancedSettings
@@ -227,7 +226,7 @@ it('calls onDeinterlaceOptionsChange when deinterlace options are changed', () =
 });
 
 it('renders the denoise options correctly', () => {
-  const options = 'hqdn3d';
+  const options = createString();
   const component = renderer.create(
     <AdvancedSettings denoiseOptions={options} />,
   );
@@ -237,7 +236,7 @@ it('renders the denoise options correctly', () => {
 });
 
 it('calls onDenoiseOptionsChange when denoise options are changed', () => {
-  const options = 'hqdn3d';
+  const options = createString();
   const onDenoiseOptionsChange = jest.fn();
   const component = renderer.create(
     <AdvancedSettings onDenoiseOptionsChange={onDenoiseOptionsChange} />,
@@ -250,7 +249,7 @@ it('calls onDenoiseOptionsChange when denoise options are changed', () => {
 });
 
 it('renders the tonemap options correctly', () => {
-  const options = 'hable';
+  const options = createString();
   const component = renderer.create(
     <AdvancedSettings tonemapOptions={options} />,
   );
@@ -260,7 +259,7 @@ it('renders the tonemap options correctly', () => {
 });
 
 it('calls onTonemapOptionsChange when tonemap options are changed', () => {
-  const options = 'hable';
+  const options = createString();
   const onTonemapOptionsChange = jest.fn();
   const component = renderer.create(
     <AdvancedSettings onTonemapOptionsChange={onTonemapOptionsChange} />,

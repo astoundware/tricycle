@@ -22,6 +22,7 @@ module.exports = {
           '@models': './App/models',
           '@native': './App/native',
           '@screens': './App/screens',
+          '@test-utils': './test-utils',
         },
       },
     ],

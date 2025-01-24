@@ -1,18 +1,22 @@
 import 'react-native';
 import renderer from 'react-test-renderer';
 import React from 'react';
-import {FlatList} from 'react-native';
+import {FlatList, ListRenderItemInfo} from 'react-native';
 
 import {TemplateTable} from '@components';
 import '@config/i18n';
+import {Template} from '@models';
+import {
+  createListRenderItemInfo,
+  createString,
+  createTemplate,
+} from '@test-utils/fixtures';
 
-const element = {
-  index: 1,
-  item: {
-    key: 2,
-    name: 'test',
-  },
-};
+let element: ListRenderItemInfo<Template>;
+
+beforeEach(() => {
+  element = createListRenderItemInfo(createTemplate);
+});
 
 it('renders the row correctly', () => {
   const component = renderer.create(<TemplateTable />);
@@ -23,7 +27,7 @@ it('renders the row correctly', () => {
 });
 
 it("calls onNameChange when the row's name is changed", () => {
-  const newName = 'updated';
+  const newName = createString();
   const onNameChange = jest.fn();
   const component = renderer.create(
     <TemplateTable onNameChange={onNameChange} />,

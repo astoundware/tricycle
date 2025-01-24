@@ -3,9 +3,10 @@ import renderer from 'react-test-renderer';
 import React from 'react';
 
 import {ImageButton, PlatformTextInput, TemplateRow} from '@components';
+import {createString} from '@test-utils/fixtures';
 
 it('renders the name correctly', () => {
-  const name = 'test';
+  const name = createString();
   const component = renderer.create(<TemplateRow name={name} />);
   const input = component.root.findByType(PlatformTextInput);
 
@@ -13,7 +14,7 @@ it('renders the name correctly', () => {
 });
 
 it('calls onNameChange when the text is changed', () => {
-  const name = 'test';
+  const name = createString();
   const onNameChange = jest.fn();
   const component = renderer.create(
     <TemplateRow onNameChange={onNameChange} />,

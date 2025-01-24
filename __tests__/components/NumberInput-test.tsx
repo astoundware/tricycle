@@ -3,9 +3,10 @@ import renderer from 'react-test-renderer';
 import React from 'react';
 
 import {NumberInput, PlatformTextInput} from '@components';
+import {createNumber} from '@test-utils/fixtures';
 
 it('renders the value when it is defined', () => {
-  const value = 100;
+  const value = createNumber();
   const component = renderer.create(<NumberInput value={value} />);
   const input = component.root.findByType(PlatformTextInput);
 
@@ -30,7 +31,7 @@ test.each([[false], [true]])(
 );
 
 it('calls onValueChange when allowDecimals is false and the text is changed to a valid integer', () => {
-  const value = 100;
+  const value = createNumber();
   const onValueChange = jest.fn();
   const component = renderer.create(
     <NumberInput onValueChange={onValueChange} />,

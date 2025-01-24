@@ -11,9 +11,16 @@ import {
   TemplateTable,
 } from '@components';
 import '@config/i18n';
+import {
+  createBoolean,
+  createDisplayValues,
+  createNumber,
+  createString,
+  createTemplates,
+} from '@test-utils/fixtures';
 
 it('renders the completion alert value correctly', () => {
-  const value = true;
+  const value = createBoolean();
   const component = renderer.create(
     <GeneralSettings completionAlertEnabled={value} />,
   );
@@ -23,7 +30,7 @@ it('renders the completion alert value correctly', () => {
 });
 
 it('calls onCompletionAlertChange when completion alert is toggled', () => {
-  const value = true;
+  const value = createBoolean();
   const onCompletionAlertChange = jest.fn();
   const component = renderer.create(
     <GeneralSettings onCompletionAlertChange={onCompletionAlertChange} />,
@@ -36,7 +43,7 @@ it('calls onCompletionAlertChange when completion alert is toggled', () => {
 });
 
 it('renders the incomplete deletion value correctly', () => {
-  const value = true;
+  const value = createBoolean();
   const component = renderer.create(
     <GeneralSettings incompleteDeletionEnabled={value} />,
   );
@@ -46,7 +53,7 @@ it('renders the incomplete deletion value correctly', () => {
 });
 
 it('calls onIncompleteDeletionChange when incomplete deletion is toggled', () => {
-  const value = true;
+  const value = createBoolean();
   const onIncompleteDeletionChange = jest.fn();
   const component = renderer.create(
     <GeneralSettings onIncompleteDeletionChange={onIncompleteDeletionChange} />,
@@ -59,7 +66,7 @@ it('calls onIncompleteDeletionChange when incomplete deletion is toggled', () =>
 });
 
 it('renders the forced subtitles value correctly', () => {
-  const value = true;
+  const value = createBoolean();
   const component = renderer.create(
     <GeneralSettings forcedSubtitlesEnabled={value} />,
   );
@@ -69,7 +76,7 @@ it('renders the forced subtitles value correctly', () => {
 });
 
 it('calls onForcedSubtitlesChange when forced subtitles is toggled', () => {
-  const value = true;
+  const value = createBoolean();
   const onForcedSubtitlesChange = jest.fn();
   const component = renderer.create(
     <GeneralSettings onForcedSubtitlesChange={onForcedSubtitlesChange} />,
@@ -82,7 +89,7 @@ it('calls onForcedSubtitlesChange when forced subtitles is toggled', () => {
 });
 
 it('renders the soft subtitles value correctly', () => {
-  const value = true;
+  const value = createBoolean();
   const component = renderer.create(
     <GeneralSettings softSubtitlesEnabled={value} />,
   );
@@ -92,7 +99,7 @@ it('renders the soft subtitles value correctly', () => {
 });
 
 it('calls onSoftSubtitlesChange when soft subtitles is toggled', () => {
-  const value = true;
+  const value = createBoolean();
   const onSoftSubtitlesChange = jest.fn();
   const component = renderer.create(
     <GeneralSettings onSoftSubtitlesChange={onSoftSubtitlesChange} />,
@@ -105,7 +112,7 @@ it('calls onSoftSubtitlesChange when soft subtitles is toggled', () => {
 });
 
 it('renders the MP4 file extension correctly', () => {
-  const extension = 'm4v';
+  const extension = createString();
   const component = renderer.create(
     <GeneralSettings mp4FileExtension={extension} />,
   );
@@ -115,7 +122,7 @@ it('renders the MP4 file extension correctly', () => {
 });
 
 it('calls onMp4FileExtensionChange when MP4 file extension is changed', () => {
-  const extension = 'm4v';
+  const extension = createString();
   const onMp4FileExtensionChange = jest.fn();
   const component = renderer.create(
     <GeneralSettings onMp4FileExtensionChange={onMp4FileExtensionChange} />,
@@ -128,7 +135,7 @@ it('calls onMp4FileExtensionChange when MP4 file extension is changed', () => {
 });
 
 it('renders the MKV file extension correctly', () => {
-  const extension = 'mkv';
+  const extension = createString();
   const component = renderer.create(
     <GeneralSettings mkvFileExtension={extension} />,
   );
@@ -138,7 +145,7 @@ it('renders the MKV file extension correctly', () => {
 });
 
 it('calls onMkvFileExtensionChange when MKV file extension is changed', () => {
-  const extension = 'mkv';
+  const extension = createString();
   const onMkvFileExtensionChange = jest.fn();
   const component = renderer.create(
     <GeneralSettings onMkvFileExtensionChange={onMkvFileExtensionChange} />,
@@ -151,10 +158,7 @@ it('calls onMkvFileExtensionChange when MKV file extension is changed', () => {
 });
 
 it('renders the destination mode options correctly', () => {
-  const items = [
-    {key: 'manual', text: 'Manual'},
-    {key: 'auto', text: 'Auto'},
-  ];
+  const items = createDisplayValues();
   const component = renderer.create(
     <GeneralSettings destinationModeItems={items} />,
   );
@@ -172,7 +176,7 @@ it('renders the destination mode options correctly', () => {
 });
 
 it('renders the selected destination mode correctly', () => {
-  const mode = 'auto';
+  const mode = createString();
   const component = renderer.create(<GeneralSettings destinationMode={mode} />);
   const picker = component.root.findByType(Picker);
 
@@ -180,7 +184,7 @@ it('renders the selected destination mode correctly', () => {
 });
 
 it('calls onDestinationModeChange when destination mode is changed', () => {
-  const mode = 'auto';
+  const mode = createString();
   const onDestinationModeChange = jest.fn();
   const component = renderer.create(
     <GeneralSettings onDestinationModeChange={onDestinationModeChange} />,
@@ -193,7 +197,7 @@ it('calls onDestinationModeChange when destination mode is changed', () => {
 });
 
 it('renders the destination folder correctly', () => {
-  const folder = 'movies';
+  const folder = createString();
   const component = renderer.create(
     <GeneralSettings destinationFolder={folder} />,
   );
@@ -215,10 +219,7 @@ it('calls onDestinationFolderBrowse when browse button is pressed', () => {
 });
 
 it('renders the templates correctly', () => {
-  const templates = [
-    {key: '1', name: 'Template 1'},
-    {key: '2', name: 'Template 2'},
-  ];
+  const templates = createTemplates();
   const component = renderer.create(<GeneralSettings templates={templates} />);
   const table = component.root.findByType(TemplateTable);
 
@@ -226,8 +227,8 @@ it('renders the templates correctly', () => {
 });
 
 it('calls onTemplateNameChange when destination mode is changed', () => {
-  const index = 1;
-  const name = 'New Template';
+  const index = createNumber();
+  const name = createString();
   const onTemplateNameChange = jest.fn();
   const component = renderer.create(
     <GeneralSettings onTemplateNameChange={onTemplateNameChange} />,
@@ -240,7 +241,7 @@ it('calls onTemplateNameChange when destination mode is changed', () => {
 });
 
 it('calls onTemplateRemove when destination mode is changed', () => {
-  const index = 1;
+  const index = createNumber();
   const onTemplateRemove = jest.fn();
   const component = renderer.create(
     <GeneralSettings onTemplateRemove={onTemplateRemove} />,

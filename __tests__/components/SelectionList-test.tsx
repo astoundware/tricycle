@@ -5,11 +5,14 @@ import {Pressable, StyleSheet, Text} from 'react-native';
 
 import {SelectionList} from '@components';
 import {theme} from '@config';
+import {DisplayValue} from '@models';
+import {createDisplayValues} from '@test-utils/fixtures';
 
-const items = [
-  {key: '1', text: 'A'},
-  {key: '2', text: 'B'},
-];
+let items: DisplayValue[];
+
+beforeEach(() => {
+  items = createDisplayValues();
+});
 
 it('renders the correct number of items', () => {
   const component = renderer.create(<SelectionList items={items} />);

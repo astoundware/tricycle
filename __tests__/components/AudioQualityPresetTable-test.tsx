@@ -1,26 +1,30 @@
 import 'react-native';
 import renderer from 'react-test-renderer';
 import React from 'react';
-import {FlatList} from 'react-native';
+import {FlatList, ListRenderItemInfo} from 'react-native';
 
 import {AudioQualityPresetTable} from '@components';
 import '@config/i18n';
+import {AudioQualityPreset} from '@models';
+import {
+  createAudioQualityPreset,
+  createDisplayValues,
+  createListRenderItemInfo,
+  createNumber,
+  createString,
+} from '@test-utils/fixtures';
 
-const element = {
-  item: {
-    key: 2,
-    format: 'aac',
-    mixdown: 'stereo',
-    quality: 256,
-  },
-};
+let element: ListRenderItemInfo<AudioQualityPreset>;
+
+beforeEach(() => {
+  element = createListRenderItemInfo(createAudioQualityPreset);
+});
 
 it('renders the row format options correctly', () => {
-  const items = [
-    {key: 'aac', text: 'AAC'},
-    {key: 'dd', text: 'Dolby Digital'},
-  ];
-  const component = renderer.create(<AudioQualityPresetTable formatItems={items} />);
+  const items = createDisplayValues();
+  const component = renderer.create(
+    <AudioQualityPresetTable formatItems={items} />,
+  );
   const list = component.root.findByType(FlatList);
   const row = list.props.renderItem(element);
 
@@ -36,10 +40,7 @@ it('renders the row format correctly', () => {
 });
 
 it('renders the row mixdown options correctly', () => {
-  const items = [
-    {key: 'mono', text: 'Mono'},
-    {key: 'stereo', text: 'Stereo'},
-  ];
+  const items = createDisplayValues();
   const component = renderer.create(
     <AudioQualityPresetTable mixdownItems={items} />,
   );
@@ -66,7 +67,7 @@ it('renders the row quality correctly', () => {
 });
 
 it("calls onFormatChange when the row's format is changed", () => {
-  const newFormat = 'aac';
+  const newFormat = createString();
   const onFormatChange = jest.fn();
   const component = renderer.create(
     <AudioQualityPresetTable onFormatChange={onFormatChange} />,
@@ -80,7 +81,7 @@ it("calls onFormatChange when the row's format is changed", () => {
 });
 
 it("calls onMixdownChange when the row's mixdown is changed", () => {
-  const newMixdown = 'aac';
+  const newMixdown = createString();
   const onMixdownChange = jest.fn();
   const component = renderer.create(
     <AudioQualityPresetTable onMixdownChange={onMixdownChange} />,
@@ -94,7 +95,7 @@ it("calls onMixdownChange when the row's mixdown is changed", () => {
 });
 
 it("calls onQualityChange when the row's quality is changed", () => {
-  const newQuality = 256;
+  const newQuality = createNumber();
   const onQualityChange = jest.fn();
   const component = renderer.create(
     <AudioQualityPresetTable onQualityChange={onQualityChange} />,
@@ -109,7 +110,9 @@ it("calls onQualityChange when the row's quality is changed", () => {
 
 it('calls onRemove when the row is removed', () => {
   const onRemove = jest.fn();
-  const component = renderer.create(<AudioQualityPresetTable onRemove={onRemove} />);
+  const component = renderer.create(
+    <AudioQualityPresetTable onRemove={onRemove} />,
+  );
   const list = component.root.findByType(FlatList);
   const row = list.props.renderItem(element);
 
