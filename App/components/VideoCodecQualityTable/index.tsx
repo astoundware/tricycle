@@ -45,7 +45,7 @@ export default function VideoCodecQualityTable({
         renderItem={({item}) => (
           <VideoCodecQualityRow
             style={styles.row}
-            codecName={item.key}
+            codecName={item.name}
             min={item.min}
             max={item.max}
             steps={item.steps}

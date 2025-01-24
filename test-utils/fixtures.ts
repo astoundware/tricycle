@@ -1,7 +1,12 @@
 import {faker} from '@faker-js/faker';
 import {ListRenderItemInfo} from 'react-native';
 
-import {AudioQualityPreset, DisplayValue, Template} from '@models';
+import {
+  AudioQualityPreset,
+  DisplayValue,
+  Template,
+  VideoCodecQuality,
+} from '@models';
 
 export const createBoolean = () => faker.datatype.boolean();
 
@@ -48,12 +53,25 @@ export const createAudioQualityPresets = (count?: number) =>
   createMany(createAudioQualityPreset, count);
 
 export const createTemplate = (template?: Partial<Template>): Template => ({
-  key: createKey(),
-  name: createString(),
+  key: template?.key || createKey(),
+  name: template?.name || createString(),
 });
 
 export const createTemplates = (count?: number): Template[] =>
   createMany(createTemplate, count);
+
+export const createVideoCodecQuality = (
+  videoCodecQuality?: Partial<VideoCodecQuality>,
+): VideoCodecQuality => ({
+  key: videoCodecQuality?.key || createKey(),
+  name: videoCodecQuality?.name || createString(),
+  min: videoCodecQuality?.min || createNumber(),
+  max: videoCodecQuality?.max || createNumber(),
+  steps: videoCodecQuality?.steps || createNumber(),
+});
+
+export const createVideoCodecQualities = (count?: number) =>
+  createMany(createVideoCodecQuality, count);
 
 const createMany = <T>(factory: () => T, count?: number): T[] =>
   Array.from({length: count ?? createNumber(2, 5)}, factory);
