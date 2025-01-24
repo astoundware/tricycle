@@ -144,8 +144,8 @@ export default function Settings() {
   const [videoCodecQualities, setVideoCodecQualities] = useState<
     VideoCodecQuality[]
   >([
-    {key: 'AVC', min: 22.0, max: 20.0, steps: 3},
-    {key: 'HEVC', min: 22.0, max: 18.0, steps: 4},
+    {key: 'avc', name: 'AVC', min: 22.0, max: 20.0, steps: 3},
+    {key: 'hevc', name: 'HEVC', min: 22.0, max: 18.0, steps: 4},
   ]);
   const [passthruMatchingTracksEnabled, setPassthruMatchingTracksEnabled] =
     useState(true);
