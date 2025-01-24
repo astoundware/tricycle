@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import React from 'react';
 import {FlatList} from 'react-native';
 
-import {QualityPresetTable} from '@components';
+import {AudioQualityPresetTable} from '@components';
 import '@config/i18n';
 
 const element = {
@@ -20,7 +20,7 @@ it('renders the row format options correctly', () => {
     {key: 'aac', text: 'AAC'},
     {key: 'dd', text: 'Dolby Digital'},
   ];
-  const component = renderer.create(<QualityPresetTable formatItems={items} />);
+  const component = renderer.create(<AudioQualityPresetTable formatItems={items} />);
   const list = component.root.findByType(FlatList);
   const row = list.props.renderItem(element);
 
@@ -28,7 +28,7 @@ it('renders the row format options correctly', () => {
 });
 
 it('renders the row format correctly', () => {
-  const component = renderer.create(<QualityPresetTable />);
+  const component = renderer.create(<AudioQualityPresetTable />);
   const list = component.root.findByType(FlatList);
   const row = list.props.renderItem(element);
 
@@ -41,7 +41,7 @@ it('renders the row mixdown options correctly', () => {
     {key: 'stereo', text: 'Stereo'},
   ];
   const component = renderer.create(
-    <QualityPresetTable mixdownItems={items} />,
+    <AudioQualityPresetTable mixdownItems={items} />,
   );
   const list = component.root.findByType(FlatList);
   const row = list.props.renderItem(element);
@@ -50,7 +50,7 @@ it('renders the row mixdown options correctly', () => {
 });
 
 it('renders the row mixdown correctly', () => {
-  const component = renderer.create(<QualityPresetTable />);
+  const component = renderer.create(<AudioQualityPresetTable />);
   const list = component.root.findByType(FlatList);
   const row = list.props.renderItem(element);
 
@@ -58,7 +58,7 @@ it('renders the row mixdown correctly', () => {
 });
 
 it('renders the row quality correctly', () => {
-  const component = renderer.create(<QualityPresetTable />);
+  const component = renderer.create(<AudioQualityPresetTable />);
   const list = component.root.findByType(FlatList);
   const row = list.props.renderItem(element);
 
@@ -69,7 +69,7 @@ it("calls onFormatChange when the row's format is changed", () => {
   const newFormat = 'aac';
   const onFormatChange = jest.fn();
   const component = renderer.create(
-    <QualityPresetTable onFormatChange={onFormatChange} />,
+    <AudioQualityPresetTable onFormatChange={onFormatChange} />,
   );
   const list = component.root.findByType(FlatList);
   const row = list.props.renderItem(element);
@@ -83,7 +83,7 @@ it("calls onMixdownChange when the row's mixdown is changed", () => {
   const newMixdown = 'aac';
   const onMixdownChange = jest.fn();
   const component = renderer.create(
-    <QualityPresetTable onMixdownChange={onMixdownChange} />,
+    <AudioQualityPresetTable onMixdownChange={onMixdownChange} />,
   );
   const list = component.root.findByType(FlatList);
   const row = list.props.renderItem(element);
@@ -97,7 +97,7 @@ it("calls onQualityChange when the row's quality is changed", () => {
   const newQuality = 256;
   const onQualityChange = jest.fn();
   const component = renderer.create(
-    <QualityPresetTable onQualityChange={onQualityChange} />,
+    <AudioQualityPresetTable onQualityChange={onQualityChange} />,
   );
   const list = component.root.findByType(FlatList);
   const row = list.props.renderItem(element);
@@ -109,7 +109,7 @@ it("calls onQualityChange when the row's quality is changed", () => {
 
 it('calls onRemove when the row is removed', () => {
   const onRemove = jest.fn();
-  const component = renderer.create(<QualityPresetTable onRemove={onRemove} />);
+  const component = renderer.create(<AudioQualityPresetTable onRemove={onRemove} />);
   const list = component.root.findByType(FlatList);
   const row = list.props.renderItem(element);
 

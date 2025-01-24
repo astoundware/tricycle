@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Text, View} from 'react-native';
 
-import {QualityPreset, Template, VideoCodecQuality} from '@models';
+import {AudioQualityPreset, Template, VideoCodecQuality} from '@models';
 import {
   AdvancedSettings,
   AudioSettings,
@@ -42,7 +42,7 @@ function updateVideoCodecQualityValue(
 }
 
 function updateQualityPresetFormat(
-  presets: QualityPreset[],
+  presets: AudioQualityPreset[],
   key: string,
   format: string,
 ) {
@@ -57,7 +57,7 @@ function updateQualityPresetFormat(
 }
 
 function updateQualityPresetMixdown(
-  presets: QualityPreset[],
+  presets: AudioQualityPreset[],
   key: string,
   mixdown: string,
 ) {
@@ -72,7 +72,7 @@ function updateQualityPresetMixdown(
 }
 
 function updateQualityPresetQuality(
-  presets: QualityPreset[],
+  presets: AudioQualityPreset[],
   key: string,
   quality: number | undefined,
 ) {
@@ -86,7 +86,7 @@ function updateQualityPresetQuality(
   return result;
 }
 
-function removeQualityPreset(presets: QualityPreset[], key: string) {
+function removeQualityPreset(presets: AudioQualityPreset[], key: string) {
   return (presets || []).filter(p => p.key !== key);
 }
 
@@ -149,7 +149,7 @@ export default function Settings() {
   ]);
   const [passthruMatchingTracksEnabled, setPassthruMatchingTracksEnabled] =
     useState(true);
-  const [qualityPresets, setQualityPresets] = useState<QualityPreset[]>([
+  const [qualityPresets, setQualityPresets] = useState<AudioQualityPreset[]>([
     {key: '1', format: 'aac', mixdown: 'stereo', quality: 160},
     {key: '2', format: 'dolby', mixdown: 'surround', quality: 640},
   ]);

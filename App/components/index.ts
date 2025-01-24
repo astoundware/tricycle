@@ -3,6 +3,14 @@ export {
   type Props as AdvancedSettingsProps,
 } from './AdvancedSettings';
 export {
+  default as AudioQualityPresetRow,
+  type Props as AudioQualityPresetRowProps,
+} from './AudioQualityPresetRow';
+export {
+  default as AudioQualityPresetTable,
+  type Props as AudioQualityPresetTableProps,
+} from './AudioQualityPresetTable';
+export {
   default as AudioSettings,
   type Props as AudioSettingsProps,
 } from './AudioSettings';
@@ -26,14 +34,6 @@ export {
   default as PlatformTextInput,
   type Props as PlatformTextInputProps,
 } from './PlatformTextInput';
-export {
-  default as QualityPresetRow,
-  type Props as QualityPresetRowProps,
-} from './QualityPresetRow';
-export {
-  default as QualityPresetTable,
-  type Props as QualityPresetTableProps,
-} from './QualityPresetTable';
 export {
   default as SelectionList,
   type Props as SelectionListProps,

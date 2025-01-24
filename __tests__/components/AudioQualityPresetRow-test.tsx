@@ -3,14 +3,14 @@ import renderer from 'react-test-renderer';
 import React from 'react';
 import {Picker} from '@react-native-picker/picker';
 
-import {ImageButton, NumberInput, QualityPresetRow} from '@components';
+import {ImageButton, NumberInput, AudioQualityPresetRow} from '@components';
 
 it('renders the format options correctly', () => {
   const items = [
     {key: 'aac', text: 'AAC'},
     {key: 'dd', text: 'Dolby Digital'},
   ];
-  const component = renderer.create(<QualityPresetRow formatItems={items} />);
+  const component = renderer.create(<AudioQualityPresetRow formatItems={items} />);
   const pickers = component.root.findAllByType(Picker);
   const pickerItems = pickers[0].props.children;
 
@@ -26,7 +26,7 @@ it('renders the format options correctly', () => {
 
 it('renders the format correctly', () => {
   const format = 'aac';
-  const component = renderer.create(<QualityPresetRow format={format} />);
+  const component = renderer.create(<AudioQualityPresetRow format={format} />);
   const pickers = component.root.findAllByType(Picker);
 
   expect(pickers[0].props.selectedValue).toBe(format);
@@ -36,7 +36,7 @@ it('calls onFormatChange when format is changed', () => {
   const format = 'aac';
   const onFormatChange = jest.fn();
   const component = renderer.create(
-    <QualityPresetRow onFormatChange={onFormatChange} />,
+    <AudioQualityPresetRow onFormatChange={onFormatChange} />,
   );
   const pickers = component.root.findAllByType(Picker);
 
@@ -50,7 +50,7 @@ it('renders the mixdown options correctly', () => {
     {key: 'mono', text: 'Mono'},
     {key: 'stereo', text: 'Stereo'},
   ];
-  const component = renderer.create(<QualityPresetRow mixdownItems={items} />);
+  const component = renderer.create(<AudioQualityPresetRow mixdownItems={items} />);
   const pickers = component.root.findAllByType(Picker);
   const pickerItems = pickers[1].props.children;
 
@@ -66,7 +66,7 @@ it('renders the mixdown options correctly', () => {
 
 it('renders the mixdown correctly', () => {
   const mixdown = 'stereo';
-  const component = renderer.create(<QualityPresetRow mixdown={mixdown} />);
+  const component = renderer.create(<AudioQualityPresetRow mixdown={mixdown} />);
   const pickers = component.root.findAllByType(Picker);
 
   expect(pickers[1].props.selectedValue).toBe(mixdown);
@@ -76,7 +76,7 @@ it('calls onMixdownChange when mixdown is changed', () => {
   const mixdown = 'stereo';
   const onMixdownChange = jest.fn();
   const component = renderer.create(
-    <QualityPresetRow onMixdownChange={onMixdownChange} />,
+    <AudioQualityPresetRow onMixdownChange={onMixdownChange} />,
   );
   const pickers = component.root.findAllByType(Picker);
 
@@ -87,7 +87,7 @@ it('calls onMixdownChange when mixdown is changed', () => {
 
 it('renders the quality correctly', () => {
   const quality = 256;
-  const component = renderer.create(<QualityPresetRow quality={quality} />);
+  const component = renderer.create(<AudioQualityPresetRow quality={quality} />);
   const input = component.root.findByType(NumberInput);
 
   expect(input.props.value).toBe(quality);
@@ -97,7 +97,7 @@ it('calls onQualityChange when quality is changed', () => {
   const quality = 256;
   const onQualityChange = jest.fn();
   const component = renderer.create(
-    <QualityPresetRow onQualityChange={onQualityChange} />,
+    <AudioQualityPresetRow onQualityChange={onQualityChange} />,
   );
   const input = component.root.findByType(NumberInput);
 
@@ -108,7 +108,7 @@ it('calls onQualityChange when quality is changed', () => {
 
 it('calls onRemove when the button is pressed', () => {
   const onRemove = jest.fn();
-  const component = renderer.create(<QualityPresetRow onRemove={onRemove} />);
+  const component = renderer.create(<AudioQualityPresetRow onRemove={onRemove} />);
   const button = component.root.findByType(ImageButton);
 
   button.props.onPress();

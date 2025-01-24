@@ -2,13 +2,13 @@ import React from 'react';
 import {FlatList, Text, View} from 'react-native';
 import {useTranslation} from 'react-i18next';
 
-import {DisplayValue, QualityPreset} from '@models';
-import QualityPresetRow from '../QualityPresetRow';
+import {DisplayValue, AudioQualityPreset} from '@models';
+import AudioQualityPresetRow from '../AudioQualityPresetRow';
 import styles from './styles';
 
 export type Props = {
   style?: any;
-  presets?: QualityPreset[];
+  presets?: AudioQualityPreset[];
   formatItems?: DisplayValue[];
   mixdownItems?: DisplayValue[];
   onFormatChange?: (key: string, format: string) => void;
@@ -17,7 +17,7 @@ export type Props = {
   onRemove?: (key: string) => void;
 };
 
-export default function QualityPresetTable({
+export default function AudioQualityPresetTable({
   style,
   presets,
   formatItems,
@@ -47,7 +47,7 @@ export default function QualityPresetTable({
         style={styles.list}
         data={presets}
         renderItem={({item}) => (
-          <QualityPresetRow
+          <AudioQualityPresetRow
             style={styles.row}
             format={item.format}
             formatItems={formatItems}

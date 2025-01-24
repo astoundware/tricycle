@@ -1,4 +1,4 @@
-export type QualityPreset = {
+export type AudioQualityPreset = {
   key: string;
   format: string;
   mixdown: string;

@@ -21,7 +21,7 @@ export type Props = {
   onRemove?: () => void;
 };
 
-export default function QualityPresetRow({
+export default function AudioQualityPresetRow({
   style,
   format,
   formatItems,

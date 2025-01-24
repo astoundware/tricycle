@@ -2,16 +2,16 @@ import React from 'react';
 import {Text, View} from 'react-native';
 import {useTranslation} from 'react-i18next';
 
-import {DisplayValue, QualityPreset, ValueChangeHandler} from '@models';
+import {AudioQualityPreset, DisplayValue, ValueChangeHandler} from '@models';
+import AudioQualityPresetTable from '../AudioQualityPresetTable';
 import LabeledSwitch from '../LabeledSwitch';
-import QualityPresetTable from '../QualityPresetTable';
 import styles from './styles';
 
 export type Props = {
   style?: any;
   passthruMatchingTracksEnabled: boolean;
   onPassthruMatchingTracksChange: ValueChangeHandler<boolean>;
-  qualityPresets?: QualityPreset[];
+  qualityPresets?: AudioQualityPreset[];
   formatItems?: DisplayValue[];
   mixdownItems?: DisplayValue[];
   onQualityPresetFormatChange?: (key: string, format: string) => void;
@@ -48,7 +48,7 @@ export default function AudioSettings({
         <View style={styles.tableHeader}>
           <Text style={styles.tableTitle}>{t('qualityPresets.title')}</Text>
         </View>
-        <QualityPresetTable
+        <AudioQualityPresetTable
           presets={qualityPresets}
           formatItems={formatItems}
           mixdownItems={mixdownItems}
