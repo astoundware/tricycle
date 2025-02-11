@@ -1,7 +1,12 @@
 import React, {useState} from 'react';
 import {Text, View} from 'react-native';
 
-import {AudioQualityPreset, Template, VideoCodecQuality} from '@models';
+import {
+  AudioQualityPreset,
+  Template,
+  VideoCodecQuality,
+  VideoSizePreset,
+} from '@models';
 import {
   AdvancedSettings,
   AudioSettings,
@@ -41,7 +46,34 @@ function updateVideoCodecQualityValue(
   return result;
 }
 
-function updateQualityPresetFormat(
+function updateVideoSizePresetValue(
+  presets: VideoSizePreset[],
+  key: string,
+  propertyName: keyof VideoSizePreset,
+  value: string | number | undefined,
+) {
+  let result = Array.from(presets || []);
+  const preset = result.find(p => p.key === key);
+
+  if (preset) {
+    if (
+      propertyName === 'name' &&
+      (typeof value === 'string' || value === undefined)
+    ) {
+      preset.name = value || '';
+    } else if (typeof value === 'number' || value === undefined) {
+      (preset[propertyName] as number | undefined) = value;
+    }
+  }
+
+  return result;
+}
+
+function removeVideoSizePreset(presets: VideoSizePreset[], key: string) {
+  return (presets || []).filter(p => p.key !== key);
+}
+
+function updateAudioQualityPresetFormat(
   presets: AudioQualityPreset[],
   key: string,
   format: string,
@@ -56,7 +88,7 @@ function updateQualityPresetFormat(
   return result;
 }
 
-function updateQualityPresetMixdown(
+function updateAudioQualityPresetMixdown(
   presets: AudioQualityPreset[],
   key: string,
   mixdown: string,
@@ -71,7 +103,7 @@ function updateQualityPresetMixdown(
   return result;
 }
 
-function updateQualityPresetQuality(
+function updateAudioQualityPresetQuality(
   presets: AudioQualityPreset[],
   key: string,
   quality: number | undefined,
@@ -86,7 +118,7 @@ function updateQualityPresetQuality(
   return result;
 }
 
-function removeQualityPreset(presets: AudioQualityPreset[], key: string) {
+function removeAudioQualityPreset(presets: AudioQualityPreset[], key: string) {
   return (presets || []).filter(p => p.key !== key);
 }
 
@@ -146,6 +178,12 @@ export default function Settings() {
   >([
     {key: 'avc', name: 'AVC', min: 22.0, max: 20.0, steps: 3},
     {key: 'hevc', name: 'HEVC', min: 22.0, max: 18.0, steps: 4},
+  ]);
+  const [videoSizePresets, setVideoSizePresets] = useState<VideoSizePreset[]>([
+    {key: '1', name: '480p', width: 720, height: 480},
+    {key: '2', name: '720p', width: 1280, height: 720},
+    {key: '3', name: '1080p', width: 1920, height: 1080},
+    {key: '4', name: '4K', width: 3840, height: 2160},
   ]);
   const [passthruMatchingTracksEnabled, setPassthruMatchingTracksEnabled] =
     useState(true);
@@ -232,6 +270,27 @@ export default function Settings() {
                 updateVideoCodecQualityValue(oldValue, key, 'steps', value),
               )
             }
+            sizePresets={videoSizePresets}
+            onSizePresetNameChange={(key, value) =>
+              setVideoSizePresets(oldValue =>
+                updateVideoSizePresetValue(oldValue, key, 'name', value),
+              )
+            }
+            onSizePresetWidthChange={(key, value) =>
+              setVideoSizePresets(oldValue =>
+                updateVideoSizePresetValue(oldValue, key, 'width', value),
+              )
+            }
+            onSizePresetHeightChange={(key, value) =>
+              setVideoSizePresets(oldValue =>
+                updateVideoSizePresetValue(oldValue, key, 'height', value),
+              )
+            }
+            onSizePresetRemove={key =>
+              setVideoSizePresets(oldValue =>
+                removeVideoSizePreset(oldValue, key),
+              )
+            }
           />
         )}
         {section === 'audio' && (
@@ -243,21 +302,23 @@ export default function Settings() {
             mixdownItems={mixdownItems}
             onQualityPresetFormatChange={(key, format) =>
               setQualityPresets(oldValue =>
-                updateQualityPresetFormat(oldValue, key, format),
+                updateAudioQualityPresetFormat(oldValue, key, format),
               )
             }
             onQualityPresetMixdownChange={(key, mixdown) =>
               setQualityPresets(oldValue =>
-                updateQualityPresetMixdown(oldValue, key, mixdown),
+                updateAudioQualityPresetMixdown(oldValue, key, mixdown),
               )
             }
             onQualityPresetQualityChange={(key, quality) =>
               setQualityPresets(oldValue =>
-                updateQualityPresetQuality(oldValue, key, quality),
+                updateAudioQualityPresetQuality(oldValue, key, quality),
               )
             }
             onQualityPresetRemove={key =>
-              setQualityPresets(oldValue => removeQualityPreset(oldValue, key))
+              setQualityPresets(oldValue =>
+                removeAudioQualityPreset(oldValue, key),
+              )
             }
           />
         )}

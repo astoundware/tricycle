@@ -33,13 +33,13 @@ export default function AudioQualityPresetTable({
     <View style={[styles.container, style]}>
       <View style={[styles.row, styles.header]}>
         <View style={styles.pickerHeader}>
-          <Text>{t('qualityPresets.format')}</Text>
+          <Text>{t('audioQualityPresets.format')}</Text>
         </View>
         <View style={styles.pickerHeader}>
-          <Text>{t('qualityPresets.mixdown')}</Text>
+          <Text>{t('audioQualityPresets.mixdown')}</Text>
         </View>
         <View style={styles.inputHeader}>
-          <Text>{t('qualityPresets.quality')}</Text>
+          <Text>{t('audioQualityPresets.quality')}</Text>
         </View>
         <Text>{t('items.remove')}</Text>
       </View>

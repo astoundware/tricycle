@@ -58,3 +58,11 @@ export {
   default as VideoSettings,
   type Props as VideoSettingsProps,
 } from './VideoSettings';
+export {
+  default as VideoSizePresetRow,
+  type Props as VideoSizePresetRowProps
+} from './VideoSizePresetRow';
+export {
+  default as VideoSizePresetTable,
+  type Props as VideoSizePresetTableProps
+} from './VideoSizePresetTable';

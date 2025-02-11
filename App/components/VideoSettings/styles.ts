@@ -30,6 +30,7 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     padding: 2,
+    marginBottom: 5,
   },
   tableHeader: {
     flexDirection: 'row',

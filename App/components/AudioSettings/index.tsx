@@ -46,7 +46,7 @@ export default function AudioSettings({
       />
       <View style={styles.tableContainer}>
         <View style={styles.tableHeader}>
-          <Text style={styles.tableTitle}>{t('qualityPresets.title')}</Text>
+          <Text style={styles.tableTitle}>{t('audioQualityPresets.title')}</Text>
         </View>
         <AudioQualityPresetTable
           presets={qualityPresets}

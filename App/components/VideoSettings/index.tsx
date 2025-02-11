@@ -5,12 +5,15 @@ import {Picker} from '@react-native-picker/picker';
 
 import {
   DisplayValue,
+  KeyedActionHandler,
   KeyedValueChangeHandler,
   ValueChangeHandler,
   VideoCodecQuality,
+  VideoSizePreset,
 } from '@models';
 import NumberInput from '../NumberInput';
 import VideoCodecQualityTable from '../VideoCodecQualityTable';
+import VideoSizePresetTable from '../VideoSizePresetTable';
 import styles from './styles';
 
 export type Props = {
@@ -24,6 +27,11 @@ export type Props = {
   onCodecQualityMinChange?: KeyedValueChangeHandler<number | undefined>;
   onCodecQualityMaxChange?: KeyedValueChangeHandler<number | undefined>;
   onCodecQualityStepsChange?: KeyedValueChangeHandler<number | undefined>;
+  sizePresets?: VideoSizePreset[];
+  onSizePresetNameChange?: KeyedValueChangeHandler<string>;
+  onSizePresetWidthChange?: KeyedValueChangeHandler<number | undefined>;
+  onSizePresetHeightChange?: KeyedValueChangeHandler<number | undefined>;
+  onSizePresetRemove?: KeyedActionHandler;
 };
 
 export default function VideoSettings({
@@ -37,6 +45,11 @@ export default function VideoSettings({
   onCodecQualityMinChange,
   onCodecQualityMaxChange,
   onCodecQualityStepsChange,
+  sizePresets,
+  onSizePresetNameChange,
+  onSizePresetWidthChange,
+  onSizePresetHeightChange,
+  onSizePresetRemove,
 }: Props) {
   const {t} = useTranslation();
 
@@ -78,6 +91,18 @@ export default function VideoSettings({
           onMinChange={onCodecQualityMinChange}
           onMaxChange={onCodecQualityMaxChange}
           onStepsChange={onCodecQualityStepsChange}
+        />
+      </View>
+      <View style={styles.tableContainer}>
+        <View style={styles.tableHeader}>
+          <Text style={styles.tableTitle}>{t('videoSizePresets.title')}</Text>
+        </View>
+        <VideoSizePresetTable
+          presets={sizePresets}
+          onNameChange={onSizePresetNameChange}
+          onWidthChange={onSizePresetWidthChange}
+          onHeightChange={onSizePresetHeightChange}
+          onRemove={onSizePresetRemove}
         />
       </View>
     </View>

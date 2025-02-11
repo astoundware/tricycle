@@ -7,7 +7,6 @@ export default StyleSheet.create({
   header: {
     flexDirection: 'row',
     marginBottom: 7,
-    paddingRight: 15,
   },
   headerCell: {
     flex: 1,

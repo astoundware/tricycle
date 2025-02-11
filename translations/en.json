@@ -3,7 +3,7 @@
     "name": "Name",
     "remove": "Remove"
   },
-  "qualityPresets": {
+  "audioQualityPresets": {
     "title": "Quality Presets",
     "format": "Format",
     "mixdown": "Mixdown",
@@ -41,5 +41,11 @@
     "min": "Good",
     "max": "Best",
     "steps": "Steps"
+  },
+  "videoSizePresets": {
+    "title": "Size Presets",
+    "dimensionSeparator": "x",
+    "width": "Width",
+    "height": "Height"
   }
 }
