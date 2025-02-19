@@ -1,12 +1,13 @@
 import React from 'react';
 import {Pressable, Switch, Text, View} from 'react-native';
 
+import {ValueChangeHandler} from "@models";
 import styles from './styles';
 
 export type Props = {
   style?: any;
   label?: string;
-  onValueChange?: (value: boolean) => void;
+  onValueChange?: ValueChangeHandler<boolean>;
   value?: boolean;
 };
 

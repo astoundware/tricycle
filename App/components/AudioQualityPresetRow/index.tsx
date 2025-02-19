@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 
 import {trash} from '@images';
-import {DisplayValue, ValueChangeHandler} from '@models';
+import {ActionHandler, DisplayValue, ValueChangeHandler} from '@models';
 import ImageButton from '../ImageButton';
 import NumberInput from '../NumberInput';
 import styles from './styles';
@@ -19,7 +19,7 @@ export type Props = {
   onFormatChange?: ValueChangeHandler<string>;
   onMixdownChange?: ValueChangeHandler<string>;
   onQualityChange?: ValueChangeHandler<number | undefined>;
-  onRemove?: () => void;
+  onRemove?: ActionHandler;
 };
 
 export default function AudioQualityPresetRow({

@@ -5,6 +5,7 @@ import {useTranslation} from 'react-i18next';
 
 import {folderBrowse} from '@images';
 import {
+  ActionHandler,
   DisplayValue,
   KeyedActionHandler,
   KeyedValueChangeHandler,
@@ -36,7 +37,7 @@ export type Props = {
   onDestinationModeChange?: ValueChangeHandler<string>;
   destinationFolder?: string;
   isDestinationFolderBrowseDisabled?: boolean;
-  onDestinationFolderBrowse?: () => void;
+  onDestinationFolderBrowse?: ActionHandler;
   templates?: Template[];
   onTemplateNameChange?: KeyedValueChangeHandler<string>;
   onTemplateRemove?: KeyedActionHandler;

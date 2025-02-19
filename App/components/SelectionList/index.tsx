@@ -2,14 +2,14 @@ import React from 'react';
 import {Pressable, Text, View} from 'react-native';
 
 import {theme} from '@config';
-import {DisplayValue} from '@models';
+import {DisplayValue, KeyedActionHandler} from '@models';
 import styles from './styles';
 
 export type Props = {
   style?: any;
   items?: DisplayValue[];
   selectedKey?: string;
-  onSelectionChange?: (key: string) => void;
+  onSelectionChange?: KeyedActionHandler;
 };
 
 export default function SelectionList({

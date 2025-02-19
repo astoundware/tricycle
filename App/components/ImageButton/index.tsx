@@ -2,13 +2,14 @@ import React from 'react';
 import {Image, ImageSourcePropType, Pressable} from 'react-native';
 
 import {theme} from '@config';
+import {ActionHandler} from '@models';
 import styles from './styles';
 
 export type Props = {
   style?: any;
   imageSource: ImageSourcePropType;
   disabled?: boolean;
-  onPress?: () => void;
+  onPress?: ActionHandler;
 };
 
 export default function ImageButton({

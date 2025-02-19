@@ -2,7 +2,13 @@ import React from 'react';
 import {Text, View} from 'react-native';
 import {useTranslation} from 'react-i18next';
 
-import {AudioQualityPreset, DisplayValue, ValueChangeHandler} from '@models';
+import {
+  AudioQualityPreset,
+  DisplayValue,
+  KeyedActionHandler,
+  KeyedValueChangeHandler,
+  ValueChangeHandler
+} from '@models';
 import AudioQualityPresetTable from '../AudioQualityPresetTable';
 import LabeledSwitch from '../LabeledSwitch';
 import styles from './styles';
@@ -14,13 +20,10 @@ export type Props = {
   qualityPresets?: AudioQualityPreset[];
   formatItems?: DisplayValue[];
   mixdownItems?: DisplayValue[];
-  onQualityPresetFormatChange?: (key: string, format: string) => void;
-  onQualityPresetMixdownChange?: (key: string, mixdown: string) => void;
-  onQualityPresetQualityChange?: (
-    key: string,
-    quality: number | undefined,
-  ) => void;
-  onQualityPresetRemove?: (key: string) => void;
+  onQualityPresetFormatChange?: KeyedValueChangeHandler<string>;
+  onQualityPresetMixdownChange?: KeyedValueChangeHandler<string>;
+  onQualityPresetQualityChange?: KeyedValueChangeHandler<number | undefined>;
+  onQualityPresetRemove?: KeyedActionHandler;
 };
 
 export default function AudioSettings({

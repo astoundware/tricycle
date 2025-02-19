@@ -2,7 +2,7 @@ import React from 'react';
 import {View} from 'react-native';
 
 import {trash} from '@images';
-import {ValueChangeHandler} from '@models';
+import {ActionHandler, ValueChangeHandler} from '@models';
 import ImageButton from '../ImageButton';
 import PlatformTextInput from '../PlatformTextInput';
 import styles from './styles';
@@ -12,7 +12,7 @@ export type Props = {
   name?: string;
   removeDisabled?: boolean;
   onNameChange?: ValueChangeHandler<string>;
-  onRemove?: () => void;
+  onRemove?: ActionHandler;
 };
 
 export default function TemplateRow({
