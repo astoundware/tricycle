@@ -4,7 +4,13 @@ import {Picker} from '@react-native-picker/picker';
 import {useTranslation} from 'react-i18next';
 
 import {folderBrowse} from '@images';
-import {DisplayValue, Template, ValueChangeHandler} from '@models';
+import {
+  DisplayValue,
+  KeyedActionHandler,
+  KeyedValueChangeHandler,
+  Template,
+  ValueChangeHandler,
+} from '@models';
 import ImageButton from '../ImageButton';
 import LabeledSwitch from '../LabeledSwitch';
 import PlatformTextInput from '../PlatformTextInput';
@@ -32,8 +38,8 @@ export type Props = {
   isDestinationFolderBrowseDisabled?: boolean;
   onDestinationFolderBrowse?: () => void;
   templates?: Template[];
-  onTemplateNameChange?: (index: number, name: string) => void;
-  onTemplateRemove?: (index: number) => void;
+  onTemplateNameChange?: KeyedValueChangeHandler<string>;
+  onTemplateRemove?: KeyedActionHandler;
 };
 
 export default function GeneralSettings({

@@ -2,15 +2,15 @@ import React from 'react';
 import {FlatList, Text, View} from 'react-native';
 import {useTranslation} from 'react-i18next';
 
-import {Template} from '@models';
+import {KeyedActionHandler, KeyedValueChangeHandler, Template} from '@models';
 import TemplateRow from '../TemplateRow';
 import styles from './styles';
 
 export type Props = {
   style?: any;
   templates?: Template[];
-  onNameChange?: (index: number, name: string) => void;
-  onRemove?: (index: number) => void;
+  onNameChange?: KeyedValueChangeHandler<string>;
+  onRemove?: KeyedActionHandler;
 };
 
 export default function TemplateTable({
@@ -32,12 +32,12 @@ export default function TemplateTable({
       <FlatList
         style={styles.list}
         data={templates}
-        renderItem={({index, item}) => (
+        renderItem={({item}) => (
           <TemplateRow
             style={styles.row}
             name={item.name}
-            onNameChange={name => onNameChange && onNameChange(index, name)}
-            onRemove={() => onRemove && onRemove(index)}
+            onNameChange={name => onNameChange && onNameChange(item.key, name)}
+            onRemove={() => onRemove && onRemove(item.key)}
           />
         )}
         ItemSeparatorComponent={() => <View style={styles.separator} />}

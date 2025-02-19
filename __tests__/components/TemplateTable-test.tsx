@@ -37,7 +37,7 @@ it("calls onNameChange when the row's name is changed", () => {
 
   row.props.onNameChange(newName);
 
-  expect(onNameChange).toHaveBeenCalledWith(element.index, newName);
+  expect(onNameChange).toHaveBeenCalledWith(element.item.key, newName);
 });
 
 it('calls onRemove when the row is removed', () => {
@@ -48,5 +48,5 @@ it('calls onRemove when the row is removed', () => {
 
   row.props.onRemove();
 
-  expect(onRemove).toHaveBeenCalledWith(element.index);
+  expect(onRemove).toHaveBeenCalledWith(element.item.key);
 });

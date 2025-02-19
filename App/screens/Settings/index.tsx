@@ -27,20 +27,17 @@ function removeRemovable<T extends Removable>(
 
 function renameTemplate(
   templates: Template[],
-  index: number,
+  key: string,
   name: string,
 ): Template[] {
-  let result = Array.from(templates || []);
+  const result = Array.from(templates || []);
+  const template = result.find(t => t.key === key);
 
-  if (result.length > index) {
-    result[index].name = name;
+  if (template) {
+    template.name = name;
   }
 
   return result;
-}
-
-function removeTemplate(templates: Template[], index: number): Template[] {
-  return (templates || []).filter((_, i) => i !== index);
 }
 
 function updateVideoCodecQualityValue(
@@ -49,7 +46,7 @@ function updateVideoCodecQualityValue(
   propertyName: keyof VideoCodecQuality,
   value: number | undefined,
 ): VideoCodecQuality[] {
-  let result = Array.from(qualities || []);
+  const result = Array.from(qualities || []);
   const quality = result.find(p => p.key === key);
 
   if (quality) {
@@ -65,7 +62,7 @@ function updateVideoSizePresetValue(
   propertyName: keyof VideoSizePreset,
   value: string | number | undefined,
 ): VideoSizePreset[] {
-  let result = Array.from(presets || []);
+  const result = Array.from(presets || []);
   const preset = result.find(p => p.key === key);
 
   if (preset) {
@@ -88,7 +85,7 @@ function updateVideoAspectRatioPresetValue(
   propertyName: keyof VideoAspectRatioPreset,
   value: string | number | undefined,
 ): VideoAspectRatioPreset[] {
-  let result = Array.from(presets || []);
+  const result = Array.from(presets || []);
   const preset = result.find(p => p.key === key);
 
   if (preset) {
@@ -110,7 +107,7 @@ function updateAudioQualityPresetFormat(
   key: string,
   format: string,
 ) {
-  let result = Array.from(presets || []);
+  const result = Array.from(presets || []);
   const preset = result.find(p => p.key === key);
 
   if (preset) {
@@ -125,7 +122,7 @@ function updateAudioQualityPresetMixdown(
   key: string,
   mixdown: string,
 ) {
-  let result = Array.from(presets || []);
+  const result = Array.from(presets || []);
   const preset = result.find(p => p.key === key);
 
   if (preset) {
@@ -140,7 +137,7 @@ function updateAudioQualityPresetQuality(
   key: string,
   quality: number | undefined,
 ) {
-  let result = Array.from(presets || []);
+  const result = Array.from(presets || []);
   const preset = result.find(p => p.key === key);
 
   if (preset) {
@@ -274,11 +271,11 @@ export default function Settings() {
             destinationFolder="/Users/kenny/Temp"
             isDestinationFolderBrowseDisabled={true}
             templates={templates}
-            onTemplateNameChange={(index, name) =>
-              setTemplates(oldValue => renameTemplate(oldValue, index, name))
+            onTemplateNameChange={(key, name) =>
+              setTemplates(oldValue => renameTemplate(oldValue, key, name))
             }
-            onTemplateRemove={index =>
-              setTemplates(oldValue => removeTemplate(oldValue, index))
+            onTemplateRemove={key =>
+              setTemplates(oldValue => removeRemovable(oldValue, key))
             }
           />
         )}
