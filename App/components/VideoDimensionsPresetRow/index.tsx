@@ -14,6 +14,7 @@ export type Props = {
   width?: number;
   height?: number;
   separator?: string;
+  removeDisabled?: boolean;
   onWidthChange?: ValueChangeHandler<number | undefined>;
   onHeightChange?: ValueChangeHandler<number | undefined>;
   onRemove?: ActionHandler;
@@ -25,6 +26,7 @@ export default function VideoDimensionsPresetRow({
   width,
   height,
   separator,
+  removeDisabled,
   onWidthChange,
   onHeightChange,
   onRemove,
@@ -45,7 +47,7 @@ export default function VideoDimensionsPresetRow({
         value={height}
         onValueChange={onHeightChange}
       />
-      <ImageButton imageSource={trash} onPress={onRemove} />
+      <ImageButton imageSource={trash} disabled={removeDisabled} onPress={onRemove} />
     </View>
   );
 }

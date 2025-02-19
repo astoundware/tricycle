@@ -47,6 +47,7 @@ export const createAudioQualityPreset = (
   format: preset?.format || createString(),
   mixdown: preset?.mixdown || createString(),
   quality: preset?.quality || createNumber(),
+  removeDisabled: preset?.removeDisabled || createBoolean(),
 });
 
 export const createAudioQualityPresets = (count?: number) =>
@@ -55,6 +56,7 @@ export const createAudioQualityPresets = (count?: number) =>
 export const createTemplate = (template?: Partial<Template>): Template => ({
   key: template?.key || createKey(),
   name: template?.name || createString(),
+  removeDisabled: template?.removeDisabled || createBoolean(),
 });
 
 export const createTemplates = (count?: number): Template[] =>

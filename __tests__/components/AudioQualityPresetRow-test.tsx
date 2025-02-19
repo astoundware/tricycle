@@ -5,6 +5,7 @@ import {Picker} from '@react-native-picker/picker';
 
 import {ImageButton, NumberInput, AudioQualityPresetRow} from '@components';
 import {
+  createBoolean,
   createDisplayValues,
   createNumber,
   createString,
@@ -98,6 +99,16 @@ it('renders the quality correctly', () => {
   const input = component.root.findByType(NumberInput);
 
   expect(input.props.value).toBe(quality);
+});
+
+it('disables the remove button when disabled', () => {
+  const removeDisabled = createBoolean();
+  const component = renderer.create(
+    <AudioQualityPresetRow removeDisabled={removeDisabled} />,
+  );
+  const button = component.root.findByType(ImageButton);
+
+  expect(button.props.disabled).toBe(removeDisabled);
 });
 
 it('calls onQualityChange when quality is changed', () => {

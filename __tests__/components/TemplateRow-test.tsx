@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import React from 'react';
 
 import {ImageButton, PlatformTextInput, TemplateRow} from '@components';
-import {createString} from '@test-utils/fixtures';
+import {createBoolean, createString} from '@test-utils/fixtures';
 
 it('renders the name correctly', () => {
   const name = createString();
@@ -11,6 +11,16 @@ it('renders the name correctly', () => {
   const input = component.root.findByType(PlatformTextInput);
 
   expect(input.props.value).toBe(name);
+});
+
+it('disables the remove button when disabled', () => {
+  const removeDisabled = createBoolean();
+  const component = renderer.create(
+    <TemplateRow removeDisabled={removeDisabled} />,
+  );
+  const button = component.root.findByType(ImageButton);
+
+  expect(button.props.disabled).toBe(removeDisabled);
 });
 
 it('calls onNameChange when the text is changed', () => {

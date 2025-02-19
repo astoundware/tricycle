@@ -15,6 +15,7 @@ export type Props = {
   mixdown?: string;
   mixdownItems?: DisplayValue[];
   quality?: number;
+  removeDisabled?: boolean;
   onFormatChange?: ValueChangeHandler<string>;
   onMixdownChange?: ValueChangeHandler<string>;
   onQualityChange?: ValueChangeHandler<number | undefined>;
@@ -28,6 +29,7 @@ export default function AudioQualityPresetRow({
   mixdown,
   mixdownItems,
   quality,
+  removeDisabled,
   onFormatChange,
   onMixdownChange,
   onQualityChange,
@@ -56,7 +58,7 @@ export default function AudioQualityPresetRow({
         value={quality}
         onValueChange={onQualityChange}
       />
-      <ImageButton imageSource={trash} onPress={onRemove} />
+      <ImageButton imageSource={trash} disabled={removeDisabled} onPress={onRemove} />
     </View>
   );
 }

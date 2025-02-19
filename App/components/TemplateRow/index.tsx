@@ -10,6 +10,7 @@ import styles from './styles';
 export type Props = {
   style?: any;
   name?: string;
+  removeDisabled?: boolean;
   onNameChange?: ValueChangeHandler<string>;
   onRemove?: () => void;
 };
@@ -17,6 +18,7 @@ export type Props = {
 export default function TemplateRow({
   style,
   name,
+  removeDisabled,
   onNameChange,
   onRemove,
 }: Props) {
@@ -27,7 +29,7 @@ export default function TemplateRow({
         value={name}
         onChangeText={onNameChange}
       />
-      <ImageButton imageSource={trash} onPress={onRemove} />
+      <ImageButton imageSource={trash} disabled={removeDisabled} onPress={onRemove} />
     </View>
   );
 }
