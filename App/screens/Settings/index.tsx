@@ -3,7 +3,9 @@ import {Text, View} from 'react-native';
 
 import {
   AudioQualityPreset,
+  Removable,
   Template,
+  VideoAspectRatioPreset,
   VideoCodecQuality,
   VideoSizePreset,
 } from '@models';
@@ -16,7 +18,18 @@ import {
 } from '@components';
 import styles from './styles';
 
-function renameTemplate(templates: Template[], index: number, name: string) {
+function removeRemovable<T extends Removable>(
+  removables: T[],
+  key: string,
+): T[] {
+  return (removables || []).filter(r => r.key !== key);
+}
+
+function renameTemplate(
+  templates: Template[],
+  index: number,
+  name: string,
+): Template[] {
   let result = Array.from(templates || []);
 
   if (result.length > index) {
@@ -26,7 +39,7 @@ function renameTemplate(templates: Template[], index: number, name: string) {
   return result;
 }
 
-function removeTemplate(templates: Template[], index: number) {
+function removeTemplate(templates: Template[], index: number): Template[] {
   return (templates || []).filter((_, i) => i !== index);
 }
 
@@ -35,7 +48,7 @@ function updateVideoCodecQualityValue(
   key: string,
   propertyName: keyof VideoCodecQuality,
   value: number | undefined,
-) {
+): VideoCodecQuality[] {
   let result = Array.from(qualities || []);
   const quality = result.find(p => p.key === key);
 
@@ -51,7 +64,7 @@ function updateVideoSizePresetValue(
   key: string,
   propertyName: keyof VideoSizePreset,
   value: string | number | undefined,
-) {
+): VideoSizePreset[] {
   let result = Array.from(presets || []);
   const preset = result.find(p => p.key === key);
 
@@ -69,8 +82,27 @@ function updateVideoSizePresetValue(
   return result;
 }
 
-function removeVideoSizePreset(presets: VideoSizePreset[], key: string) {
-  return (presets || []).filter(p => p.key !== key);
+function updateVideoAspectRatioPresetValue(
+  presets: VideoAspectRatioPreset[],
+  key: string,
+  propertyName: keyof VideoAspectRatioPreset,
+  value: string | number | undefined,
+): VideoAspectRatioPreset[] {
+  let result = Array.from(presets || []);
+  const preset = result.find(p => p.key === key);
+
+  if (preset) {
+    if (
+      propertyName === 'name' &&
+      (typeof value === 'string' || value === undefined)
+    ) {
+      preset.name = value || '';
+    } else if (typeof value === 'number' || value === undefined) {
+      (preset[propertyName] as number | undefined) = value;
+    }
+  }
+
+  return result;
 }
 
 function updateAudioQualityPresetFormat(
@@ -118,10 +150,6 @@ function updateAudioQualityPresetQuality(
   return result;
 }
 
-function removeAudioQualityPreset(presets: AudioQualityPreset[], key: string) {
-  return (presets || []).filter(p => p.key !== key);
-}
-
 const sections = [
   {key: 'general', text: 'General'},
   {key: 'video', text: 'Video'},
@@ -161,15 +189,15 @@ export default function Settings() {
   const [mkvFileExtension, setMkvFileExtension] = useState('mkv');
   const [destinationMode, setDestinationMode] = useState('auto');
   const [templates, setTemplates] = useState<Template[]>([
-    {key: 1, name: 'Template 1'},
-    {key: 2, name: 'Template 2'},
-    {key: 3, name: 'Template 3'},
-    {key: 4, name: 'Template 4'},
-    {key: 5, name: 'Template 5'},
-    {key: 6, name: 'Template 6'},
-    {key: 7, name: 'Template 7'},
-    {key: 8, name: 'Template 8'},
-    {key: 9, name: 'Template 9'},
+    {key: '1', name: 'Template 1'},
+    {key: '2', name: 'Template 2'},
+    {key: '3', name: 'Template 3'},
+    {key: '4', name: 'Template 4'},
+    {key: '5', name: 'Template 5'},
+    {key: '6', name: 'Template 6'},
+    {key: '7', name: 'Template 7'},
+    {key: '8', name: 'Template 8'},
+    {key: '9', name: 'Template 9'},
   ]);
   const [deinterlace, setDeinterlace] = useState('auto');
   const [sizeDivisor, setSizeDivisor] = useState<number | undefined>(8);
@@ -184,6 +212,13 @@ export default function Settings() {
     {key: '2', name: '720p', width: 1280, height: 720},
     {key: '3', name: '1080p', width: 1920, height: 1080},
     {key: '4', name: '4K', width: 3840, height: 2160},
+  ]);
+  const [videoAspectRatioPresets, setVideoAspectRatioPresets] = useState<
+    VideoAspectRatioPreset[]
+  >([
+    {key: '1', name: '4:3', width: 4, height: 3},
+    {key: '2', name: '16:9', width: 16, height: 9},
+    {key: '3', name: '21:9', width: 21, height: 9},
   ]);
   const [passthruMatchingTracksEnabled, setPassthruMatchingTracksEnabled] =
     useState(true);
@@ -287,8 +322,37 @@ export default function Settings() {
               )
             }
             onSizePresetRemove={key =>
-              setVideoSizePresets(oldValue =>
-                removeVideoSizePreset(oldValue, key),
+              setVideoSizePresets(oldValue => removeRemovable(oldValue, key))
+            }
+            aspectRatioPresets={videoAspectRatioPresets}
+            onAspectRatioPresetNameChange={(key, value) =>
+              setVideoAspectRatioPresets(oldValue =>
+                updateVideoAspectRatioPresetValue(oldValue, key, 'name', value),
+              )
+            }
+            onAspectRatioPresetWidthChange={(key, value) =>
+              setVideoAspectRatioPresets(oldValue =>
+                updateVideoAspectRatioPresetValue(
+                  oldValue,
+                  key,
+                  'width',
+                  value,
+                ),
+              )
+            }
+            onAspectRatioPresetHeightChange={(key, value) =>
+              setVideoAspectRatioPresets(oldValue =>
+                updateVideoAspectRatioPresetValue(
+                  oldValue,
+                  key,
+                  'height',
+                  value,
+                ),
+              )
+            }
+            onAspectRatioPresetRemove={key =>
+              setVideoAspectRatioPresets(oldValue =>
+                removeRemovable(oldValue, key),
               )
             }
           />
@@ -316,9 +380,7 @@ export default function Settings() {
               )
             }
             onQualityPresetRemove={key =>
-              setQualityPresets(oldValue =>
-                removeAudioQualityPreset(oldValue, key),
-              )
+              setQualityPresets(oldValue => removeRemovable(oldValue, key))
             }
           />
         )}

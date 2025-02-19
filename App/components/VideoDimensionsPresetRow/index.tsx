@@ -15,6 +15,8 @@ export type Props = {
   height?: number;
   separator?: string;
   removeDisabled?: boolean;
+  allowDecimals?: boolean;
+  onNameChange?: ValueChangeHandler<string>;
   onWidthChange?: ValueChangeHandler<number | undefined>;
   onHeightChange?: ValueChangeHandler<number | undefined>;
   onRemove?: ActionHandler;
@@ -27,27 +29,35 @@ export default function VideoDimensionsPresetRow({
   height,
   separator,
   removeDisabled,
+  allowDecimals,
+  onNameChange,
   onWidthChange,
   onHeightChange,
   onRemove,
 }: Props) {
   return (
     <View style={[styles.container, style]}>
-      <PlatformTextInput style={styles.input}>{name}</PlatformTextInput>
+      <PlatformTextInput style={styles.input} onChangeText={onNameChange}>
+        {name}
+      </PlatformTextInput>
       <NumberInput
         style={styles.input}
-        allowDecimals={false}
+        allowDecimals={allowDecimals}
         value={width}
         onValueChange={onWidthChange}
       />
       <Text style={styles.separator}>{separator}</Text>
       <NumberInput
         style={styles.input}
-        allowDecimals={false}
+        allowDecimals={allowDecimals}
         value={height}
         onValueChange={onHeightChange}
       />
-      <ImageButton imageSource={trash} disabled={removeDisabled} onPress={onRemove} />
+      <ImageButton
+        imageSource={trash}
+        disabled={removeDisabled}
+        onPress={onRemove}
+      />
     </View>
   );
 }

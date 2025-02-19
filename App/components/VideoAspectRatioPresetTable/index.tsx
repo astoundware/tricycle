@@ -5,21 +5,21 @@ import {useTranslation} from 'react-i18next';
 import {
   KeyedActionHandler,
   KeyedValueChangeHandler,
-  VideoSizePreset,
+  VideoAspectRatioPreset,
 } from '@models';
-import VideoSizePresetRow from '../VideoSizePresetRow';
+import VideoAspectRatioPresetRow from '../VideoAspectRatioPresetRow';
 import styles from './styles';
 
 export type Props = {
   style?: any;
-  presets?: VideoSizePreset[];
+  presets?: VideoAspectRatioPreset[];
   onNameChange?: KeyedValueChangeHandler<string>;
   onWidthChange?: KeyedValueChangeHandler<number | undefined>;
   onHeightChange?: KeyedValueChangeHandler<number | undefined>;
   onRemove?: KeyedActionHandler;
 };
 
-export default function VideoSizePresetTable({
+export default function VideoAspectRatioPresetTable({
   style,
   presets,
   onNameChange,
@@ -36,10 +36,10 @@ export default function VideoSizePresetTable({
           <Text>{t('items.name')}</Text>
         </View>
         <View style={styles.headerCell}>
-          <Text>{t('videoSizePresets.width')}</Text>
+          <Text>{t('videoAspectRatioPresets.width')}</Text>
         </View>
         <View style={styles.headerCell}>
-          <Text>{t('videoSizePresets.height')}</Text>
+          <Text>{t('videoAspectRatioPresets.height')}</Text>
         </View>
         <Text>{t('items.remove')}</Text>
       </View>
@@ -47,7 +47,7 @@ export default function VideoSizePresetTable({
         style={styles.list}
         data={presets}
         renderItem={({item}) => (
-          <VideoSizePresetRow
+          <VideoAspectRatioPresetRow
             style={styles.row}
             name={item.name}
             width={item.width}

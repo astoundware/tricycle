@@ -8,10 +8,12 @@ import {
   KeyedActionHandler,
   KeyedValueChangeHandler,
   ValueChangeHandler,
+  VideoAspectRatioPreset,
   VideoCodecQuality,
   VideoSizePreset,
 } from '@models';
 import NumberInput from '../NumberInput';
+import VideoAspectRatioPresetTable from '../VideoAspectRatioPresetTable';
 import VideoCodecQualityTable from '../VideoCodecQualityTable';
 import VideoSizePresetTable from '../VideoSizePresetTable';
 import styles from './styles';
@@ -32,6 +34,11 @@ export type Props = {
   onSizePresetWidthChange?: KeyedValueChangeHandler<number | undefined>;
   onSizePresetHeightChange?: KeyedValueChangeHandler<number | undefined>;
   onSizePresetRemove?: KeyedActionHandler;
+  aspectRatioPresets?: VideoAspectRatioPreset[];
+  onAspectRatioPresetNameChange?: KeyedValueChangeHandler<string>;
+  onAspectRatioPresetWidthChange?: KeyedValueChangeHandler<number | undefined>;
+  onAspectRatioPresetHeightChange?: KeyedValueChangeHandler<number | undefined>;
+  onAspectRatioPresetRemove?: KeyedActionHandler;
 };
 
 export default function VideoSettings({
@@ -50,6 +57,11 @@ export default function VideoSettings({
   onSizePresetWidthChange,
   onSizePresetHeightChange,
   onSizePresetRemove,
+  aspectRatioPresets,
+  onAspectRatioPresetNameChange,
+  onAspectRatioPresetWidthChange,
+  onAspectRatioPresetHeightChange,
+  onAspectRatioPresetRemove,
 }: Props) {
   const {t} = useTranslation();
 
@@ -103,6 +115,20 @@ export default function VideoSettings({
           onWidthChange={onSizePresetWidthChange}
           onHeightChange={onSizePresetHeightChange}
           onRemove={onSizePresetRemove}
+        />
+      </View>
+      <View style={styles.tableContainer}>
+        <View style={styles.tableHeader}>
+          <Text style={styles.tableTitle}>
+            {t('videoAspectRatioPresets.title')}
+          </Text>
+        </View>
+        <VideoAspectRatioPresetTable
+          presets={aspectRatioPresets}
+          onNameChange={onAspectRatioPresetNameChange}
+          onWidthChange={onAspectRatioPresetWidthChange}
+          onHeightChange={onAspectRatioPresetHeightChange}
+          onRemove={onAspectRatioPresetRemove}
         />
       </View>
     </View>

@@ -47,6 +47,14 @@ export {
   type Props as TemplateTableProps,
 } from './TemplateTable';
 export {
+  default as VideoAspectRatioPresetRow,
+  type Props as VideoAspectRatioRowProps
+} from './VideoAspectRatioPresetRow';
+export {
+  default as VideoAspectRatioPresetTable,
+  type Props as VideoAspectRatioPresetTableProps
+} from './VideoAspectRatioPresetTable';
+export {
   default as VideoCodecQualityRow,
   type Props as VideoCodecQualityRowProps,
 } from './VideoCodecQualityRow';

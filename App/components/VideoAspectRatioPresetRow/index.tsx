@@ -8,14 +8,14 @@ import {
 
 export type Props = VideoDimensionsPresetRowProps;
 
-export default function VideoSizePresetRow(props: Props) {
+export default function VideoAspectRatioPresetRow(props: Props) {
   const {t} = useTranslation();
 
   return (
     <VideoDimensionsPresetRow
       {...props}
-      allowDecimals={false}
-      separator={t('videoSizePresets.dimensionSeparator')}
+      allowDecimals={true}
+      separator={t('videoAspectRatioPresets.dimensionSeparator')}
     />
   );
 }

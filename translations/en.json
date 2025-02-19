@@ -47,5 +47,11 @@
     "dimensionSeparator": "x",
     "width": "Width",
     "height": "Height"
+  },
+  "videoAspectRatioPresets": {
+    "title": "Aspect Ratio Presets",
+    "dimensionSeparator": ":",
+    "width": "Width",
+    "height": "Height"
   }
 }
