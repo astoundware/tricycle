@@ -48,11 +48,11 @@ export {
 } from './TemplateTable';
 export {
   default as VideoAspectRatioPresetRow,
-  type Props as VideoAspectRatioRowProps
+  type Props as VideoAspectRatioRowProps,
 } from './VideoAspectRatioPresetRow';
 export {
   default as VideoAspectRatioPresetTable,
-  type Props as VideoAspectRatioPresetTableProps
+  type Props as VideoAspectRatioPresetTableProps,
 } from './VideoAspectRatioPresetTable';
 export {
   default as VideoCodecQualityRow,
@@ -63,14 +63,18 @@ export {
   type Props as VideoCodecQualityTableProps,
 } from './VideoCodecQualityTable';
 export {
+  default as VideoDimensionsPresetRow,
+  type Props as VideoDimensionsPresetRowProps,
+} from './VideoDimensionsPresetRow';
+export {
   default as VideoSettings,
   type Props as VideoSettingsProps,
 } from './VideoSettings';
 export {
   default as VideoSizePresetRow,
-  type Props as VideoSizePresetRowProps
+  type Props as VideoSizePresetRowProps,
 } from './VideoSizePresetRow';
 export {
   default as VideoSizePresetTable,
-  type Props as VideoSizePresetTableProps
+  type Props as VideoSizePresetTableProps,
 } from './VideoSizePresetTable';
