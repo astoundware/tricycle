@@ -9,4 +9,5 @@ export type {Theme} from './Theme';
 export type {ValueChangeHandler} from './ValueChangeHandler';
 export type {VideoAspectRatioPreset} from './VideoAspectRatioPreset';
 export type {VideoCodecQuality} from './VideoCodecQuality';
+export type {VideoDimensionsPreset} from './VideoDimensionsPreset';
 export type {VideoSizePreset} from './VideoSizePreset';

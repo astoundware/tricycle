@@ -66,7 +66,7 @@ it("calls onMinChange when the row's min value is changed", () => {
 });
 
 it("calls onMaxChange when the row's max value is changed", () => {
-  const newMax = createString();
+  const newMax = createNumber();
   const onMaxChange = jest.fn();
   const component = renderer.create(
     <VideoCodecQualityTable onMaxChange={onMaxChange} />,

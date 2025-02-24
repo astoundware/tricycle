@@ -5,7 +5,10 @@ import {
   AudioQualityPreset,
   DisplayValue,
   Template,
+  VideoAspectRatioPreset,
   VideoCodecQuality,
+  VideoDimensionsPreset,
+  VideoSizePreset,
 } from '@models';
 
 export const createBoolean = () => faker.datatype.boolean();
@@ -62,6 +65,14 @@ export const createTemplate = (template?: Partial<Template>): Template => ({
 export const createTemplates = (count?: number): Template[] =>
   createMany(createTemplate, count);
 
+export const createVideoAspectRatioPreset = (
+  videoAspectRatioPreset?: Partial<VideoAspectRatioPreset>,
+): VideoAspectRatioPreset =>
+  createVideoDimensionsPreset(videoAspectRatioPreset);
+
+export const createVideoAspectRatioPresets = (count?: number) =>
+  createMany(createVideoAspectRatioPreset, count);
+
 export const createVideoCodecQuality = (
   videoCodecQuality?: Partial<VideoCodecQuality>,
 ): VideoCodecQuality => ({
@@ -74,6 +85,22 @@ export const createVideoCodecQuality = (
 
 export const createVideoCodecQualities = (count?: number) =>
   createMany(createVideoCodecQuality, count);
+
+export const createVideoDimensionsPreset = (
+  videoDimensionsPreset?: Partial<VideoDimensionsPreset>,
+): VideoDimensionsPreset => ({
+  key: videoDimensionsPreset?.key || createKey(),
+  name: videoDimensionsPreset?.name || createString(),
+  width: videoDimensionsPreset?.width || createNumber(),
+  height: videoDimensionsPreset?.height || createNumber(),
+});
+
+export const createVideoSizePreset = (
+  videoSizePreset?: Partial<VideoSizePreset>,
+): VideoSizePreset => createVideoDimensionsPreset(videoSizePreset);
+
+export const createVideoSizePresets = (count?: number) =>
+  createMany(createVideoSizePreset, count);
 
 const createMany = <T>(factory: () => T, count?: number): T[] =>
   Array.from({length: count ?? createNumber(2, 5)}, factory);

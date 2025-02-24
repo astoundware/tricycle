@@ -1,7 +1,3 @@
-import {Removable} from './Removable';
+import {VideoDimensionsPreset} from './VideoDimensionsPreset';
 
-export type VideoAspectRatioPreset = Removable & {
-  name: string;
-  width: number;
-  height: number;
-};
+export type VideoAspectRatioPreset = VideoDimensionsPreset;

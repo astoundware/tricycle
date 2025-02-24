@@ -7,7 +7,7 @@ import {
   KeyedValueChangeHandler,
   VideoSizePreset,
 } from '@models';
-import VideoSizePresetRow from '../VideoSizePresetRow';
+import VideoDimensionsPresetRow from '../VideoDimensionsPresetRow';
 import styles from './styles';
 
 export type Props = {
@@ -47,11 +47,13 @@ export default function VideoSizePresetTable({
         style={styles.list}
         data={presets}
         renderItem={({item}) => (
-          <VideoSizePresetRow
+          <VideoDimensionsPresetRow
             style={styles.row}
             name={item.name}
             width={item.width}
             height={item.height}
+            allowDecimals={false}
+            separator={t('videoSizePresets.dimensionSeparator')}
             onNameChange={name => onNameChange && onNameChange(item.key, name)}
             onWidthChange={width =>
               onWidthChange && onWidthChange(item.key, width)

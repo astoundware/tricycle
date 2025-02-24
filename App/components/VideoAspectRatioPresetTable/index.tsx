@@ -7,7 +7,7 @@ import {
   KeyedValueChangeHandler,
   VideoAspectRatioPreset,
 } from '@models';
-import VideoAspectRatioPresetRow from '../VideoAspectRatioPresetRow';
+import VideoDimensionsPresetRow from '../VideoDimensionsPresetRow';
 import styles from './styles';
 
 export type Props = {
@@ -47,11 +47,13 @@ export default function VideoAspectRatioPresetTable({
         style={styles.list}
         data={presets}
         renderItem={({item}) => (
-          <VideoAspectRatioPresetRow
+          <VideoDimensionsPresetRow
             style={styles.row}
             name={item.name}
             width={item.width}
             height={item.height}
+            allowDecimals={true}
+            separator={t('videoAspectRatioPresets.dimensionSeparator')}
             onNameChange={name => onNameChange && onNameChange(item.key, name)}
             onWidthChange={width =>
               onWidthChange && onWidthChange(item.key, width)
