@@ -14,7 +14,6 @@ import '@config/i18n';
 import {
   createBoolean,
   createDisplayValues,
-  createNumber,
   createString,
   createTemplates,
 } from '@test-utils/fixtures';
@@ -227,7 +226,7 @@ it('renders the templates correctly', () => {
 });
 
 it('calls onTemplateNameChange when template name is changed', () => {
-  const index = createNumber();
+  const key = createString();
   const name = createString();
   const onTemplateNameChange = jest.fn();
   const component = renderer.create(
@@ -235,20 +234,20 @@ it('calls onTemplateNameChange when template name is changed', () => {
   );
   const table = component.root.findByType(TemplateTable);
 
-  table.props.onNameChange(index, name);
+  table.props.onNameChange(key, name);
 
-  expect(onTemplateNameChange).toHaveBeenCalledWith(index, name);
+  expect(onTemplateNameChange).toHaveBeenCalledWith(key, name);
 });
 
 it('calls onTemplateRemove when template is removed', () => {
-  const index = createNumber();
+  const key = createString();
   const onTemplateRemove = jest.fn();
   const component = renderer.create(
     <GeneralSettings onTemplateRemove={onTemplateRemove} />,
   );
   const table = component.root.findByType(TemplateTable);
 
-  table.props.onRemove(index);
+  table.props.onRemove(key);
 
-  expect(onTemplateRemove).toHaveBeenCalledWith(index);
+  expect(onTemplateRemove).toHaveBeenCalledWith(key);
 });

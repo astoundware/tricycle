@@ -25,7 +25,7 @@ export type Props = {
   onDeinterlaceChange?: ValueChangeHandler<string>;
   sizeDivisor?: number;
   onSizeDivisorChange?: ValueChangeHandler<number | undefined>;
-  codecQualities: VideoCodecQuality[];
+  codecQualities?: VideoCodecQuality[];
   onCodecQualityMinChange?: KeyedValueChangeHandler<number | undefined>;
   onCodecQualityMaxChange?: KeyedValueChangeHandler<number | undefined>;
   onCodecQualityStepsChange?: KeyedValueChangeHandler<number | undefined>;
