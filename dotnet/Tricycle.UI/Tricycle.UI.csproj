@@ -18,9 +18,6 @@
     <PackageReference Include="Lamar" Version="8.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Tricycle.Media\Tricycle.Media.csproj" />
     <ProjectReference Include="..\Tricycle.IO\Tricycle.IO.csproj" />
     <ProjectReference Include="..\Tricycle.Models\Tricycle.Models.csproj" />
