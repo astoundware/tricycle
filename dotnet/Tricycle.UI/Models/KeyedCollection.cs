@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace Tricycle.UI.Models
@@ -32,5 +33,20 @@ namespace Tricycle.UI.Models
         }
 
         protected override string GetKeyForItem(T item) => item.Key;
+    }
+
+    public static class KeyedCollectionExtensions
+    {
+        public static KeyedCollection<T> ToKeyedCollection<T>(this IEnumerable<T> enumerable) where T : IKeyed
+        {
+            var result = new KeyedCollection<T>();
+
+            foreach (T keyed in enumerable)
+            {
+                result.Add(keyed);
+            }
+
+            return result;
+        }
     }
 }

@@ -15,10 +15,11 @@ namespace Tricycle.UI.Views
         IList<DisplayValue> DestinationDirectoryModeOptions { set; }
         string SelectedDestinationDirectoryModeKey { set; }
         string DestinationDirectory { set; }
+        bool IsDestinationDirectoryBrowsingEnabled { set; }
         IList<Template> Templates { set; }
         IList<DisplayValue> DeinterlaceModeOptions { set; }
         string SelectedDeinterlaceModeKey { set; }
-        int SizeDivisor { set; }
+        int? SizeDivisor { set; }
         IList<VideoCodecQuality> VideoCodecQualities { set; }
         IList<VideoSizePreset> VideoSizePresets { set; }
         IList<VideoAspectRatioPreset> VideoAspectRatioPresets { set; }
@@ -51,13 +52,17 @@ namespace Tricycle.UI.Views
         event Action<string> SelectedDestinationDirectoryModeChanged;
         event Action<string> DestinationDirectoryChanged;
         event Action<Template> TemplateChanged;
+        event Action<string> TemplateRemoved;
         event Action<string> SelectedDeinterlaceModeChanged;
         event Action<int> SizeDivisorChanged;
-        event Action<VideoCodecQuality> VideoCodecQualityChanged;
-        event Action<VideoSizePreset> VideoSizePresetChanged;
-        event Action<VideoAspectRatioPreset> VideoAspectRatioPresetChanged;
+        event Action<VideoCodecQuality> VideoCodecQualityModified;
+        event Action<VideoSizePreset> VideoSizePresetModified;
+        event Action<string> VideoSizePresetRemoved;
+        event Action<VideoAspectRatioPreset> VideoAspectRatioPresetModified;
+        event Action<string> VideoAspectRatioPresetRemoved;
         event Action<bool> PassthruMatchingTracksChanged;
-        event Action<AudioQualityPreset> AudioQualityPresetChanged;
+        event Action<AudioQualityPreset> AudioQualityPresetModified;
+        event Action<string> AudioQualityPresetRemoved;
         event Action<string> SelectedX264PresetChanged;
         event Action<string> SelectedX265PresetChanged;
         event Action<string> HevcTagChanged;
